@@ -50,10 +50,10 @@ describe Vx::ServiceConnector::Github do
       subject { github.repos.map(&:values) }
       it do
         should eq(
-          [["octocat/user", false,
+          [[1296269, "octocat/user", false,
             "git@github.com:octocat/Hello-World.git",
             "https://github.com/octocat/Hello-World"],
-           ["octocat/org", false,
+           [1296269, "octocat/org", false,
             "git@github.com:octocat/Hello-World.git",
             "https://github.com/octocat/Hello-World"]]
         )
