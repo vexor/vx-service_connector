@@ -22,10 +22,10 @@ module Vx
         def remove(repo_full_name, url_mask)
           session.hooks(repo_full_name).select do |hook|
             if url = hook.config.rels[:self]
-              url.href =~ /#{Regexp.escape url_mask}\//
+              url.href =~ /#{Regexp.escape url_mask}/
             end
           end.map do |hook|
-            session.remove_hook(repo_full_name, hook.id)
+            #session.remove_hook(repo_full_name, hook.id)
           end
         end
 

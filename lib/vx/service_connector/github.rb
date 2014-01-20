@@ -20,7 +20,7 @@ module Vx
       end
 
       def repos
-        @repos ||= Repos.new(session)
+        @repos ||= Repos.new(session).to_a
       end
 
       def hook

@@ -19,9 +19,10 @@ module Vx
         def organization_repositories
           organizations.map do |org|
             Thread.new do
-              session.organization_repositories(org)
-                     .reject { |repo| not repo.permissions.admin }
-                     .map { |repo| repo_to_model repo }
+              session
+                .organization_repositories(org)
+                .select { |repo| repo.permissions && repo.permissions.admin }
+                .map { |repo| repo_to_model repo }
             end.tap do |th|
               th.abort_on_exception = true
             end
