@@ -2,7 +2,7 @@ require File.expand_path("../../lib/vx/service_connector", __FILE__)
 
 require 'rubygems'
 require 'bundler'
-Bundler.require(:test)
+Bundler.require
 
 require 'rspec/autorun'
 require 'webmock/rspec'
