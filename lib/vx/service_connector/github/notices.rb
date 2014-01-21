@@ -1,7 +1,7 @@
 module Vx
   module ServiceConnector
     class Github
-      Notice = Struct.new(:session, :repo) do
+      Notices = Struct.new(:session, :repo) do
 
         def create(build_sha, build_status, build_url, description)
           if status = github_status(build_status)

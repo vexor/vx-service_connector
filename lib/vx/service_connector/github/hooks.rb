@@ -1,7 +1,7 @@
 module Vx
   module ServiceConnector
     class Github
-      Hook = Struct.new(:session, :repo) do
+      Hooks = Struct.new(:session, :repo) do
 
         def all
           session.hooks(repo.full_name)

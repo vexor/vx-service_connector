@@ -1,7 +1,7 @@
 module Vx
   module ServiceConnector
     class Github
-      DeployKey = Struct.new(:session, :repo) do
+      DeployKeys = Struct.new(:session, :repo) do
 
         def all
           session.deploy_keys(repo.full_name)

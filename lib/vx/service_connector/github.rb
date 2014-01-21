@@ -6,40 +6,27 @@ end
 
 module Vx
   module ServiceConnector
-    class Github
+    Github = Struct.new(:login, :access_token) do
 
-      autoload :Hook,      File.expand_path("../github/hook",       __FILE__)
-      autoload :DeployKey, File.expand_path("../github/deploy_key", __FILE__)
-      autoload :Notice,    File.expand_path("../github/notice",     __FILE__)
-      autoload :Repos,     File.expand_path("../github/repos",      __FILE__)
-
-      attr_reader :login, :access_token
-
-      def initialize(login, access_token)
-        @login, @access_token = login, access_token
-      end
+      include ServiceConnector::Base
 
       def repos
-        @repos ||= Repos.new(session).to_a
+        @repos ||= Github::Repos.new(session).to_a
       end
 
       def hooks(repo)
-        Hook.new(session, repo)
+        Github::Hooks.new(session, repo)
       end
 
       def deploy_keys(repo)
-        DeployKey.new(session, repo)
+        Github::DeployKeys.new(session, repo)
       end
 
       def notices(repo)
-        Notice.new(session, repo)
+        Github::Notices.new(session, repo)
       end
 
       private
-
-        def session
-          @session ||= create_session
-        end
 
         def create_session
           Octokit::Client.new(login: login, access_token: access_token)
@@ -47,4 +34,8 @@ module Vx
 
     end
   end
+end
+
+%w{ hooks deploy_keys notices repos }.each do |f|
+  require File.expand_path("../github/#{f}", __FILE__)
 end
