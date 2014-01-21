@@ -6,6 +6,7 @@ describe Vx::ServiceConnector::GitlabV3 do
 
   let(:endpoint) { 'http://example.com' }
   let(:token)    { 'token' }
+  let(:repo)     { create :repo }
   let(:gitlab)   { described_class.new endpoint, token }
   subject { gitlab }
 
@@ -26,6 +27,23 @@ describe Vx::ServiceConnector::GitlabV3 do
         )
       end
     end
+  end
 
+  context "(deploy_keys)" do
+    let(:key_name)    { 'key_name' }
+    let(:public_key)  { 'public_key' }
+    let(:deploy_keys) { gitlab.deploy_keys(repo) }
+
+    context "all" do
+      subject { deploy_keys.all }
+      before { mock_deploy_keys }
+      it { should have(2).item }
+    end
+
+    context "add" do
+      subject { deploy_keys.add key_name, public_key }
+      before { mock_add_deploy_key }
+      it { should be }
+    end
   end
 end

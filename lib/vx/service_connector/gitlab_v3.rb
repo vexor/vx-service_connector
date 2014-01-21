@@ -10,6 +10,10 @@ module Vx
         @repos ||= GitlabV3::Repos.new(session).to_a
       end
 
+      def deploy_keys(repo)
+        GitlabV3::DeployKeys.new(session, repo)
+      end
+
       private
 
         def create_session
