@@ -7,7 +7,7 @@ module Vx
           session.hooks(repo.full_name)
         end
 
-        def add(url, token)
+        def create(url, token)
           config = {
             url:           url,
             secret:        token,
@@ -17,7 +17,7 @@ module Vx
           session.create_hook(repo.full_name, "web", config, options)
         end
 
-        def remove(url_mask)
+        def destroy(url_mask)
           all.select do |hook|
             if url = hook.config.rels[:self]
               url.href =~ /#{Regexp.escape url_mask}/

@@ -7,7 +7,7 @@ module Vx
           session.deploy_keys(repo.full_name)
         end
 
-        def add(key_name, public_key)
+        def create(key_name, public_key)
           session.add_deploy_key(
             repo.full_name,
             key_name,
@@ -15,7 +15,7 @@ module Vx
           )
         end
 
-        def remove(key_name)
+        def destroy(key_name)
           all.select do |key|
             key.title == key_name
           end.map do |key|

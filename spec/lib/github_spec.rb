@@ -66,14 +66,14 @@ describe Vx::ServiceConnector::Github do
       it { should have(1).item }
     end
 
-    context "add" do
-      subject { deploy_keys.add key_name, public_key }
+    context "create" do
+      subject { deploy_keys.create key_name, public_key }
       before { mock_add_deploy_key }
       it { should be }
     end
 
-    context "remove" do
-      subject { deploy_keys.remove key_name}
+    context "destroy" do
+      subject { deploy_keys.destroy key_name}
 
       before do
         mock_deploy_keys
@@ -95,15 +95,15 @@ describe Vx::ServiceConnector::Github do
       it { should have(1).item }
     end
 
-    context "add" do
-      subject { hooks.add url, token }
+    context "create" do
+      subject { hooks.create url, token }
       before { mock_add_hook }
       it { should be }
     end
 
-    context "remove" do
+    context "destroy" do
       let(:mask) { "http://example.com" }
-      subject { hooks.remove mask }
+      subject { hooks.destroy mask }
       before do
         mock_hooks
         mock_remove_hook
