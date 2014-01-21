@@ -8,5 +8,30 @@ module Vx
     autoload :GitlabV3, File.expand_path("../service_connector/gitlab_v3", __FILE__)
     autoload :Model,    File.expand_path("../service_connector/model",     __FILE__)
 
+    extend self
+
+    def github ; Github end
+    def gitlab_v3 ; GitlabV3 end
+
+    def to(name)
+      case name.to_sym
+      when :github
+        Github
+      when :gitlab_v3
+        GitlabV3
+      else
+        raise ArgumentError, "Serivice for #{name.inspect} is not defined"
+      end
+    end
+
+    def payload(name, params)
+      case name.to_sym
+      when :github
+        Github::Payload.new(params).to_model
+      else
+        raise ArgumentError, "Payload for #{name.inspect} is not defined"
+      end
+    end
+
   end
 end

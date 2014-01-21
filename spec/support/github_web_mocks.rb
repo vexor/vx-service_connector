@@ -47,6 +47,19 @@ module GithubWebMocks
     mock_get "https://api.github.com/user/orgs", "orgs"
   end
 
+  def mock_get_file
+    require 'base64'
+    require 'json'
+
+    content = { "content" => Base64.encode64('content') }.to_json
+    mock_get "https://api.github.com/repos/full/name/contents/path?ref=sha", nil, content: content
+  end
+
+  def mock_get_file_not_found
+    stub_request(:get, "https://api.github.com/repos/full/name/contents/path?ref=sha").
+      to_return(:status => 404, :body => "")
+  end
+
   def mock_post(url, body, fixture)
     stub_request(:post, url).
       with(:body    => body,
@@ -56,15 +69,18 @@ module GithubWebMocks
       to_return(:status => 200, :body => read_fixture("github/#{fixture}.json"), :headers => {})
   end
 
-  def mock_get(url, fixture)
+  def mock_get(url, fixture, options = {})
+    content = options[:content]
+    content ||= read_fixture("github/#{fixture}.json")
+    content_type = options[:content_type] || 'application/json'
     stub_request(:get, url).
       with(:headers => {
         'Accept'=>'application/vnd.github.beta+json',
         'Authorization'=>'token token'}).
       to_return(
         :status => 200,
-        :body => read_fixture("github/#{fixture}.json"),
-        :headers => {'Content-Type'=>"application/json"})
+        :body => content,
+        :headers => {'Content-Type'=> content_type})
   end
 
   def mock_delete(url, body)
