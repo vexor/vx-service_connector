@@ -1,19 +1,13 @@
 module Vx
   module ServiceConnector
     class Github
-      class Notice
+      Notice = Struct.new(:session, :repo) do
 
-        attr_reader :session
-
-        def initialize(session)
-          @session = session
-        end
-
-        def create(repo_full_name, build_sha, build_status, build_url, description)
+        def create(build_sha, build_status, build_url, description)
           if status = github_status(build_status)
             begin
               session.create_status(
-                repo_full_name,
+                repo.full_name,
                 build_sha,
                 status,
                 description: description,

@@ -1,27 +1,25 @@
 module Vx
   module ServiceConnector
     class Github
-      class DeployKey
+      DeployKey = Struct.new(:session, :repo) do
 
-        attr_reader :session
-
-        def initialize(session)
-          @session = session
+        def all
+          session.deploy_keys(repo.full_name)
         end
 
-        def add(repo_full_name, key_name, public_key)
+        def add(key_name, public_key)
           session.add_deploy_key(
-            repo_full_name,
+            repo.full_name,
             key_name,
             public_key
           )
         end
 
-        def remove(repo_full_name, key_name)
-          session.deploy_keys(repo_full_name).select do |key|
+        def remove(key_name)
+          all.select do |key|
             key.title == key_name
           end.map do |key|
-            session.remove_deploy_key(repo_full_name, key.id)
+            session.remove_deploy_key(repo.full_name, key.id)
           end
         end
 

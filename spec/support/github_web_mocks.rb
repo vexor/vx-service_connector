@@ -1,30 +1,36 @@
 module GithubWebMocks
 
+  def mock_create_notice(state)
+    mock_post "https://api.github.com/repos/full/name/statuses/sha",
+              "{\"description\":\"description\",\"target_url\":\"url\",\"state\":\"#{state}\"}",
+              "create_status"
+  end
+
   def mock_remove_hook
-    mock_delete  "https://api.github.com/repos/test/hooks/1", "{}"
+    mock_delete  "https://api.github.com/repos/full/name/hooks/1", "{}"
   end
 
   def mock_hooks
-    mock_get "https://api.github.com/repos/test/hooks?per_page=100",
+    mock_get "https://api.github.com/repos/full/name/hooks?per_page=100",
              "hooks"
   end
 
   def mock_add_hook
-    mock_post "https://api.github.com/repos/test/hooks",
+    mock_post "https://api.github.com/repos/full/name/hooks",
               "{\"name\":\"web\",\"config\":{\"url\":\"url\",\"secret\":\"token\",\"content_type\":\"json\"},\"events\":[\"push\",\"pull_request\"],\"active\":true}",
               "create_hook"
   end
 
   def mock_deploy_keys
-    mock_get "https://api.github.com/repos/test/keys?per_page=100", "deploy_keys"
+    mock_get "https://api.github.com/repos/full/name/keys?per_page=100", "deploy_keys"
   end
 
   def mock_delete_deploy_key
-    mock_delete "https://api.github.com/repos/test/keys/1", "{}"
+    mock_delete "https://api.github.com/repos/full/name/keys/1", "{}"
   end
 
   def mock_add_deploy_key
-    mock_post "https://api.github.com/repos/test/keys",
+    mock_post "https://api.github.com/repos/full/name/keys",
               "{\"title\":\"octocat@octomac\",\"key\":\"public key\"}",
               "add_deploy_key"
   end

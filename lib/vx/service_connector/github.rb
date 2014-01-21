@@ -23,16 +23,16 @@ module Vx
         @repos ||= Repos.new(session).to_a
       end
 
-      def hook
-        @hook ||= Hook.new(session)
+      def hooks(repo)
+        Hook.new(session, repo)
       end
 
-      def deploy_key
-        @hook ||= DeployKey.new(session)
+      def deploy_keys(repo)
+        DeployKey.new(session, repo)
       end
 
-      def notice
-        @notice ||= Notice.new(session)
+      def notices(repo)
+        Notice.new(session, repo)
       end
 
       private

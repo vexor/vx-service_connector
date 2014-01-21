@@ -6,15 +6,15 @@ describe Vx::ServiceConnector::Github do
 
   let(:login)     { 'login' }
   let(:token)     { 'token' }
-  let(:repo_name) { 'test' }
+  let(:repo)      { create :repo }
   let(:github)    { described_class.new login, token }
 
   subject { github }
 
   it { should be }
 
-  context "(notice)" do
-    subject { github.notice }
+  context "(notices)" do
+    let(:notices) { github.notices(repo) }
 
     context "create" do
       let(:sha)  { 'sha' }
@@ -23,12 +23,8 @@ describe Vx::ServiceConnector::Github do
 
       { started: "pending",  passed: "success", failed: "failure", errored: "error"}.each do |k,v|
         context "#{k}" do
-          subject { github.notice.create repo_name, sha, k, url, desc }
-          before do
-            mock_post "https://api.github.com/repos/test/statuses/sha",
-                      "{\"description\":\"description\",\"target_url\":\"url\",\"state\":\"#{v}\"}",
-                      "create_status"
-          end
+          subject { notices.create sha, k, url, desc }
+          before { mock_create_notice(v) }
           it { should be }
         end
       end
@@ -61,23 +57,25 @@ describe Vx::ServiceConnector::Github do
     end
   end
 
-  context "(deploy_key)" do
-    let(:key_name)   { 'octocat@octomac' }
-    let(:public_key) { 'public key' }
-    let(:deploy_key) { github.deploy_key }
+  context "(deploy_keys)" do
+    let(:key_name)    { 'octocat@octomac' }
+    let(:public_key)  { 'public key' }
+    let(:deploy_keys) { github.deploy_keys(repo) }
+
+    context "all" do
+      subject { deploy_keys.all }
+      before { mock_deploy_keys }
+      it { should have(1).item }
+    end
 
     context "add" do
-      subject { deploy_key.add repo_name, key_name, public_key }
-
-      before do
-        mock_add_deploy_key
-      end
-
+      subject { deploy_keys.add key_name, public_key }
+      before { mock_add_deploy_key }
       it { should be }
     end
 
     context "remove" do
-      subject { deploy_key.remove repo_name, key_name}
+      subject { deploy_keys.remove key_name}
 
       before do
         mock_deploy_keys
@@ -88,22 +86,26 @@ describe Vx::ServiceConnector::Github do
     end
   end
 
-  context "(hook)" do
+  context "(hooks)" do
     let(:url)   { 'url' }
     let(:token) { 'token' }
-    let(:hook)  { github.hook }
+    let(:hooks) { github.hooks(repo) }
+
+    context "all" do
+      subject { hooks.all }
+      before { mock_hooks }
+      it { should have(1).item }
+    end
 
     context "add" do
-      subject { hook.add repo_name, url, token }
-      before do
-        mock_add_hook
-      end
+      subject { hooks.add url, token }
+      before { mock_add_hook }
       it { should be }
     end
 
     context "remove" do
       let(:mask) { "http://example.com" }
-      subject { hook.remove repo_name, mask }
+      subject { hooks.remove mask }
       before do
         mock_hooks
         mock_remove_hook
@@ -111,6 +113,4 @@ describe Vx::ServiceConnector::Github do
       it { should have(1).item }
     end
   end
-
-
 end

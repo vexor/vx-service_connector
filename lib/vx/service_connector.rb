@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'bundler'
+Bundler.require
+
 require File.expand_path("../service_connector/version", __FILE__)
 
 module Vx
