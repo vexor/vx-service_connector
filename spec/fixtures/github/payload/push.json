@@ -1,0 +1,92 @@
+{
+   "ref":"refs/heads/master",
+   "after":"84158c732ff1af3db9775a37a74ddc39f5c4078f",
+   "before":"b665f90239563c030f1b280a434b3d84daeda1bd",
+   "created":false,
+   "deleted":false,
+   "forced":false,
+   "compare":"https://github.com/evrone/ci-worker-test-repo/compare/b665f9023956...687753389908",
+   "commits":[
+      {
+         "id":"687753389908e70801dd4ff5448be908642055c6",
+         "distinct":true,
+         "message":"test commit #3",
+         "timestamp":"2013-08-09T05:01:52-07:00",
+         "url":"https://github.com/evrone/ci-worker-test-repo/commit/687753389908e70801dd4ff5448be908642055c6",
+         "author":{
+            "name":"Dmitry Galinsky",
+            "email":"dima.exe@gmail.com",
+            "username":"dima-exe"
+         },
+         "committer":{
+            "name":"Dmitry Galinsky",
+            "email":"dima.exe@gmail.com",
+            "username":"dima-exe"
+         },
+         "added":[
+            "test"
+         ],
+         "removed":[
+
+         ],
+         "modified":[
+
+         ]
+      }
+   ],
+   "head_commit":{
+      "id":"687753389908e70801dd4ff5448be908642055c6",
+      "distinct":true,
+      "message":"test commit #3",
+      "timestamp":"2013-08-09T05:01:52-07:00",
+      "url":"https://github.com/evrone/ci-worker-test-repo/commit/687753389908e70801dd4ff5448be908642055c6",
+      "author":{
+         "name":"Dmitry Galinsky",
+         "email":"dima.exe@gmail.com",
+         "username":"dima-exe"
+      },
+      "committer":{
+         "name":"Dmitry Galinsky",
+         "email":"dima.exe@gmail.com",
+         "username":"dima-exe"
+      },
+      "added":[
+         "test"
+      ],
+      "removed":[
+
+      ],
+      "modified":[
+
+      ]
+   },
+   "repository":{
+      "id":11705362,
+      "name":"ci-worker-test-repo",
+      "url":"https://github.com/evrone/ci-worker-test-repo",
+      "description":"",
+      "watchers":0,
+      "stargazers":0,
+      "forks":1,
+      "fork":false,
+      "size":48,
+      "owner":{
+         "name":"evrone",
+         "email":"oleg@evrone.com"
+      },
+      "private":false,
+      "open_issues":0,
+      "has_issues":true,
+      "has_downloads":true,
+      "has_wiki":true,
+      "language":"Ruby",
+      "created_at":1374932007,
+      "pushed_at":1376049617,
+      "master_branch":"master",
+      "organization":"evrone"
+   },
+   "pusher":{
+      "name":"dima-exe",
+      "email":"dima.exe@gmail.com"
+   }
+}

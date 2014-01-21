@@ -36,6 +36,6 @@ module Vx
   end
 end
 
-%w{ hooks deploy_keys notices repos }.each do |f|
+%w{ hooks deploy_keys notices repos payload }.each do |f|
   require File.expand_path("../github/#{f}", __FILE__)
 end

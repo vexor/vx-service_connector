@@ -44,16 +44,14 @@ describe Vx::ServiceConnector::Github do
 
     context "values" do
       subject { github.repos.map(&:values) }
-      it do
-        should eq(
-          [[1296269, "octocat/user", false,
-            "git@github.com:octocat/Hello-World.git",
-            "https://github.com/octocat/Hello-World"],
-           [1296269, "octocat/org", false,
-            "git@github.com:octocat/Hello-World.git",
-            "https://github.com/octocat/Hello-World"]]
-        )
-      end
+      it { should eq(
+        [[1296269, "octocat/user", false,
+          "git@github.com:octocat/Hello-World.git",
+          "https://github.com/octocat/Hello-World"],
+         [1296269, "octocat/org", false,
+          "git@github.com:octocat/Hello-World.git",
+          "https://github.com/octocat/Hello-World"]]
+      ) }
     end
   end
 

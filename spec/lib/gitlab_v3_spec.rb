@@ -16,16 +16,14 @@ describe Vx::ServiceConnector::GitlabV3 do
     it { should have(2).item }
     context "values" do
       subject { gitlab.repos.map(&:values) }
-      it do
-        should eq(
-          [[4, "diaspora/diaspora-client", true,
-            "git@example.com:diaspora/diaspora-client.git",
-            "http://example.com/diaspora/diaspora-client"],
-           [6, "brightbox/puppet", true,
-            "git@example.com:brightbox/puppet.git",
-            "http://example.com/brightbox/puppet"]]
-        )
-      end
+      it { should eq(
+        [[4, "diaspora/diaspora-client", true,
+          "git@example.com:diaspora/diaspora-client.git",
+          "http://example.com/diaspora/diaspora-client"],
+         [6, "brightbox/puppet", true,
+          "git@example.com:brightbox/puppet.git",
+          "http://example.com/brightbox/puppet"]]
+      ) }
     end
   end
 
@@ -40,10 +38,5 @@ describe Vx::ServiceConnector::GitlabV3 do
       it { should have(2).item }
     end
 
-    context "add" do
-      subject { deploy_keys.add key_name, public_key }
-      before { mock_add_deploy_key }
-      it { should be }
-    end
   end
 end
