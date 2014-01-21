@@ -4,12 +4,10 @@ module Vx
   module ServiceConnector
     GitlabV3 = Struct.new(:endpoint, :private_token) do
 
-      def repos
-        @repos ||= GitlabV3::Projects.new(session).to_a
-      end
+      include ServiceConnector::Base
 
-      def session
-        @session ||= create_session
+      def repos
+        @repos ||= GitlabV3::Repos.new(session).to_a
       end
 
       private
@@ -22,6 +20,6 @@ module Vx
   end
 end
 
-%w{ projects deploy_key }.each do |f|
+%w{ repos deploy_keys }.each do |f|
   require File.expand_path("../gitlab_v3/#{f}", __FILE__)
 end

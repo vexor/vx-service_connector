@@ -1,7 +1,7 @@
 module Vx
   module ServiceConnector
     class GitlabV3
-      Projects = Struct.new(:session) do
+      Repos = Struct.new(:session) do
 
         def to_a
           session.projects.map do |proj|
@@ -12,7 +12,8 @@ module Vx
         private
 
           def proj_to_model(repo)
-            Model::Repo.new(repo.path_with_namespace,
+            Model::Repo.new(repo.id,
+                            repo.path_with_namespace,
                             true,
                             repo.ssh_url_to_repo,
                             repo.web_url)
