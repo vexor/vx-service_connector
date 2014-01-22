@@ -30,6 +30,10 @@ module Vx
         Github::Files.new(session, repo)
       end
 
+      def commits(repo)
+        Github::Commits.new(session, repo)
+      end
+
       private
 
         def create_session
@@ -40,6 +44,6 @@ module Vx
   end
 end
 
-%w{ hooks deploy_keys notices repos payload files }.each do |f|
+%w{ hooks deploy_keys notices repos payload files commits }.each do |f|
   require File.expand_path("../github/#{f}", __FILE__)
 end

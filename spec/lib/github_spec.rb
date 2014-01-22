@@ -130,4 +130,28 @@ describe Vx::ServiceConnector::Github do
       end
     end
   end
+
+  context "(commits)" do
+    let(:sha)  { 'sha' }
+
+    context "get" do
+      subject { github.commits(repo).get sha }
+
+      context "success" do
+        before { mock_get_commit  }
+        it { should be }
+        its(:sha)          { should eq '6dcb09b5b57875f334f61aebed695e2e4193db5e' }
+        its(:message)      { should eq 'Fix all the bugs' }
+        its(:author)       { should eq 'Monalisa Octocat' }
+        its(:author_email) { should eq 'support@github.com' }
+        its(:http_url)     { should be_nil }
+      end
+
+      context "not found" do
+        before { mock_get_commit_not_found }
+        it { should be_nil }
+      end
+    end
+  end
+
 end

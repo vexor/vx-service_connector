@@ -41,7 +41,7 @@ module Vx
           if pull_request?
             pull_request["head"]["ref"]
           else
-            self["ref"].split("refs/heads/").last
+            self["ref"].to_s.split("refs/heads/").last
           end
         end
 

@@ -1,5 +1,14 @@
 module GithubWebMocks
 
+  def mock_get_commit
+    mock_get "https://api.github.com/repos/full/name/commits/sha", 'commit'
+  end
+
+  def mock_get_commit_not_found
+    stub_request(:get, "https://api.github.com/repos/full/name/commits/sha").
+      to_return(:status => 404, :body => "")
+  end
+
   def mock_create_notice(state)
     mock_post "https://api.github.com/repos/full/name/statuses/sha",
               "{\"description\":\"description\",\"target_url\":\"url\",\"state\":\"#{state}\"}",
