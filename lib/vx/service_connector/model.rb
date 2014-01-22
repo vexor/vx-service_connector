@@ -26,7 +26,7 @@ module Vx
           def from_hash(params)
             payload = Payload.new
             payload.members.each do |m|
-              payload[m] = params[m]
+              payload[m] = params[m] || params[m.to_s]
             end
             payload
           end
@@ -40,6 +40,29 @@ module Vx
         :author_email,
         :http_url
       )
+
+      extend self
+
+      def test_payload_attributes(params = {})
+        {
+          pull_request?:        false,
+          pull_request_number:  nil,
+          head:                 "HEAD",
+          base:                 '0000',
+          branch:               'master',
+          branch_label:         'master:label',
+          url:                  'http://example.com',
+          ignore?:              false
+        }.merge(params)
+      end
+
+      def test_payload(params = {})
+        Payload.from_hash(test_payload_attributes params)
+      end
+
+      def test_commit
+        Commit.new('sha', 'message', 'author', 'author_email', 'http_url')
+      end
 
     end
 
