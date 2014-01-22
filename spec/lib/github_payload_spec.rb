@@ -87,7 +87,7 @@ describe Vx::ServiceConnector::Github::Payload do
 
       context "and is closed" do
         before do
-          mock(payload).closed_pull_request? { true }
+          expect(payload).to receive(:closed_pull_request?) { true }
         end
         it { should be_true }
       end
@@ -103,14 +103,14 @@ describe Vx::ServiceConnector::Github::Payload do
 
       context "and deleted branch" do
         before do
-          mock(payload).head{ '0000000000000000000000000000000000000000' }
+          expect(payload).to receive(:head) { '0000000000000000000000000000000000000000'  }
         end
         it { should be_true }
       end
 
       context "and tag created" do
         before do
-          mock(payload).tag? { true }
+          expect(payload).to receive(:tag?) { true }
         end
         it { should be_true }
       end
