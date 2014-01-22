@@ -19,7 +19,19 @@ module Vx
         :branch_label,
         :url,
         :ignore?
-      )
+      ) do
+        def to_hash ; to_h end
+
+        class << self
+          def from_hash(params)
+            payload = Payload.new
+            payload.members.each do |m|
+              payload[m] = params[m]
+            end
+            payload
+          end
+        end
+      end
 
       Commit = Struct.new(
         :sha,
