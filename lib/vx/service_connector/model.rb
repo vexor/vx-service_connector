@@ -65,6 +65,17 @@ module Vx
         Commit.new('sha', 'message', 'author', 'author_email', 'http_url')
       end
 
+      def test_repo
+        Repo.new(
+          1,
+          'full/name',
+          false,
+          'git@example.com',
+          'http://example.com',
+          'description'
+        )
+      end
+
     end
 
   end
