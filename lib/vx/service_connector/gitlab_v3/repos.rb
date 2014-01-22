@@ -12,11 +12,14 @@ module Vx
         private
 
           def proj_to_model(repo)
-            Model::Repo.new(repo.id,
-                            repo.path_with_namespace,
-                            true,
-                            repo.ssh_url_to_repo,
-                            repo.web_url)
+            Model::Repo.new(
+              repo.id,
+              repo.path_with_namespace,
+              true,
+              repo.ssh_url_to_repo,
+              repo.web_url,
+              repo.description
+            )
           end
 
       end

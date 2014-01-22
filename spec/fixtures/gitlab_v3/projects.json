@@ -1,7 +1,7 @@
 [
   {
     "id": 4,
-    "description": null,
+    "description": "description",
     "default_branch": "master",
     "public": false,
     "visibility_level": 0,
@@ -36,7 +36,7 @@
   },
   {
     "id": 6,
-    "description": null,
+    "description": "description",
     "default_branch": "master",
     "public": false,
     "visibility_level": 0,

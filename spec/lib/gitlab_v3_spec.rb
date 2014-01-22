@@ -19,10 +19,12 @@ describe Vx::ServiceConnector::GitlabV3 do
       it { should eq(
         [[4, "diaspora/diaspora-client", true,
           "git@example.com:diaspora/diaspora-client.git",
-          "http://example.com/diaspora/diaspora-client"],
+          "http://example.com/diaspora/diaspora-client",
+          "description"],
          [6, "brightbox/puppet", true,
           "git@example.com:brightbox/puppet.git",
-          "http://example.com/brightbox/puppet"]]
+          "http://example.com/brightbox/puppet",
+          "description"]]
       ) }
     end
   end

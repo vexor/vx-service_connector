@@ -7,7 +7,8 @@ module Vx
         :full_name,
         :is_private,
         :ssh_url,
-        :html_url
+        :html_url,
+        :description
       )
 
       Payload = Struct.new(
@@ -26,7 +27,7 @@ module Vx
           def from_hash(params)
             payload = Payload.new
             payload.members.each do |m|
-              payload[m] = params[m] || params[m.to_s]
+              payload[m] = params.key?(m) ? params[m] : params[m.to_s]
             end
             payload
           end

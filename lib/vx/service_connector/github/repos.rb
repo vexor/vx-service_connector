@@ -36,7 +36,14 @@ module Vx
         end
 
         def repo_to_model(repo)
-          Model::Repo.new(repo.id, repo.full_name, repo.private, repo.rels[:ssh].href, repo.rels[:html].href)
+          Model::Repo.new(
+            repo.id,
+            repo.full_name,
+            repo.private,
+            repo.rels[:ssh].href,
+            repo.rels[:html].href,
+            repo.description
+          )
         end
 
       end

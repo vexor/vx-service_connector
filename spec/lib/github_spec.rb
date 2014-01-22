@@ -47,10 +47,12 @@ describe Vx::ServiceConnector::Github do
       it { should eq(
         [[1296269, "octocat/user", false,
           "git@github.com:octocat/Hello-World.git",
-          "https://github.com/octocat/Hello-World"],
+          "https://github.com/octocat/Hello-World",
+          "This your first repo!"],
          [1296269, "octocat/org", false,
           "git@github.com:octocat/Hello-World.git",
-          "https://github.com/octocat/Hello-World"]]
+          "https://github.com/octocat/Hello-World",
+          "This your first repo!"]]
       ) }
     end
   end
