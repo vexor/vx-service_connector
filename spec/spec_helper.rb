@@ -11,5 +11,4 @@ Dir[File.expand_path("../..", __FILE__) + "/spec/support/**/*.rb"].each {|f| req
 
 RSpec.configure do |config|
   config.include ReadFixtureSpecSupport
-  config.mock_with :rr
 end
