@@ -1,7 +1,12 @@
 module Vx
   module ServiceConnector
     module Base
+
       def repos
+        raise ArgumentError, 'not implemented'
+      end
+
+      def organizations
         raise ArgumentError, 'not implemented'
       end
 

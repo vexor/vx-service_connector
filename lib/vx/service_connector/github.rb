@@ -14,6 +14,10 @@ module Vx
         @repos ||= Github::Repos.new(session).to_a
       end
 
+      def organizations
+        @organizations ||= Github::Repos.new(session).organizations
+      end
+
       def hooks(repo)
         Github::Hooks.new(session, repo)
       end
