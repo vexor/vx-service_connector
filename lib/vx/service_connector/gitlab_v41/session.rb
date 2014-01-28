@@ -18,7 +18,7 @@ module Vx
         end
 
         def delete(url, options = {})
-          res = agent.call :delete, request_url(url)
+          res = agent.call :delete, request_url(url), options
           response! res
         end
 

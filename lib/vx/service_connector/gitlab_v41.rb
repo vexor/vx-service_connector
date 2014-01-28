@@ -10,8 +10,16 @@ module Vx
         @repos ||= GitlabV41::Repos.new(session).to_a
       end
 
+      def organizations
+        []
+      end
+
       def deploy_keys(repo)
         GitlabV41::DeployKeys.new(session, repo)
+      end
+
+      def hooks(repo)
+        GitlabV41::Hooks.new(session, repo)
       end
 
       private
@@ -24,6 +32,6 @@ module Vx
   end
 end
 
-%w{ repos deploy_keys session }.each do |f|
+%w{ repos deploy_keys session hooks }.each do |f|
   require File.expand_path("../gitlab_v41/#{f}", __FILE__)
 end
