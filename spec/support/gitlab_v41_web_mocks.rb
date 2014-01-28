@@ -9,7 +9,7 @@ module GitlabV41WebMocks
   end
 
   def mock_add_user_key
-    mock_post "user/keys", "{\"title\":\"me@example.com\",\"key\":\"public key\"}"
+    mock_post "user/keys", "{\"title\":\"(full/name) me@example.com\",\"key\":\"public key\"}"
   end
 
   def mock_delete_user_key
