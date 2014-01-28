@@ -14,12 +14,24 @@ module Vx
         []
       end
 
+      def hooks(repo)
+        GitlabV41::Hooks.new(session, repo)
+      end
+
       def deploy_keys(repo)
         GitlabV41::DeployKeys.new(session, repo)
       end
 
-      def hooks(repo)
-        GitlabV41::Hooks.new(session, repo)
+      def notices(repo)
+        GitlabV41::Notices.new(session, repo)
+      end
+
+      def files(repo)
+        GitlabV41::Files.new(session, repo)
+      end
+
+      def commits(repo)
+        GitlabV41::Commits.new(session, repo)
       end
 
       private
@@ -32,6 +44,6 @@ module Vx
   end
 end
 
-%w{ repos deploy_keys session hooks }.each do |f|
+%w{ repos deploy_keys session hooks files commits notices }.each do |f|
   require File.expand_path("../gitlab_v41/#{f}", __FILE__)
 end

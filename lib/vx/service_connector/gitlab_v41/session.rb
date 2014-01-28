@@ -45,9 +45,9 @@ module Vx
           end
 
           def agent
-            puts api_endpoint.inspect
             @agent ||= Sawyer::Agent.new(api_endpoint) do |http|
-              http.headers['content-type'] = 'application/json'
+              http.headers['content-type']  = 'application/json'
+              http.headers['accept']        = 'application/json'
               http.headers['PRIVATE-TOKEN'] = private_token
             end
           end
