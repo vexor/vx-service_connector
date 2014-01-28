@@ -44,6 +44,6 @@ module Vx
   end
 end
 
-%w{ repos deploy_keys session hooks files commits notices }.each do |f|
-  require File.expand_path("../gitlab_v41/#{f}", __FILE__)
+Dir[File.expand_path("../gitlab_v41/*.rb", __FILE__)].each do |f|
+  require f
 end

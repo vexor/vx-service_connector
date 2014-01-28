@@ -1,0 +1,106 @@
+{
+  "before": "e9f2a24318cf0a08dc2d7b987b9d8484e8c89406",
+  "after": "a1dfcca6369dcbd19607c4cc0f932194d8bdf57d",
+  "ref": "refs/heads/master",
+  "user_id": 228,
+  "user_name": "User Name",
+  "repository": {
+    "name": "SQERP",
+    "url": "git@gitlab.example.com:sqerp.git",
+    "description": null,
+    "homepage": "https://gitlab.example.com/sqerp"
+  },
+  "commits": [
+    {
+      "id": "4b65377d80364713293df276d7756ff6253eedcd",
+      "message": "Merge branch '93537_hours_units_in_details' of gitlab.example.com:sqerp",
+      "timestamp": "2014-01-21T08:51:56+04:00",
+      "url": "https://gitlab.example.com/sqerp/commit/4b65377d80364713293df276d7756ff6253eedcd",
+      "author": {
+        "name": "User Name",
+        "email": "me@example.com"
+      }
+    },
+    {
+      "id": "17574ef138f188e5b51a1f036448c92296b674e7",
+      "message": "[97241] activities_controller specs",
+      "timestamp": "2014-01-21T18:26:16+04:00",
+      "url": "https://gitlab.example.com/sqerp/commit/17574ef138f188e5b51a1f036448c92296b674e7",
+      "author": {
+        "name": "User Name",
+        "email": "me@example.com"
+      }
+    },
+    {
+      "id": "ca71c5938c9c796cddf2d5a32c2689669998bb0d",
+      "message": "fixes #84078 Custom roles.",
+      "timestamp": "2014-01-22T11:20:10+04:00",
+      "url": "https://gitlab.example.com/sqerp/commit/ca71c5938c9c796cddf2d5a32c2689669998bb0d",
+      "author": {
+        "name": "Maxim Dorofienko",
+        "email": "dorofienko@gmail.com"
+      }
+    },
+    {
+      "id": "f27d4dca4e7094fbb2206cd61ecbf933d77f0897",
+      "message": "[96071] merge ad_campaing's table",
+      "timestamp": "2014-01-22T12:20:55+04:00",
+      "url": "https://gitlab.example.com/sqerp/commit/f27d4dca4e7094fbb2206cd61ecbf933d77f0897",
+      "author": {
+        "name": "Evgeny Li",
+        "email": "exaspark@gmail.com"
+      }
+    },
+    {
+      "id": "432ead814f28ec1701584b7ffe130eeb8ecd3e1f",
+      "message": "csv exporter fix",
+      "timestamp": "2014-01-23T13:25:38+04:00",
+      "url": "https://gitlab.example.com/sqerp/commit/432ead814f28ec1701584b7ffe130eeb8ecd3e1f",
+      "author": {
+        "name": "Dmitry Koprov",
+        "email": "dmitry.koprov@gmail.com"
+      }
+    },
+    {
+      "id": "780c2e4a26ebf10691d157a64e3d7259f369d48f",
+      "message": "Merge branch '97241_controller_tests' of gitlab.example.com:sqerp",
+      "timestamp": "2014-01-23T14:58:27+04:00",
+      "url": "https://gitlab.example.com/sqerp/commit/780c2e4a26ebf10691d157a64e3d7259f369d48f",
+      "author": {
+        "name": "User Name",
+        "email": "me@example.com"
+      }
+    },
+    {
+      "id": "e63d231b1c3e6286bea9ffbceebd6c12d87e3dc7",
+      "message": "[98386] env fix",
+      "timestamp": "2014-01-28T11:52:48+04:00",
+      "url": "https://gitlab.example.com/sqerp/commit/e63d231b1c3e6286bea9ffbceebd6c12d87e3dc7",
+      "author": {
+        "name": "User Name",
+        "email": "me@example.com"
+      }
+    },
+    {
+      "id": "09d62be9db7e476b01c9773b5e06e5fc6a550d3c",
+      "message": "Merge branch '98386_fix' of gitlab.example.com:sqerp",
+      "timestamp": "2014-01-28T11:54:49+04:00",
+      "url": "https://gitlab.example.com/sqerp/commit/09d62be9db7e476b01c9773b5e06e5fc6a550d3c",
+      "author": {
+        "name": "User Name",
+        "email": "me@example.com"
+      }
+    },
+    {
+      "id": "a1dfcca6369dcbd19607c4cc0f932194d8bdf57d",
+      "message": "Merge branch '96071_merge_ad_campaigns' of gitlab.example.com:sqerp",
+      "timestamp": "2014-01-28T12:10:16+04:00",
+      "url": "https://gitlab.example.com/sqerp/commit/a1dfcca6369dcbd19607c4cc0f932194d8bdf57d",
+      "author": {
+        "name": "User Name",
+        "email": "me@example.com"
+      }
+    }
+  ],
+  "total_commits_count": 9
+}
