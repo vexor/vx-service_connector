@@ -1,5 +1,5 @@
 module Vx
   module ServiceConnector
-    VERSION = "0.0.3"
+    class RequestError < StandardError ; end
   end
 end
