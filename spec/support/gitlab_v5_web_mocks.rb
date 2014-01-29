@@ -8,7 +8,7 @@ module GitlabV5WebMocks
   end
 
   def mock_delete_deploy_key
-    mock_delete "projects/1/keys/3", "{}"
+    mock_delete "projects/1/keys/3", nil
   end
 
   def mock_get(url, fixture)

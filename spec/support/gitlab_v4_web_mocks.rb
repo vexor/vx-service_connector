@@ -13,7 +13,7 @@ module GitlabV4WebMocks
   end
 
   def mock_delete_user_key
-    mock_delete "user/keys/589", '{}'
+    mock_delete "user/keys/589", nil
   end
 
   def mock_add_hook
@@ -21,7 +21,7 @@ module GitlabV4WebMocks
   end
 
   def mock_remove_hook
-    mock_delete "projects/1/hooks", "{\"hook_id\":57}"
+    mock_delete "projects/1/hooks?hook_id=57", ""
   end
 
   def mock_hooks
