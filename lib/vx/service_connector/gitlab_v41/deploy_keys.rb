@@ -23,7 +23,7 @@ module Vx
 
         private
           def compute_key_name(orig_name)
-            "(#{repo.full_name}) #{orig_name}"
+            "#{orig_name} for #{repo.full_name}"
           end
       end
     end
