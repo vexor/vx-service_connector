@@ -15,7 +15,7 @@ module Vx
             Model::Repo.new(
               repo.id,
               compute_name_with_namespace(repo),
-              repo.private,
+              compute_is_private(repo),
               compute_ssh_url(repo),
               compute_web_url(repo),
               repo.description
@@ -45,6 +45,15 @@ module Vx
               repo.web_url
             else
               "#{session.uri.scheme}://#{session.uri.hostname}:#{session.uri.port}/#{repo.name.downcase}"
+            end
+          end
+
+          def compute_is_private(repo)
+            case
+            when repo.private != nil
+              repo.private
+            when repo.public != nil
+              !repo.public
             end
           end
 
