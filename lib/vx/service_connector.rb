@@ -7,6 +7,7 @@ module Vx
     autoload :Base,      File.expand_path("../service_connector/base",       __FILE__)
     autoload :Github,    File.expand_path("../service_connector/github",     __FILE__)
     autoload :GitlabV4,  File.expand_path("../service_connector/gitlab_v4",  __FILE__)
+    autoload :GitlabV5,  File.expand_path("../service_connector/gitlab_v5",  __FILE__)
     autoload :Model,     File.expand_path("../service_connector/model",      __FILE__)
 
     extend self
@@ -20,6 +21,8 @@ module Vx
         Github
       when :gitlab_v4
         GitlabV4
+      when :gitlab_v5
+        GitlabV5
       else
         raise ArgumentError, "Serivice for #{name.inspect} is not defined"
       end

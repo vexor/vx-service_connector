@@ -8,7 +8,12 @@ module Vx
         end
 
         def create(url, token)
-          session.post hooks_url, url: url
+          session.post(
+            hooks_url,
+            url: url,
+            push_events: true,
+            merge_requests_events: true
+          )
         end
 
         def destroy(url_mask)

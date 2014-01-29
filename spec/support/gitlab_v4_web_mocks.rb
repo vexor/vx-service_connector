@@ -17,7 +17,7 @@ module GitlabV4WebMocks
   end
 
   def mock_add_hook
-    mock_post "projects/1/hooks", "{\"url\":\"url\"}"
+    mock_post "projects/1/hooks", "{\"url\":\"url\",\"push_events\":true,\"merge_requests_events\":true}"
   end
 
   def mock_remove_hook

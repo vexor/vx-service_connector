@@ -23,15 +23,29 @@ module Vx
           end
 
           def compute_name_with_namespace(repo)
-            [session.uri.hostname, repo.name.downcase].join("/")
+            if repo.path_with_namespace
+              repo.path_with_namespace
+            else
+              hn = session.uri.hostname.to_s.split(".")[-2]
+              hm ||= session.uri.hostname
+              [hn, repo.name.downcase].join("/")
+            end
           end
 
           def compute_ssh_url(repo)
-            "git@#{session.uri.hostname}:#{repo.name.downcase}.git"
+            if repo.ssh_url
+              repo.ssh_url
+            else
+              "git@#{session.uri.hostname}:#{repo.name.downcase}.git"
+            end
           end
 
           def compute_web_url(repo)
-            "#{session.uri.scheme}://#{session.uri.hostname}:#{session.uri.port}/#{repo.name.downcase}"
+            if repo.web_url
+              repo.web_url
+            else
+              "#{session.uri.scheme}://#{session.uri.hostname}:#{session.uri.port}/#{repo.name.downcase}"
+            end
           end
 
       end
