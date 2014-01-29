@@ -36,14 +36,6 @@ module Vx
         end
       end
 
-      Commit = Struct.new(
-        :sha,
-        :message,
-        :author,
-        :author_email,
-        :http_url
-      )
-
       extend self
 
       def test_payload_attributes(params = {})
@@ -63,10 +55,6 @@ module Vx
 
       def test_payload(params = {})
         Payload.from_hash(test_payload_attributes params)
-      end
-
-      def test_commit
-        Commit.new('sha', 'message', 'author', 'author_email', 'http_url')
       end
 
       def test_repo
