@@ -6,13 +6,8 @@ module Vx
       Commits = Struct.new(:session, :repo) do
 
         def get(sha)
-          begin
-            all_commits = session.get "/projects/#{repo.id}/repository/commits", ref_name: sha
-            commits_to_model all_commits
-          rescue RequestError => e
-            $stderr.puts "ERROR: #{e.inspect}"
-            nil
-          end
+          all_commits = session.get "/projects/#{repo.id}/repository/commits", ref_name: sha
+          commits_to_model all_commits
         end
 
         private

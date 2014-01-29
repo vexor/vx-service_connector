@@ -32,7 +32,8 @@ module Vx
             if (200..204).include?(res.status)
               res.data
             else
-              raise RequestError, res.data
+              $stderr.puts "HTTP ERROR: #{res.inspect}"
+              nil
             end
           end
 

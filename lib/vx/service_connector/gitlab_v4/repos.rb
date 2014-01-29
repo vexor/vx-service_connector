@@ -4,8 +4,13 @@ module Vx
       Repos = Struct.new(:session) do
 
         def to_a
-          session.get("/projects").map do |proj|
-            proj_to_model proj
+          begin
+            session.get("/projects").map do |proj|
+              proj_to_model proj
+            end
+          rescue MultiJson::LoadError => e
+            $stderr.puts "ERROR: #{e.inspect}"
+            []
           end
         end
 
