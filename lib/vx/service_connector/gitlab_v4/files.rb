@@ -6,7 +6,12 @@ module Vx
       Files = Struct.new(:session, :repo) do
 
         def get(sha, path)
-          session.get("/projects/#{repo.id}/repository/commits/#{sha}/blob", filepath: path)
+          begin
+            session.get("/projects/#{repo.id}/repository/commits/#{sha}/blob", filepath: path)
+          rescue RequestError => e
+            $stderr.puts "ERROR: #{e.inspect}"
+            nil
+          end
         end
 
       end
