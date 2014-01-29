@@ -33,7 +33,7 @@ module Vx
             else
               hn = session.uri.hostname.to_s.split(".")[-2]
               hm ||= session.uri.hostname
-              [hn, repo.name.downcase].join("/")
+              [hn, repo.name.downcase].join("/").downcase
             end
           end
 
@@ -49,7 +49,8 @@ module Vx
             if repo.web_url
               repo.web_url
             else
-              "#{session.uri.scheme}://#{session.uri.hostname}:#{session.uri.port}/#{repo.name.downcase}"
+              name = compute_name_with_namespace(repo)
+              "#{session.uri.scheme}://#{session.uri.hostname}:#{session.uri.port}/#{name.downcase}"
             end
           end
 
