@@ -2,15 +2,43 @@ require 'gitlab'
 
 module Vx
   module ServiceConnector
-    class GitlabV5 < GitlabV4
+    GitlabV5 = Struct.new(:endpoint, :private_token) do
+
+      include ServiceConnector::Base
 
       def repos
-        @repos ||= GitlabV4::Repos.new(session).to_a
+        @repos ||= GitlabV5::Repos.new(session).to_a
+      end
+
+      def organizations
+        []
+      end
+
+      def hooks(repo)
+        GitlabV5::Hooks.new(session, repo)
       end
 
       def deploy_keys(repo)
         GitlabV5::DeployKeys.new(session, repo)
       end
+
+      def notices(repo)
+        GitlabV5::Notices.new(session, repo)
+      end
+
+      def files(repo)
+        GitlabV5::Files.new(session, repo)
+      end
+
+      def payload(params)
+        GitlabV5::Payload.new(session, params)
+      end
+
+      private
+
+        def create_session
+          GitlabV5::Session.new(endpoint, private_token)
+        end
 
     end
   end

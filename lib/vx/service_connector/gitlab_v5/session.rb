@@ -3,7 +3,7 @@ require 'uri'
 
 module Vx
   module ServiceConnector
-    class GitlabV4
+    class GitlabV5
 
       Session = Struct.new(:endpoint, :private_token) do
 
