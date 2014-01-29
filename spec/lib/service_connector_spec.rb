@@ -32,4 +32,23 @@ describe Vx::ServiceConnector do
     end
   end
 
+  context "payload" do
+    subject { described_class.payload(name, {}) }
+
+    context ":github" do
+      let(:name) { :github }
+      it { should be }
+    end
+
+    context ":gitlab_v4" do
+      let(:name) { :gitlab_v4 }
+      it { should be }
+    end
+
+    context ":gitlab_v5" do
+      let(:name) { :gitlab_v5 }
+      it { should be }
+    end
+  end
+
 end

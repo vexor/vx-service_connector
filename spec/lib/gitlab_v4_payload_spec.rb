@@ -21,6 +21,15 @@ describe Vx::ServiceConnector::GitlabV4::Payload do
   end
 
   context "pull_request" do
+    let(:content) { read_json_fixture("gitlab_v4/payload/merge_request1_unchecked") }
+
+    its(:pull_request?)       { should be_true }
+    its(:pull_request_number) { should eq 1 }
+    its(:ignore?)             { should be_false }
+    its(:head)                { should eq 'd0862adb2c46aecb3db4cb4a50867599e4015cf9' }
+    its(:base)                { should eq 'f1f92a4ef47a4257973282718449154938c3684d' }
+    its(:branch)              { should eq 'one' }
+    its(:url)                 { should be_nil }
   end
 
   context "tag?" do

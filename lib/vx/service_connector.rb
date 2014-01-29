@@ -29,12 +29,16 @@ module Vx
     end
 
     def payload(name, params)
-      case name.to_sym
-      when :github
-        Github::Payload.new(params).to_model
-      else
-        raise ArgumentError, "Payload for #{name.inspect} is not defined"
-      end
+      klass =
+        case name.to_sym
+        when :github
+          Github::Payload
+        when :gitlab_v4, :gitlab_v5
+          GitlabV4::Payload
+        else
+          raise ArgumentError, "Payload for #{name.inspect} is not defined"
+        end
+      klass.new(params).to_model
     end
 
   end
