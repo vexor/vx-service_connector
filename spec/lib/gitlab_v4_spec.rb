@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Vx::ServiceConnector::GitlabV41 do
+describe Vx::ServiceConnector::GitlabV4 do
 
-  include GitlabV41WebMocks
+  include GitlabV4WebMocks
 
   let(:endpoint)  { 'http://example.com' }
   let(:token)     { 'token' }

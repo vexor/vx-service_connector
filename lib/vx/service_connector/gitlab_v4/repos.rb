@@ -1,6 +1,6 @@
 module Vx
   module ServiceConnector
-    class GitlabV41
+    class GitlabV4
       Repos = Struct.new(:session) do
 
         def to_a

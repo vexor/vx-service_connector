@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Vx::ServiceConnector::GitlabV41::Payload do
-  let(:content) { read_json_fixture("gitlab_v41/payload/push") }
+describe Vx::ServiceConnector::GitlabV4::Payload do
+  let(:content) { read_json_fixture("gitlab_v4/payload/push") }
   let(:payload) { described_class.new content }
   subject { payload }
 

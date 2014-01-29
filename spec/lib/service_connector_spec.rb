@@ -21,8 +21,8 @@ describe Vx::ServiceConnector do
       it { should be }
     end
 
-    context ":gitlab_v41" do
-      let(:name) { :gitlab_v41 }
+    context ":gitlab_v4" do
+      let(:name) { :gitlab_v4 }
       it { should be }
     end
   end

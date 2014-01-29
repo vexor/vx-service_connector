@@ -1,6 +1,6 @@
 module Vx
   module ServiceConnector
-    class GitlabV41
+    class GitlabV4
       class Payload
 
         def initialize(params)

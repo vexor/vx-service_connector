@@ -1,4 +1,4 @@
-module GitlabV41WebMocks
+module GitlabV4WebMocks
 
   def mock_repos
     mock_get "projects", 'projects'
@@ -55,7 +55,7 @@ module GitlabV41WebMocks
       with(:headers => {'Accept'=>'application/json', 'PRIVATE-TOKEN' => "token"}).
       to_return(
         :status => 200,
-        :body => read_fixture("gitlab_v41/#{fixture}.json"),
+        :body => read_fixture("gitlab_v4/#{fixture}.json"),
         :headers => {'Content-Type' => 'application/json'})
   end
 

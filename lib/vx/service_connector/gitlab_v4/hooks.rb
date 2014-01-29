@@ -1,6 +1,6 @@
 module Vx
   module ServiceConnector
-    class GitlabV41
+    class GitlabV4
       Hooks = Struct.new(:session, :repo) do
 
         def all
