@@ -7,11 +7,11 @@ module Vx
 
         def build
           ServiceConnector::Model::Payload.new(
+            !!ignore?,
             !!pull_request,
             pull_request_number,
             branch,
             branch_label,
-            !!ignore?,
             sha,
             message,
             author,

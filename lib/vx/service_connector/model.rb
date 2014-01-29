@@ -12,11 +12,11 @@ module Vx
       )
 
       Payload = Struct.new(
+        :ignore?,
         :pull_request?,
         :pull_request_number,
         :branch,
         :branch_label,
-        :ignore?,
         :sha,
         :message,
         :author,
@@ -48,14 +48,16 @@ module Vx
 
       def test_payload_attributes(params = {})
         {
+          ignore?:              false,
           pull_request?:        false,
           pull_request_number:  nil,
-          head:                 "HEAD",
-          base:                 '0000',
           branch:               'master',
           branch_label:         'master:label',
-          url:                  'http://example.com',
-          ignore?:              false
+          sha:                  "HEAD",
+          message:              'test commit',
+          author:               'User Name',
+          author_email:         'me@example.com',
+          web_url:              'http://example.com',
         }.merge(params)
       end
 
