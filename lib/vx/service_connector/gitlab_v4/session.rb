@@ -3,7 +3,7 @@ require 'uri'
 
 module Vx
   module ServiceConnector
-    class GitlabV41
+    class GitlabV4
 
       Session = Struct.new(:endpoint, :private_token) do
 
@@ -18,7 +18,7 @@ module Vx
         end
 
         def delete(url, options = {})
-          res = agent.call :delete, request_url(url), options
+          res = agent.call :delete, request_url(url), nil, query: options
           response! res
         end
 

@@ -1,4 +1,4 @@
-module GitlabV41WebMocks
+module GitlabV4WebMocks
 
   def mock_repos
     mock_get "projects", 'projects'
@@ -13,15 +13,15 @@ module GitlabV41WebMocks
   end
 
   def mock_delete_user_key
-    mock_delete "user/keys/589", '{}'
+    mock_delete "user/keys/589", nil
   end
 
   def mock_add_hook
-    mock_post "projects/1/hooks", "{\"url\":\"url\"}"
+    mock_post "projects/1/hooks", "{\"url\":\"url\",\"push_events\":true,\"merge_requests_events\":true}"
   end
 
   def mock_remove_hook
-    mock_delete "projects/1/hooks", "{\"hook_id\":57}"
+    mock_delete "projects/1/hooks?hook_id=57", ""
   end
 
   def mock_hooks
@@ -55,7 +55,7 @@ module GitlabV41WebMocks
       with(:headers => {'Accept'=>'application/json', 'PRIVATE-TOKEN' => "token"}).
       to_return(
         :status => 200,
-        :body => read_fixture("gitlab_v41/#{fixture}.json"),
+        :body => read_fixture("gitlab_v4/#{fixture}.json"),
         :headers => {'Content-Type' => 'application/json'})
   end
 

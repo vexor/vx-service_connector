@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Vx::ServiceConnector::GitlabV41 do
+describe Vx::ServiceConnector::GitlabV4 do
 
-  include GitlabV41WebMocks
+  include GitlabV4WebMocks
 
   let(:endpoint)  { 'http://example.com' }
   let(:token)     { 'token' }
@@ -34,7 +34,7 @@ describe Vx::ServiceConnector::GitlabV41 do
     context "values" do
       subject { gitlab.repos.map(&:values) }
       it { should eq(
-        [[9, "example.com/sqerp", true, "git@example.com:sqerp.git", "http://example.com:80/sqerp", nil]]
+        [[9, "example/sqerp", true, "git@example.com:sqerp.git", "http://example.com:80/sqerp", nil]]
       ) }
     end
   end
