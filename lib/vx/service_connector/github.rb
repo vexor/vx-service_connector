@@ -11,11 +11,11 @@ module Vx
       include ServiceConnector::Base
 
       def repos
-        @repos ||= Github::Repos.new(session).to_a
+        Github::Repos.new(session).to_a
       end
 
       def organizations
-        @organizations ||= Github::Repos.new(session).organizations
+        Github::Repos.new(session).organizations
       end
 
       def hooks(repo)
@@ -34,8 +34,8 @@ module Vx
         Github::Files.new(session, repo)
       end
 
-      def commits(repo)
-        Github::Commits.new(session, repo)
+      def payload(params)
+        Github::Payload.new(session, params)
       end
 
       private
@@ -48,6 +48,6 @@ module Vx
   end
 end
 
-%w{ hooks deploy_keys notices repos payload files commits }.each do |f|
-  require File.expand_path("../github/#{f}", __FILE__)
+Dir[File.expand_path("../github/*.rb", __FILE__)].each do |f|
+  require f
 end

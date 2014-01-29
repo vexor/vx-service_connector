@@ -22,11 +22,10 @@ module Vx
         raise ArgumentError, 'not implemented'
       end
 
-      private
+      def session
+        @session ||= create_session
+      end
 
-        def session
-          @session ||= create_session
-        end
     end
   end
 end

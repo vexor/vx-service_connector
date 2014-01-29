@@ -64,7 +64,6 @@
       "name":"dima-exe",
       "email":"dima.exe@gmail.com"
    },
-   "token":"4328934d-7c7a-4f44-b731-605d83d9ba40",
    "repo_callback":{
       "ref":"refs/tags/v0.0.1",
       "after":"2d6e206be0b94c9694af0ad37a7bf44207500b9f",

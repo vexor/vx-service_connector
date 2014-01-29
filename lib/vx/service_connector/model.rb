@@ -14,12 +14,14 @@ module Vx
       Payload = Struct.new(
         :pull_request?,
         :pull_request_number,
-        :head,
-        :base,
         :branch,
         :branch_label,
-        :url,
-        :ignore?
+        :ignore?,
+        :sha,
+        :message,
+        :author,
+        :author_email,
+        :web_url
       ) do
         def to_hash ; to_h end
 

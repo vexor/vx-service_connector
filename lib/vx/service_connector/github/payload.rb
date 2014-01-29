@@ -1,11 +1,26 @@
+require 'ostruct'
+
 module Vx
   module ServiceConnector
     class Github
-      class Payload
+      Payload = Struct.new(:session, :params) do
 
-        def initialize(params)
-          @params = params || {}
+        def build
+          ServiceConnector::Model::Payload.new(
+            !!pull_request,
+            pull_request_number,
+            branch,
+            branch_label,
+            !!ignore?,
+            sha,
+            message,
+            author,
+            author_email,
+            web_url
+          )
         end
+
+        private
 
         def pull_request?
           key? "pull_request"
@@ -21,19 +36,11 @@ module Vx
           end
         end
 
-        def head
+        def sha
           if pull_request?
             pull_request["head"]["sha"]
           else
             self["after"]
-          end
-        end
-
-        def base
-          if pull_request?
-            pull_request["base"]["sha"]
-          else
-            self["before"]
           end
         end
 
@@ -53,11 +60,35 @@ module Vx
           end
         end
 
-        def url
+        def web_url
           if pull_request?
-            pull_request["url"]
+            pull_request["html_url"]
           else
-            self["compare"]
+            head_commit["url"]
+          end
+        end
+
+        def message
+          if pull_request?
+            commit_for_pull_request.message
+          else
+            head_commit["message"]
+          end
+        end
+
+        def author
+          if pull_request?
+            commit_for_pull_request.author.name
+          else
+            head_commit["author"]["name"]
+          end
+        end
+
+        def author_email
+          if pull_request?
+            commit_for_pull_request.author.email
+          else
+            head_commit["author"]["email"]
           end
         end
 
@@ -85,37 +116,37 @@ module Vx
           if pull_request?
             closed_pull_request? || !foreign_pull_request?
           else
-            head == '0000000000000000000000000000000000000000' ||
-              tag?
+            sha == '0000000000000000000000000000000000000000' || tag?
           end
         end
 
-        def to_model
-          ServiceConnector::Model::Payload.new(
-            !!pull_request,
-            pull_request_number,
-            head,
-            base,
-            branch,
-            branch_label,
-            url,
-            !!ignore?
-          )
+
+        def commit_for_pull_request
+          @commit_for_pull_request ||=
+            begin
+              data = session.commit pull_request["base"]["repo"]["full_name"], sha
+              data.commit
+            rescue ::Octokit::NotFound => e
+              $stderr.puts "ERROR: #{e.inspect}"
+              OpenStruct.new
+            end
         end
 
-        private
+        def head_commit
+          self["head_commit"]
+        end
 
-          def pull_request
-            self["pull_request"]
-          end
+        def pull_request
+          self["pull_request"]
+        end
 
-          def key?(name)
-            @params.key? name
-          end
+        def key?(name)
+          params.key? name
+        end
 
-          def [](val)
-            @params[val]
-          end
+        def [](val)
+          params[val]
+        end
 
       end
 
