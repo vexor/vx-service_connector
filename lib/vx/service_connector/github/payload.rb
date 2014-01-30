@@ -133,7 +133,7 @@ module Vx
         end
 
         def head_commit
-          self["head_commit"]
+          self["head_commit"] || {}
         end
 
         def pull_request
