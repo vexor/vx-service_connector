@@ -1,22 +1,36 @@
 module Vx
   module ServiceConnector
     class GitlabV5
-      Payload = Struct.new(:session, :params) do
+      Payload = Struct.new(:session, :repo, :params) do
 
         def build
           ServiceConnector::Model::Payload.new(
+            !!ignore?,
             !!pull_request?,
             pull_request_number,
-            head,
-            base,
             branch,
             branch_label,
-            url,
-            !!ignore?
+            sha,
+            message,
+            author,
+            author_email,
+            web_url
           )
         end
 
         private
+
+        def message
+          commit_for_payload["title"]
+        end
+
+        def author
+          commit_for_payload["author_name"]
+        end
+
+        def author_email
+          commit_for_payload["author_email"]
+        end
 
         def pull_request?
           false
@@ -43,7 +57,9 @@ module Vx
         end
 
         def web_url
-          self["commits"] && self["commits"].first && self["commits"].first["url"]
+          if u = self["repository"] && self["repository"]["homepage"]
+            "#{u}/commit/#{sha}"
+          end
         end
 
         def pull_request_head_repo_id
@@ -63,7 +79,7 @@ module Vx
         end
 
         def ignore?
-          head == '0000000000000000000000000000000000000000'
+          sha == '0000000000000000000000000000000000000000'
         end
 
         def pull_request
@@ -76,6 +92,17 @@ module Vx
 
         def [](val)
           params[val]
+        end
+
+        def commit_for_payload
+          @commit_for_payload ||=
+            begin
+              commits = session.get("/projects/#{repo.id}/repository/commits", ref_name: sha)
+              commits.first || {}
+            rescue RequestError => e
+              $stderr.puts "ERROR: #{e.inspect}"
+              {}
+            end
         end
 
       end

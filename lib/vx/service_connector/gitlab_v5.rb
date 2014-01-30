@@ -30,8 +30,8 @@ module Vx
         GitlabV5::Files.new(session, repo)
       end
 
-      def payload(params)
-        GitlabV5::Payload.new(session, params)
+      def payload(repo, params)
+        GitlabV5::Payload.new(session, repo, params)
       end
 
       private

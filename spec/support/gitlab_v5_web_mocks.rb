@@ -40,8 +40,8 @@ module GitlabV5WebMocks
       to_return(:status => 404, :body => "")
   end
 
-  def mock_get_commit
-    mock_get "projects/1/repository/commits?ref_name=sha", 'commits'
+  def mock_get_commit(pid, sha)
+    mock_get "projects/#{pid}/repository/commits?ref_name=#{sha}", 'commits'
   end
 
   def mock_get_commit_not_found
