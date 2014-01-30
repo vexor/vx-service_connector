@@ -6,8 +6,9 @@ describe Vx::ServiceConnector::Github::Payload do
 
   let(:content) { read_json_fixture("github/payload/push") }
   let(:github)  { Vx::ServiceConnector::Github.new 'login', 'token' }
-  let(:payload) { github.payload content }
-  subject { payload.build }
+  let(:repo)    { create :repo }
+  let(:payload) { github.payload repo, content }
+  subject { payload }
 
   context "push" do
     let(:url) { "https://github.com/evrone/ci-worker-test-repo/commit/687753389908e70801dd4ff5448be908642055c6"  }

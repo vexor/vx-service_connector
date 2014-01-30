@@ -34,8 +34,8 @@ module Vx
         Github::Files.new(session, repo)
       end
 
-      def payload(params)
-        Github::Payload.new(session, params)
+      def payload(repo, params)
+        Github::Payload.new(session, params).build
       end
 
       private

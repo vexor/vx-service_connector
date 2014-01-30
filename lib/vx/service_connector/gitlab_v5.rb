@@ -31,7 +31,7 @@ module Vx
       end
 
       def payload(repo, params)
-        GitlabV5::Payload.new(session, repo, params)
+        GitlabV5::Payload.new(session, repo, params).build
       end
 
       private

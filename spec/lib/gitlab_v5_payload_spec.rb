@@ -7,7 +7,7 @@ describe Vx::ServiceConnector::GitlabV5::Payload do
   let(:content) { read_json_fixture("gitlab_v5/payload/push") }
   let(:repo)    { create :repo }
   let(:gitlab)  { Vx::ServiceConnector::GitlabV5.new 'http://example.com', 'token' }
-  let(:payload) { gitlab.payload(repo, content).build }
+  let(:payload) { gitlab.payload(repo, content) }
   subject { payload }
 
   context "push" do
