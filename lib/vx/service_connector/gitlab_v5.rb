@@ -1,5 +1,3 @@
-require 'gitlab'
-
 module Vx
   module ServiceConnector
     GitlabV5 = Struct.new(:endpoint, :private_token) do
