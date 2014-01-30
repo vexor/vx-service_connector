@@ -2,7 +2,7 @@ require 'base64'
 
 module Vx
   module ServiceConnector
-    class GitlabV4
+    class GitlabV5
       Files = Struct.new(:session, :repo) do
 
         def get(sha, path)

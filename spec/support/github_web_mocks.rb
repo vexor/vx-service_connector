@@ -1,7 +1,7 @@
 module GithubWebMocks
 
-  def mock_get_commit
-    mock_get "https://api.github.com/repos/full/name/commits/sha", 'commit'
+  def mock_get_commit(repo_name, sha)
+    mock_get "https://api.github.com/repos/#{repo_name}/commits/#{sha}", 'commit'
   end
 
   def mock_get_commit_not_found

@@ -12,14 +12,16 @@ module Vx
       )
 
       Payload = Struct.new(
+        :ignore?,
         :pull_request?,
         :pull_request_number,
-        :head,
-        :base,
         :branch,
         :branch_label,
-        :url,
-        :ignore?
+        :sha,
+        :message,
+        :author,
+        :author_email,
+        :web_url
       ) do
         def to_hash ; to_h end
 
@@ -34,35 +36,25 @@ module Vx
         end
       end
 
-      Commit = Struct.new(
-        :sha,
-        :message,
-        :author,
-        :author_email,
-        :http_url
-      )
-
       extend self
 
       def test_payload_attributes(params = {})
         {
+          ignore?:              false,
           pull_request?:        false,
           pull_request_number:  nil,
-          head:                 "HEAD",
-          base:                 '0000',
           branch:               'master',
           branch_label:         'master:label',
-          url:                  'http://example.com',
-          ignore?:              false
+          sha:                  "HEAD",
+          message:              'test commit',
+          author:               'User Name',
+          author_email:         'me@example.com',
+          web_url:              'http://example.com',
         }.merge(params)
       end
 
       def test_payload(params = {})
         Payload.from_hash(test_payload_attributes params)
-      end
-
-      def test_commit
-        Commit.new('sha', 'message', 'author', 'author_email', 'http_url')
       end
 
       def test_repo
