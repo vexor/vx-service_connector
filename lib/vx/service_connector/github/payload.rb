@@ -80,7 +80,7 @@ module Vx
           if pull_request?
             commit_for_pull_request.author.name
           else
-            head_commit["author"]["name"]
+            head_commit? && head_commit["author"]["name"]
           end
         end
 
@@ -88,7 +88,7 @@ module Vx
           if pull_request?
             commit_for_pull_request.author.email
           else
-            head_commit["author"]["email"]
+            head_commit? && head_commit["author"]["email"]
           end
         end
 
@@ -130,6 +130,10 @@ module Vx
               $stderr.puts "ERROR: #{e.inspect}"
               OpenStruct.new
             end
+        end
+
+        def head_commit?
+          self["head_commit"]
         end
 
         def head_commit
