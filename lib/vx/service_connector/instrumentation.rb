@@ -2,10 +2,11 @@ require 'active_support/notifications'
 require 'faraday'
 require 'octokit/default'
 
-builder = Faraday::RackBuilder.new
-builder.request :instrumentation
 
-Octokit::Default::MIDDLEWARE.request :instrumentation
+Octokit::Default::MIDDLEWARE.insert 0, Faraday::Request::Instrumentation
+
+builder = Faraday::RackBuilder.new
+builder.insert 0, Faraday::Request::Instrumentation
 
 Faraday.default_connection_options = {
   builder: builder
