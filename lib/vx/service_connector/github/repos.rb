@@ -1,12 +1,7 @@
 module Vx
   module ServiceConnector
     class Github
-      class Repos
-        attr_reader :session
-
-        def initialize(session)
-          @session = session
-        end
+      Repos = Struct.new(:session) do
 
         def to_a
           @repos ||= (user_repositories + organization_repositories)
