@@ -4,7 +4,11 @@ module Vx
       Hooks = Struct.new(:session, :repo) do
 
         def all
-          session.get hooks_url
+          begin
+            session.get hooks_url
+          rescue RequestError
+            []
+          end
         end
 
         def create(url, token)

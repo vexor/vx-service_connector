@@ -4,7 +4,11 @@ module Vx
       Hooks = Struct.new(:session, :repo) do
 
         def all
-          session.hooks(repo.full_name)
+          begin
+            session.hooks(repo.full_name)
+          rescue Octokit::NotFound
+            []
+          end
         end
 
         def create(url, token)

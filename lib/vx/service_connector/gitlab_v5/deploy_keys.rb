@@ -4,7 +4,11 @@ module Vx
       DeployKeys = Struct.new(:session, :repo) do
 
         def all
-          session.get "/projects/#{repo.id}/keys"
+          begin
+            session.get "/projects/#{repo.id}/keys"
+          rescue RequestError
+            []
+          end
         end
 
         def create(key_name, public_key)

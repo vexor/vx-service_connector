@@ -4,7 +4,11 @@ module Vx
       DeployKeys = Struct.new(:session, :repo) do
 
         def all
-          session.deploy_keys(repo.full_name)
+          begin
+            session.deploy_keys(repo.full_name)
+          rescue Octokit::NotFound
+            []
+          end
         end
 
         def create(key_name, public_key)
