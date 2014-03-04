@@ -1,7 +1,7 @@
 module GitlabV5WebMocks
 
   def mock_repos
-    mock_get "projects", 'projects'
+    mock_get "projects?per_page=30", 'projects'
   end
 
   def mock_deploy_keys
