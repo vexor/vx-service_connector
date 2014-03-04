@@ -4,7 +4,7 @@ module Vx
       Repos = Struct.new(:session) do
 
         def to_a
-          session.get("/projects").map do |proj|
+          session.get("/projects", per_page: 30).map do |proj|
             proj_to_model proj
           end
         end
