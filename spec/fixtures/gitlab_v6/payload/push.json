@@ -1,0 +1,25 @@
+{
+    "before": "0000000000000000000000000000000000000000",
+    "after": "decc3915e29d7ae1786bb981b2ea3702afae592a",
+    "ref": "refs/heads/testing",
+    "user_id": 13,
+    "user_name": "Dmitry",
+    "project_id": 1,
+    "repository": {
+        "name": "event_generator",
+        "url": "git@git.dev.gorod-skidok.com:serverist2/event_generator.git",
+        "description": "",
+        "homepage": "http://git.dev.gorod-skidok.com/serverist2/event_generator"
+    },
+    "commits": [{
+        "id": "decc3915e29d7ae1786bb981b2ea3702afae592a",
+        "message": "test",
+        "timestamp": "2014-04-02T23:40:31-07:00",
+        "url": "http://git.dev.gorod-skidok.com/serverist2/event_generator/commit/decc3915e29d7ae1786bb981b2ea3702afae592a",
+        "author": {
+            "name": "Dmitry",
+            "email": "some@mail.com"
+        }
+    }],
+    "total_commits_count": 1
+}

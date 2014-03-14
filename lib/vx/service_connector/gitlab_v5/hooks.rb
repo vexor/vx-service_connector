@@ -24,7 +24,7 @@ module Vx
           all.select do |hook|
             hook.url =~ /#{Regexp.escape url_mask}/
           end.map do |hook|
-            session.delete hooks_url, hook_id: hook.id
+            session.delete hook_url(hook.id)
           end
         end
 
@@ -32,6 +32,10 @@ module Vx
 
           def hooks_url
             "/projects/#{repo.id}/hooks"
+          end
+
+          def hook_url(id)
+            "#{hooks_url}?hook_id=#{id}"
           end
 
       end
