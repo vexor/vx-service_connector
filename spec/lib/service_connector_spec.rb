@@ -14,6 +14,11 @@ describe Vx::ServiceConnector do
       let(:name) { :gitlab_v5 }
       it { should be_include("GitlabV5") }
     end
+
+    context ":gitlab_v6" do
+      let(:name) { :gitlab_v6 }
+      it { should be_include("GitlabV6") }
+    end
   end
 
 end

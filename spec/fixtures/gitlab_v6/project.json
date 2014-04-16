@@ -1,0 +1,46 @@
+{
+    "id": 2,
+    "description": "",
+    "default_branch": "master",
+    "public": true,
+    "visibility_level": 20,
+    "ssh_url_to_repo": "git@localhost:example/sqerp.git",
+    "http_url_to_repo": "http://localhost/example/sqerp.git",
+    "web_url": "http://localhost/example/sqerp",
+    "owner": {
+        "id": 1,
+        "username": "root",
+        "email": "admin@local.host",
+        "name": "Administrator",
+        "state": "active",
+        "created_at": "2014-03-24T15:45:56.548Z"
+    },
+    "name": "sqerp",
+    "name_with_namespace": "Administrator / sqerp",
+    "path": "sqerp",
+    "path_with_namespace": "example/sqerp",
+    "issues_enabled": true,
+    "merge_requests_enabled": true,
+    "wall_enabled": false,
+    "wiki_enabled": true,
+    "snippets_enabled": false,
+    "created_at": "2014-04-03T09:37:48.838Z",
+    "last_activity_at": "2014-04-03T14:06:02.254Z",
+    "namespace": {
+        "id": 1,
+        "name": "root",
+        "path": "root",
+        "owner_id": 1,
+        "created_at": "2014-03-24T15:45:56.691Z",
+        "updated_at": "2014-03-24T15:45:56.691Z",
+        "description": "",
+        "avatar": null
+    },
+    "permissions": {
+        "project_access": {
+            "access_level": 40,
+            "notification_level": 3
+        },
+        "group_access": null
+    }
+}

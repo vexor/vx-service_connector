@@ -5,7 +5,7 @@ module Vx
       include ServiceConnector::Base
 
       def repos
-        @repos ||= GitlabV5::Repos.new(session).to_a
+        @repos ||= self.class::Repos.new(session).to_a
       end
 
       def organizations
@@ -13,29 +13,29 @@ module Vx
       end
 
       def hooks(repo)
-        GitlabV5::Hooks.new(session, repo)
+        self.class::Hooks.new(session, repo)
       end
 
       def deploy_keys(repo)
-        GitlabV5::DeployKeys.new(session, repo)
+        self.class::DeployKeys.new(session, repo)
       end
 
       def notices(repo)
-        GitlabV5::Notices.new(session, repo)
+        self.class::Notices.new(session, repo)
       end
 
       def files(repo)
-        GitlabV5::Files.new(session, repo)
+        self.class::Files.new(session, repo)
       end
 
       def payload(repo, params)
-        GitlabV5::Payload.new(session, repo, params).build
+        self.class::Payload.new(session, repo, params).build
       end
 
       private
 
         def create_session
-          GitlabV5::Session.new(endpoint, private_token)
+          self.class::Session.new(endpoint, private_token)
         end
 
     end

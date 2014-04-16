@@ -1,0 +1,11 @@
+[
+    {
+        "id": 57,
+        "url": "http://example.com/hook",
+        "created_at": "2014-04-03T09:38:28.431Z",
+        "project_id": 2,
+        "push_events": true,
+        "issues_events": false,
+        "merge_requests_events": true
+    }
+]

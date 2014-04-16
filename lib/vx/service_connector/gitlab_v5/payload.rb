@@ -79,7 +79,11 @@ module Vx
         end
 
         def ignore?
-          sha == '0000000000000000000000000000000000000000'
+          if pull_request?
+            closed_pull_request? || !foreign_pull_request?
+          else
+            sha == '0000000000000000000000000000000000000000' || tag?
+          end
         end
 
         def pull_request
@@ -97,12 +101,16 @@ module Vx
         def commit_for_payload
           @commit_for_payload ||=
             begin
-              commits = session.get("/projects/#{repo.id}/repository/commits", ref_name: sha)
+              commits = session.get(commit_uri(repo.id, sha))
               commits.first || {}
             rescue RequestError => e
               $stderr.puts "ERROR: #{e.inspect}"
               {}
             end
+        end
+
+        def commit_uri(repo_id, sha)
+          "/projects/#{repo_id}/repository/commits?ref_name=#{sha}"
         end
 
       end

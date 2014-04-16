@@ -1,0 +1,14 @@
+{
+    "ref": "refs/tags/v1",
+    "before": "0000000000000000000000000000000000000000",
+    "after": "decc3915e29d7ae1786bb981b2ea3702afae592a",
+    "user_id": 1,
+    "user_name": "Administrator",
+    "project_id": 2,
+    "repository": {
+        "name": "seopl",
+        "url": "git@localhost:root/seopl.git",
+        "description": "",
+        "homepage": "http://localhost/root/seopl"
+    }
+}

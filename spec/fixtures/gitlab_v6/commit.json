@@ -1,0 +1,11 @@
+{
+    "id": "2dd0fdf94c7d0a74921e178b3b5229e60ce5d03e",
+    "short_id": "2dd0fdf94c7",
+    "title": "Replace sanitize with escape once",
+    "author_name": "Dmitriy Zaporozhets",
+    "author_email": "dzaporozhets@sphereconsultinginc.com",
+    "created_at": "2014-04-03T03:06:13-07:00",
+    "parent_ids": ["3a974a1e369bf2b16ee41d925cf3d2d44842d0d0"],
+    "committed_date": "2014-04-03T03:06:13-07:00",
+    "authored_date": "2014-04-03T03:06:13-07:00"
+}

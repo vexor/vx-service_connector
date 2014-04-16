@@ -1,0 +1,22 @@
+{
+    "name": "some-branch-name",
+    "commit": {
+        "id": "a7c31647c6449c3d98c4027d97e00b3048ac3bbf",
+        "parents": [{
+            "id": "aa7544c196ccf44a24e21c9aed12a0b246919fe0"
+        }],
+        "tree": "c5752d5f3b43e847f4f7fd0cdfdd1259e5009d45",
+        "message": "hhh",
+        "author": {
+            "name": "John Doe",
+            "email": "john@doe.com"
+        },
+        "committer": {
+            "name": "John Doe",
+            "email": "john@doe.com"
+        },
+        "authored_date": "2014-04-02T23:40:31-07:00",
+        "committed_date": "2014-04-03T02:40:29-07:00"
+    },
+    "protected": false
+}
