@@ -1,8 +1,74 @@
 module Vx
   module ServiceConnector
-    class GitlabV6::Payload < GitlabV5::Payload
+    class GitlabV6
 
-      private
+      Payload = Struct.new(:session, :repo, :params) do
+
+        def build
+          ServiceConnector::Model::Payload.new(
+            !!ignore?,
+            !!pull_request?,
+            pull_request_number,
+            branch,
+            branch_label,
+            sha,
+            message,
+            author,
+            author_email,
+            web_url
+          )
+        end
+
+        private
+
+        def message
+          commit_for_payload["title"]
+        end
+
+        def author
+          commit_for_payload["author_name"]
+        end
+
+        def author_email
+          commit_for_payload["author_email"]
+        end
+
+        def branch_label
+          branch
+        end
+
+        def foreign_pull_request?
+          pull_request_base_repo_id != pull_request_head_repo_id
+        end
+
+        def ignore?
+          if pull_request?
+            closed_pull_request? || !foreign_pull_request?
+          else
+            sha == '0000000000000000000000000000000000000000' || tag?
+          end
+        end
+
+        def key?(name)
+          params.key? name
+        end
+
+        def [](val)
+          params[val]
+        end
+
+        def commit_for_payload
+          @commit_for_payload ||=
+            begin
+              commits = session.get(commit_uri(repo.id, sha))
+              commits.first || {}
+            rescue RequestError => e
+              $stderr.puts "ERROR: #{e.inspect}"
+              {}
+            end
+        end
+
+      #=== V6
 
         def pull_request?
           self["object_kind"] == "merge_request"
@@ -62,7 +128,7 @@ module Vx
 
         def project_details
           @project_details ||= begin
-            project = session.get("/projects/#{repo.id}")
+            session.get("/projects/#{repo.id}")
           rescue RequestError => e
             $stderr.puts "ERROR: #{e.inspect}"
             nil
@@ -90,7 +156,7 @@ module Vx
         def commit_for_payload
           @commit_for_payload ||=
             begin
-              commit = session.get(commit_uri(repo.id, sha))
+              session.get(commit_uri(repo.id, sha))
             rescue RequestError => e
               $stderr.puts "ERROR: #{e.inspect}"
               {}
@@ -100,6 +166,7 @@ module Vx
         def commit_uri(repo_id, sha)
           "/projects/#{repo_id}/repository/commits/#{sha}"
         end
+      end
     end
   end
 end

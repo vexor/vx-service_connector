@@ -17,8 +17,6 @@ module Vx
       case name.to_sym
       when :github
         Github
-      when :gitlab_v5
-        GitlabV5
       when :gitlab_v6
         GitlabV6
       else

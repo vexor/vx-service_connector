@@ -1,6 +1,42 @@
 module Vx
   module ServiceConnector
-    class GitlabV6 < GitlabV5
+    GitlabV6 = Struct.new(:endpoint, :private_token) do
+
+      include ServiceConnector::Base
+
+      def repos
+        @repos ||= self.class::Repos.new(session).to_a
+      end
+
+      def organizations
+        []
+      end
+
+      def hooks(repo)
+        self.class::Hooks.new(session, repo)
+      end
+
+      def deploy_keys(repo)
+        self.class::DeployKeys.new(session, repo)
+      end
+
+      def notices(repo)
+        self.class::Notices.new(session, repo)
+      end
+
+      def files(repo)
+        self.class::Files.new(session, repo)
+      end
+
+      def payload(repo, params)
+        self.class::Payload.new(session, repo, params).build
+      end
+
+      private
+
+        def create_session
+          self.class::Session.new(endpoint, private_token)
+        end
     end
   end
 end

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-[5, 6].each do |version|
+[6].each do |version|
   klass = Vx::ServiceConnector.const_get("GitlabV#{version}")
   describe klass do
     require_relative "../support/gitlab_v#{version}_spec_helpers"

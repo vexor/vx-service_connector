@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-[5, 6].each do |version|
+[6].each do |version|
   gitlab_version = "GitlabV#{version}"
   describe Vx::ServiceConnector.const_get(gitlab_version)::Payload do
 
