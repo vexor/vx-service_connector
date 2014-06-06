@@ -57,17 +57,6 @@ module Vx
           params[val]
         end
 
-        def commit_for_payload
-          @commit_for_payload ||=
-            begin
-              commits = session.get(commit_uri(repo.id, sha))
-              commits.first || {}
-            rescue RequestError => e
-              $stderr.puts "ERROR: #{e.inspect}"
-              {}
-            end
-        end
-
       #=== V6
 
         def pull_request?
@@ -91,13 +80,13 @@ module Vx
         end
 
         def web_url
-          if pull_request?
+          case
+          when pull_request?
             base_url = project_details["web_url"]
             id = pull_request["iid"]
-
             "#{base_url}/merge_requests/#{id}"
-
-          elsif u = self["repository"] && self["repository"]["homepage"]
+          when self["repository"] && self["repository"]["homepage"]
+            u = self["repository"]["homepage"]
             "#{u}/commit/#{sha}"
           end
         end
@@ -137,8 +126,12 @@ module Vx
 
         def commit_sha_for_pull_request
           @commit_sha ||= begin
-            branch_details = session.get("/projects/#{repo.id}/repository/branches/#{branch}")
-            branch_details["commit"]["id"]
+            if not ignore?
+              branch_details = session.get("/projects/#{repo.id}/repository/branches/#{branch}")
+              branch_details["commit"]["id"]
+            else
+              nil
+            end
           rescue RequestError => e
             $stderr.puts "ERROR: #{e.inspect}"
             nil
@@ -156,7 +149,11 @@ module Vx
         def commit_for_payload
           @commit_for_payload ||=
             begin
-              session.get(commit_uri(repo.id, sha))
+              if not ignore?
+                session.get(commit_uri(repo.id, sha))
+              else
+                {}
+              end
             rescue RequestError => e
               $stderr.puts "ERROR: #{e.inspect}"
               {}

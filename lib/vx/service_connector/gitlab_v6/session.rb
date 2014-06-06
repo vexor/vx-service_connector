@@ -31,7 +31,7 @@ module Vx
             if (200..204).include?(res.status)
               res.data
             else
-              raise RequestError, res.data
+              raise RequestError, res.data.inspect
             end
           end
 

@@ -28,7 +28,7 @@ describe Vx::ServiceConnector::GitlabV6::Payload do
     its(:author)              { should eq 'Dmitriy Zaporozhets' }
     its(:author_email)        { should eq 'dzaporozhets@sphereconsultinginc.com' }
     its(:web_url)             { should eq "http://localhost/example/sqerp/merge_requests/5" }
-    its(:ignore?)             { should be_true }
+    its(:ignore?)             { should be_false }
   end
 
   context "push tag" do
@@ -46,8 +46,16 @@ describe Vx::ServiceConnector::GitlabV6::Payload do
     let(:content) { read_json_fixture("gitlab_v6/payload/closed_merge_request") }
 
     before do
-      mock_get_commit 1, 'a7c31647c6449c3d98c4027d97e00b3048ac3bbf'
-      mock_branch 1, "some-branch-name"
+      mock_project 1
+    end
+
+    its(:ignore?) { should be_true }
+  end
+
+  context "merged pull request" do
+    let(:content) { read_json_fixture("gitlab_v6/payload/merged_merge_request") }
+
+    before do
       mock_project 1
     end
 
