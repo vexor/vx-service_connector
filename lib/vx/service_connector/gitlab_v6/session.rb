@@ -48,6 +48,7 @@ module Vx
               http.headers['content-type']  = 'application/json'
               http.headers['accept']        = 'application/json'
               http.headers['PRIVATE-TOKEN'] = private_token
+              http.ssl.verify = false
             end
           end
       end
