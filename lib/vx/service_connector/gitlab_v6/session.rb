@@ -38,6 +38,8 @@ module Vx
               yield
             rescue Errno::ETIMEDOUT => e
               raise RequestError, e
+            rescue Faraday::TimeoutError => e
+              raise RequestError, e
             end
           end
 
