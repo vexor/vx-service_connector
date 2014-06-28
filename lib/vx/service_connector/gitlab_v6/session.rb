@@ -62,7 +62,9 @@ module Vx
               http.headers['content-type']  = 'application/json'
               http.headers['accept']        = 'application/json'
               http.headers['PRIVATE-TOKEN'] = private_token
-              http.ssl.verify = false
+              http.ssl.verify               = false
+              http.options[:timeout]        = 5
+              http.options[:open_timeout]   = 5
             end
           end
       end
