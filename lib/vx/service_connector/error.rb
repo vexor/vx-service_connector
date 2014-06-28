@@ -1,5 +1,5 @@
 module Vx
   module ServiceConnector
-    class RequestError < StandardError ; end
+    class RequestError < RuntimeError ; end
   end
 end

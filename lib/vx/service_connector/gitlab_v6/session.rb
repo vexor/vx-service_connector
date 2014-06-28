@@ -7,18 +7,24 @@ module Vx
       Session = Struct.new(:endpoint, :private_token) do
 
         def get(url, options = {})
-          res = agent.call :get, request_url(url), nil, query: options
-          response! res
+          wrap do
+            res = agent.call :get, request_url(url), nil, query: options
+            response! res
+          end
         end
 
         def post(url, options = {})
-          res = agent.call :post, request_url(url), options, nil
-          response! res
+          wrap do
+            res = agent.call :post, request_url(url), options, nil
+            response! res
+          end
         end
 
         def delete(url, options = {})
-          res = agent.call :delete, request_url(url), nil, query: options
-          response! res
+          wrap do
+            res = agent.call :delete, request_url(url), nil, query: options
+            response! res
+          end
         end
 
         def uri
@@ -26,6 +32,14 @@ module Vx
         end
 
         private
+
+          def wrap
+            begin
+              yield
+            rescue Errno::ETIMEDOUT => e
+              raise RequestError, e
+            end
+          end
 
           def response!(res)
             if (200..204).include?(res.status)

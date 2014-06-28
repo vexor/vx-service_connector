@@ -2,6 +2,8 @@ module Vx
   module ServiceConnector
     module Model
 
+      PAYLOAD_IGNORE_RE = Regexp.escape("[ci skip]")
+
       Repo = Struct.new(
         :id,
         :full_name,
@@ -12,7 +14,7 @@ module Vx
       )
 
       Payload = Struct.new(
-        :ignore?,
+        :skip,
         :pull_request?,
         :pull_request_number,
         :branch,
@@ -24,6 +26,10 @@ module Vx
         :web_url
       ) do
         def to_hash ; to_h end
+
+        def ignore?
+          skip || message.to_s =~ /#{PAYLOAD_IGNORE_RE}/
+        end
 
         class << self
           def from_hash(params)
@@ -40,7 +46,7 @@ module Vx
 
       def test_payload_attributes(params = {})
         {
-          ignore?:              false,
+          skip:                 false,
           pull_request?:        false,
           pull_request_number:  nil,
           branch:               'master',
