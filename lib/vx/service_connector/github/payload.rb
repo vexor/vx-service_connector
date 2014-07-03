@@ -16,6 +16,7 @@ module Vx
             message,
             author,
             author_email,
+            author_avatar_url,
             web_url
           )
         end
@@ -28,6 +29,14 @@ module Vx
 
         def tag?
           !pull_request? && self['ref'] =~ /^#{Regexp.escape 'refs/tags/'}/
+        end
+
+        def author_avatar_url
+          if pull_request?
+            pull_request['head']['user']['avatar_url']
+          else
+            ServiceConnector::Model::DEFAULT_AVATAR_URL
+          end
         end
 
         def pull_request_number

@@ -1,6 +1,7 @@
 module Vx
   module ServiceConnector
     module Model
+      DEFAULT_AVATAR_URL = 'http://gravatar.com/avatar/HASH.png'
 
       PAYLOAD_IGNORE_RE = Regexp.escape("[ci skip]")
 
@@ -23,6 +24,7 @@ module Vx
         :message,
         :author,
         :author_email,
+        :author_avatar_url,
         :web_url
       ) do
         def to_hash ; to_h end
@@ -55,7 +57,8 @@ module Vx
           message:              'test commit',
           author:               'User Name',
           author_email:         'me@example.com',
-          web_url:              'http://example.com',
+          author_avatar_url:    DEFAULT_AVATAR_URL,
+          web_url:              'http://example.com'
         }.merge(params)
       end
 

@@ -15,11 +15,16 @@ module Vx
             message,
             author,
             author_email,
+            author_avatar_url,
             web_url
           )
         end
 
         private
+
+        def author_avatar_url
+          ServiceConnector::Model::DEFAULT_AVATAR_URL
+        end
 
         def message
           commit_for_payload["title"]
