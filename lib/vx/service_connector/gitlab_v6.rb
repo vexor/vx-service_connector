@@ -32,6 +32,10 @@ module Vx
         self.class::Payload.new(session, repo, params).build
       end
 
+      def commits(repo)
+        self.class::Commits.new(session, repo)
+      end
+
       private
 
         def create_session

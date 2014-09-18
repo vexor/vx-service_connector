@@ -17,6 +17,25 @@ require 'spec_helper'
 
     it { should be }
 
+    context "(commits)" do
+      let(:commits) { gitlab.commits(repo) }
+
+      it "should return payload for last commit" do
+        mock_get_commit repo.id, 'HEAD'
+        c = commits.last
+        expect(c).to be
+        expect(c.message).to eq "Replace sanitize with escape once"
+        expect(c.skip).to be_false
+        expect(c.pull_request?).to be_false
+        expect(c.branch).to eq 'HEAD'
+        expect(c.branch_label).to eq 'HEAD'
+        expect(c.sha).to eq '2dd0fdf94c7d0a74921e178b3b5229e60ce5d03e'
+        expect(c.author).to eq "Dmitriy Zaporozhets"
+        expect(c.author_email).to eq "dzaporozhets@sphereconsultinginc.com"
+        expect(c.web_url).to eq "http://example.com/commits/2dd0fdf94c7d0a74921e178b3b5229e60ce5d03e"
+      end
+    end
+
     context "(notices)" do
       let(:notices) { gitlab.notices(repo) }
 

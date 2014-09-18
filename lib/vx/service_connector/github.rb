@@ -38,6 +38,10 @@ module Vx
         Github::Payload.new(session, params).build
       end
 
+      def commits(repo, options = {})
+        Github::Commits.new(session, repo)
+      end
+
       private
 
         def create_session

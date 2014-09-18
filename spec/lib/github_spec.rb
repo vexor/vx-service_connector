@@ -13,6 +13,25 @@ describe Vx::ServiceConnector::Github do
 
   it { should be }
 
+  context "(commits)" do
+    let(:commits) { github.commits(repo) }
+
+    it "should return payload for last commit" do
+      mock_get_commit repo.full_name, 'HEAD'
+      c = commits.last
+      expect(c).to be
+      expect(c.message).to eq "Fix all the bugs"
+      expect(c.skip).to be_false
+      expect(c.pull_request?).to be_false
+      expect(c.branch).to eq 'HEAD'
+      expect(c.branch_label).to eq 'HEAD'
+      expect(c.sha).to eq '6dcb09b5b57875f334f61aebed695e2e4193db5e'
+      expect(c.author).to eq "Monalisa Octocat"
+      expect(c.author_email).to eq "support@github.com"
+      expect(c.web_url).to eq "https://api.github.com/repos/octocat/Hello-World/git/commits/6dcb09b5b57875f334f61aebed695e2e4193db5e"
+    end
+  end
+
   context "(notices)" do
     let(:notices) { github.notices(repo) }
 
