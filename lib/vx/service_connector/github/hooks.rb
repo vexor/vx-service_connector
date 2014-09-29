@@ -18,7 +18,12 @@ module Vx
             content_type: "json"
           }
           options = { events: %w{ push pull_request } }
-          session.create_hook(repo.full_name, "web", config, options)
+          begin
+            session.create_hook(repo.full_name, "web", config, options)
+            true
+          rescue ::Octokit::NotFound
+            nil
+          end
         end
 
         def destroy(url_mask)
