@@ -9,7 +9,7 @@ module Vx
           begin
             file = session.contents repo.full_name, ref: sha, path: path
             ::Base64.decode64 file.content
-          rescue ::Octokit::NotFound => e
+          rescue ::Exception => e
             $stderr.puts "ERROR: #{e.inspect}"
             nil
           end
