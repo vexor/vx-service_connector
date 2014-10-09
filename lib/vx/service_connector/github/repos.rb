@@ -25,9 +25,9 @@ module Vx
         end
 
         def user_repositories
-          session.repositories.map do |repo|
-            repo_to_model repo
-          end
+          session.repositories
+            .select { |repo| repo.permissions && repo.permissions.admin }
+            .map { |repo| repo_to_model repo }
         end
 
         def repo_to_model(repo)
