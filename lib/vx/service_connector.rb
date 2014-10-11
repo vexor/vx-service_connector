@@ -19,6 +19,8 @@ module Vx
         Github
       when :gitlab_v6
         GitlabV6
+      when :bitbucket
+        Bitbucket
       else
         raise ArgumentError, "Serivice for #{name.inspect} is not defined"
       end
