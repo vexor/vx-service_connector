@@ -5,12 +5,14 @@ module Vx
 
         def last(options = {})
           begin
-            commit = session.get "/projects/#{repo.id}/repository/commits/HEAD"
+            project = session.get "/projects/#{repo.id}"
+            branch  = project.default_branch || "master"
+            commit  = session.get "/projects/#{repo.id}/repository/commits/#{branch}"
             Model::Payload.from_hash(
               skip:          false,
               pull_request?: false,
-              branch:        'HEAD',
-              branch_label:  'HEAD',
+              branch:        branch,
+              branch_label:  branch,
               sha:           commit.id,
               message:       commit.title,
               author:        commit.author_name,

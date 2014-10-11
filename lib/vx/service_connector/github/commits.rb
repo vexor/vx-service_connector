@@ -6,12 +6,14 @@ module Vx
       Commits = Struct.new(:session, :repo) do
         def last(options = {})
           begin
-            commit = session.commit(repo.full_name, 'HEAD')
+            project = session.repository(repo.full_name)
+            branch  = project.default_branch || 'master'
+            commit  = session.commit(repo.full_name, branch)
             Model::Payload.from_hash(
               skip:          false,
               pull_request?: false,
-              branch:        'HEAD',
-              branch_label:  'HEAD',
+              branch:        branch,
+              branch_label:  branch,
               sha:           commit.sha,
               message:       commit.commit.message,
               author:        commit.commit.author.name,

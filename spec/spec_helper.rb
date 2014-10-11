@@ -18,7 +18,7 @@ ActiveSupport::Notifications.subscribe "request.faraday" do |name, started, fini
     method:           payload[:method],
     url:              payload[:url].to_s,
     status:           payload[:status],
-    response_headers: payload[:response_headers].map{|k,v| "#{k}: #{v}" }.join("\n"),
+    response_headers: (payload[:response_headers] || []).map{|k,v| "#{k}: #{v}" }.join("\n"),
     request_headers:  payload[:request_headers].map{|k,v| "#{k}: #{v}" }.join("\n")
   }
   pp env

@@ -48,6 +48,10 @@ module GithubWebMocks
     mock_get "https://api.github.com/user/repos?per_page=100", "user_repos"
   end
 
+  def mock_repo
+    mock_get "https://api.github.com/repos/full/name", "user_repo"
+  end
+
   def mock_org_repos
     mock_get "https://api.github.com/orgs/github/repos?per_page=100", "org_repos"
   end

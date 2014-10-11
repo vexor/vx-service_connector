@@ -21,14 +21,15 @@ require 'spec_helper'
       let(:commits) { gitlab.commits(repo) }
 
       it "should return payload for last commit" do
-        mock_get_commit repo.id, 'HEAD'
+        mock_repo
+        mock_get_commit repo.id, 'master'
         c = commits.last
         expect(c).to be
         expect(c.message).to eq "Replace sanitize with escape once"
         expect(c.skip).to be_false
         expect(c.pull_request?).to be_false
-        expect(c.branch).to eq 'HEAD'
-        expect(c.branch_label).to eq 'HEAD'
+        expect(c.branch).to eq 'master'
+        expect(c.branch_label).to eq 'master'
         expect(c.sha).to eq '2dd0fdf94c7d0a74921e178b3b5229e60ce5d03e'
         expect(c.author).to eq "Dmitriy Zaporozhets"
         expect(c.author_email).to eq "dzaporozhets@sphereconsultinginc.com"

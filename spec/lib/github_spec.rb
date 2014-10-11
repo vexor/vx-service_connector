@@ -17,14 +17,15 @@ describe Vx::ServiceConnector::Github do
     let(:commits) { github.commits(repo) }
 
     it "should return payload for last commit" do
-      mock_get_commit repo.full_name, 'HEAD'
+      mock_repo
+      mock_get_commit repo.full_name, 'master'
       c = commits.last
       expect(c).to be
       expect(c.message).to eq "Fix all the bugs"
       expect(c.skip).to be_false
       expect(c.pull_request?).to be_false
-      expect(c.branch).to eq 'HEAD'
-      expect(c.branch_label).to eq 'HEAD'
+      expect(c.branch).to eq 'master'
+      expect(c.branch_label).to eq 'master'
       expect(c.sha).to eq '6dcb09b5b57875f334f61aebed695e2e4193db5e'
       expect(c.author).to eq "Monalisa Octocat"
       expect(c.author_email).to eq "support@github.com"

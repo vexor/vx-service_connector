@@ -4,6 +4,10 @@ module GitlabWebMocks
     mock_get "projects?per_page=30", 'projects'
   end
 
+  def mock_repo
+    mock_get "projects/1", 'project'
+  end
+
   def mock_deploy_keys
     mock_get "projects/1/keys", 'deploy_keys'
   end
