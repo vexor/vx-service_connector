@@ -10,6 +10,12 @@ describe Vx::ServiceConnector::Github::Payload do
   let(:payload) { github.payload repo, content }
   subject { payload }
 
+  context "ping" do
+    let(:content) { read_json_fixture 'github/payload/ping'  }
+
+    its(:ignore?)             { should be_true }
+  end
+
   context "push" do
     let(:url) { "https://github.com/evrone/ci-worker-test-repo/commit/687753389908e70801dd4ff5448be908642055c6"  }
 
