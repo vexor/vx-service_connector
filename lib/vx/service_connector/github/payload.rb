@@ -113,7 +113,7 @@ module Vx
         end
 
         def ping_request?
-          self["zen"] == "Approachable is better than simple."
+          self["zen"].to_s.size > 0
         end
 
         def ignore?
