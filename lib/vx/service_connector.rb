@@ -9,6 +9,7 @@ module Vx
     autoload :Github,     File.expand_path("../service_connector/github",     __FILE__)
     autoload :GitlabV5,   File.expand_path("../service_connector/gitlab_v5",  __FILE__)
     autoload :GitlabV6,   File.expand_path("../service_connector/gitlab_v6",  __FILE__)
+    autoload :Bitbucket,  File.expand_path("../service_connector/bitbucket",  __FILE__)
     autoload :Model,      File.expand_path("../service_connector/model",      __FILE__)
 
     extend self

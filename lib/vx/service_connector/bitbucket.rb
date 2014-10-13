@@ -39,7 +39,7 @@ module Vx
       private
 
         def create_session
-          self.class::Session.new(endpoint, private_token)
+          self.class::Session.new(login, access_token)
         end
 
     end
