@@ -51,31 +51,43 @@ describe Vx::ServiceConnector::Bitbucket do
   #   end
   # end
 
-  # context "(repos)" do
-  #   subject { github.repos }
+  context "(repos)" do
+    subject { bitbucket.repos }
 
-  #   before do
-  #     mock_user_repos
-  #     mock_org_repos
-  #     mock_orgs
-  #   end
+    before do
+      mock_user_repos
+      mock_teams
+      mock_team_repos
+    end
 
-  #   it { should have(2).item }
+    it { should have(4).item }
 
-  #   context "values" do
-  #     subject { github.repos.map(&:values) }
-  #     it { should eq(
-  #       [[1296269, "octocat/user", false,
-  #         "git@github.com:octocat/Hello-World.git",
-  #         "https://github.com/octocat/Hello-World",
-  #         "This your first repo!"],
-  #        [1296269, "octocat/org", false,
-  #         "git@github.com:octocat/Hello-World.git",
-  #         "https://github.com/octocat/Hello-World",
-  #         "This your first repo!"]]
-  #     ) }
-  #   end
-  # end
+    context "values" do
+      subject { bitbucket.repos.map(&:values) }
+
+      it { should eq(
+        [["{b890dc44-b05d-4e0b-a0a4-6b5946e31603}",
+          "tarasu/res", false,
+          "ssh://git@bitbucket.org/tarasu/res.git",
+          "https://bitbucket.org/tarasu/res",
+          "This your first repo!"],
+         ["{7f4500f2-d3a7-4757-9f92-709d5976720c}",
+          "tarasu/api-test", false,
+          "ssh://git@bitbucket.org/tarasu/api-test.git",
+          "https://bitbucket.org/tarasu/api-test",
+          "repo for test api"],
+          ["{817f084d-bd66-4eb0-97c3-f190637b2de7}", "bcarpenter/registration_templates", false,
+          "ssh://hg@bitbucket.org/bcarpenter/registration_templates",
+          "https://bitbucket.org/bcarpenter/registration_templates",
+          "This your first repo!"],
+          ["{7b38a811-939e-42d0-a986-9bc24abc3ba2}", "bcarpenter/spiderbee", false,
+          "ssh://git@bitbucket.org/bcarpenter/spiderbee.git",
+          "https://bitbucket.org/bcarpenter/spiderbee",
+          "A open source project"]]
+      ) }
+
+    end
+  end
 
   # context "(deploy_keys)" do
   #   let(:key_name)    { 'octocat@octomac' }

@@ -12,6 +12,18 @@ module BitbucketWebMocks
     mock_get 'https://bitbucket.org/api/1.0/repositories/full/name/main-branch', 'default_branch'
   end
 
+  def mock_user_repos
+    mock_get "https://bitbucket.org/api/1.0/user/repositories?pagelen=100", "user_repos"
+  end
+
+  def mock_team_repos
+    mock_get "https://bitbucket.org/api/2.0/repositories/team?pagelen=100", "team_repos"
+  end
+
+  def mock_teams
+    mock_get "https://bitbucket.org/api/1.0/user/privileges", "teams"
+  end
+
   def mock_get(url, fixture)
     stub_request(:get, url).
       with(:headers => {'Accept'=>'application/json', 'PRIVATE-TOKEN' => "token"}).
