@@ -89,34 +89,33 @@ describe Vx::ServiceConnector::Bitbucket do
     end
   end
 
-  # context "(deploy_keys)" do
-  #   let(:key_name)    { 'octocat@octomac' }
-  #   let(:public_key)  { 'public key' }
-  #   let(:deploy_keys) { github.deploy_keys(repo) }
+  context "(deploy_keys)" do
+    let(:key_name)    { 'octocat@octomac' }
+    let(:public_key)  { 'public key' }
+    let(:deploy_keys) { bitbucket.deploy_keys(repo) }
 
-  #   context "all" do
-  #     subject { deploy_keys.all }
-  #     before { mock_deploy_keys }
-  #     it { should have(1).item }
-  #   end
+    context "all" do
+      subject { deploy_keys.all }
+      before { mock_deploy_keys }
+      it { should have(1).item }
+    end
 
-  #   context "create" do
-  #     subject { deploy_keys.create key_name, public_key }
-  #     before { mock_add_deploy_key }
-  #     it { should be }
-  #   end
+    context "create" do
+      subject { deploy_keys.create key_name, public_key }
+      before { mock_add_deploy_key }
+      it { should be }
+    end
 
-  #   context "destroy" do
-  #     subject { deploy_keys.destroy key_name}
+    context "destroy" do
+      subject { deploy_keys.destroy key_name}
+      before do
+        mock_deploy_keys
+        mock_delete_deploy_key
+      end
 
-  #     before do
-  #       mock_deploy_keys
-  #       mock_delete_deploy_key
-  #     end
-
-  #     it { should have(1).item }
-  #   end
-  # end
+      it { should have(1).item }
+    end
+  end
 
   # context "(hooks)" do
   #   let(:url)   { 'url' }

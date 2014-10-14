@@ -1,5 +1,4 @@
 require 'sawyer'
-require 'uri'
 
 module Vx
   module ServiceConnector
@@ -14,15 +13,17 @@ module Vx
         end
 
         def post(url, options = {})
-          ###
+          wrap do
+            res = agent.call :post, url, options, nil
+            response! res
+          end
         end
 
         def delete(url, options = {})
-          ###
-        end
-
-        def uri
-          ###
+          wrap do
+            res = agent.call :delete, url, nil, query: options
+            response! res
+          end
         end
 
         private

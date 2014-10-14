@@ -24,6 +24,20 @@ module BitbucketWebMocks
     mock_get "https://bitbucket.org/api/1.0/user/privileges", "teams"
   end
 
+  def mock_deploy_keys
+    mock_get "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys?pagelen=100", "deploy_keys"
+  end
+
+  def mock_delete_deploy_key
+    mock_delete "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys/1", ""
+  end
+
+  def mock_add_deploy_key
+    mock_post "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys",
+              "{\"label\":\"octocat@octomac\",\"key\":\"public key\"}",
+              "add_deploy_key"
+  end
+
   def mock_get(url, fixture)
     stub_request(:get, url).
       with(:headers => {'Accept'=>'application/json', 'PRIVATE-TOKEN' => "token"}).
@@ -34,9 +48,21 @@ module BitbucketWebMocks
   end
 
   def mock_post(url, body, fixture)
+    stub_request(:post, url).
+      with(:body    => body,
+           :headers => {
+            'Accept'=>'application/json',
+            'PRIVATE-TOKEN'=>'token'}).
+      to_return(:status => 200, :body => read_fixture("github/#{fixture}.json"), :headers => {})
   end
 
   def mock_delete(url, body)
+    stub_request(:delete, url).
+      with(:body => body,
+           :headers => {
+            'Accept'=>'application/json',
+            'PRIVATE-TOKEN'=>'token'}).
+      to_return(:status => 204, :body => '')
   end
 
 end
