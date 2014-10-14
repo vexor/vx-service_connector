@@ -40,7 +40,7 @@ module BitbucketWebMocks
 
   def mock_get(url, fixture)
     stub_request(:get, url).
-      with(:headers => {'Accept'=>'application/json', 'PRIVATE-TOKEN' => "token"}).
+      with(:headers => {'Accept'=>'application/json', 'Authorization' => "token"}).
       to_return(
         :status => 200,
         :body => read_fixture("bitbucket/#{fixture}.json"),
@@ -52,7 +52,7 @@ module BitbucketWebMocks
       with(:body    => body,
            :headers => {
             'Accept'=>'application/json',
-            'PRIVATE-TOKEN'=>'token'}).
+            'Authorization'=>'token'}).
       to_return(:status => 200, :body => read_fixture("github/#{fixture}.json"), :headers => {})
   end
 
@@ -61,7 +61,7 @@ module BitbucketWebMocks
       with(:body => body,
            :headers => {
             'Accept'=>'application/json',
-            'PRIVATE-TOKEN'=>'token'}).
+            'Authorization'=>'token'}).
       to_return(:status => 204, :body => '')
   end
 

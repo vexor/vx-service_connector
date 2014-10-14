@@ -54,7 +54,7 @@ module Vx
             @agent ||= Sawyer::Agent.new(api_endpoint) do |http|
               http.headers['content-type']  = 'application/json'
               http.headers['accept']        = 'application/json'
-              http.headers['PRIVATE-TOKEN'] = private_token
+              http.headers['Authorization'] = private_token
               http.ssl.verify               = false
               http.options[:timeout]        = 5
               http.options[:open_timeout]   = 5
