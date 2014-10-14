@@ -34,21 +34,6 @@ describe Vx::ServiceConnector::Bitbucket do
   end
 
   # context "(notices)" do
-  #   let(:notices) { github.notices(repo) }
-
-  #   context "create" do
-  #     let(:sha)  { 'sha' }
-  #     let(:url)  { 'url' }
-  #     let(:desc) { 'description' }
-
-  #     { started: "pending",  passed: "success", failed: "failure", errored: "error"}.each do |k,v|
-  #       context "#{k}" do
-  #         subject { notices.create sha, k, url, desc }
-  #         before { mock_create_notice(v) }
-  #         it { should be }
-  #       end
-  #     end
-  #   end
   # end
 
   context "(repos)" do
@@ -118,50 +103,15 @@ describe Vx::ServiceConnector::Bitbucket do
   end
 
   # context "(hooks)" do
-  #   let(:url)   { 'url' }
-  #   let(:token) { 'token' }
-  #   let(:hooks) { github.hooks(repo) }
-
   #   context "all" do
-  #     subject { hooks.all }
-  #     before { mock_hooks }
-  #     it { should have(1).item }
   #   end
-
   #   context "create" do
-  #     subject { hooks.create url, token }
-  #     before { mock_add_hook }
-  #     it { should be }
   #   end
-
   #   context "destroy" do
-  #     let(:mask) { "http://example.com" }
-  #     subject { hooks.destroy mask }
-  #     before do
-  #       mock_hooks
-  #       mock_remove_hook
-  #     end
-  #     it { should have(1).item }
   #   end
   # end
 
   # context "(files)" do
-  #   let(:sha)  { 'sha' }
-  #   let(:path) { 'path' }
-
-  #   context "get" do
-  #     subject { github.files(repo).get sha, path }
-
-  #     context "success" do
-  #       before { mock_get_file  }
-  #       it { should eq 'content' }
-  #     end
-
-  #     context "not found" do
-  #       before { mock_get_file_not_found }
-  #       it { should be_nil }
-  #     end
-  #   end
   # end
 
 end
