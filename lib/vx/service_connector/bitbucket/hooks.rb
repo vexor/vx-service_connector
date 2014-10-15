@@ -14,14 +14,14 @@ module Vx
         def create(url)
           session.post(
             hooks_url,
-            'URL' => url,
-            :type => 'POST'
+            :type => 'POST',
+            'URL' => url
           )
         end
 
         def destroy(url_mask)
           all.select do |hook|
-            hook.url =~ /#{Regexp.escape url_mask}/
+            hook.service.fields.first.value =~ /#{Regexp.escape url_mask}/
           end.map do |hook|
             session.delete hook_url(hook.id)
           end

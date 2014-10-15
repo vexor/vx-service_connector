@@ -41,7 +41,8 @@ module BitbucketWebMocks
 
   def mock_add_hook
     mock_post "https://bitbucket.org/api/1.0/repositories/full/name/services",
-              "{\"type\":\"POST\",\"url\":\"https://example.com\"}", ''
+              "{\"type\":\"POST\",\"URL\":\"https://example.com\"}",
+              "create_hook"
   end
 
   def mock_hooks
@@ -50,7 +51,7 @@ module BitbucketWebMocks
   end
 
   def mock_remove_hook
-    mock_delete  "https://api.github.com/repos/full/name/hooks/1", "{}"
+    mock_delete  "https://bitbucket.org/api/1.0/repositories/full/name/services/1", ""
   end
 
   def mock_get(url, fixture)
