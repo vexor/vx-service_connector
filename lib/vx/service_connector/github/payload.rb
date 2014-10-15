@@ -112,14 +112,19 @@ module Vx
           pull_request? && (pull_request_head_repo_id != pull_request_base_repo_id)
         end
 
+        def ping_request?
+          self["zen"].to_s.size > 0
+        end
+
         def ignore?
           if pull_request?
             closed_pull_request? || !foreign_pull_request?
+          elsif ping_request?
+            true
           else
             sha == '0000000000000000000000000000000000000000' || tag?
           end
         end
-
 
         def commit_for_pull_request
           @commit_for_pull_request ||=
