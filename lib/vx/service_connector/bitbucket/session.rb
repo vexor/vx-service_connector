@@ -3,7 +3,7 @@ require 'sawyer'
 module Vx
   module ServiceConnector
     class Bitbucket
-      Session = Struct.new(:endpoint, :private_token) do
+      Session = Struct.new(:login, :private_token) do
 
         def get(url, options = {})
           wrap do
@@ -46,12 +46,8 @@ module Vx
             end
           end
 
-          def api_endpoint
-            "#{endpoint}/api/v3"
-          end
-
           def agent
-            @agent ||= Sawyer::Agent.new(api_endpoint) do |http|
+            @agent ||= Sawyer::Agent.new(login) do |http|
               http.headers['content-type']  = 'application/json'
               http.headers['accept']        = 'application/json'
               http.headers['Authorization'] = private_token

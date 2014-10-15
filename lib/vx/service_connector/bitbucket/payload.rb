@@ -4,6 +4,7 @@ module Vx
       Payload = Struct.new(:session, :params) do
 
         def build
+          :not_available
         end
 
       end

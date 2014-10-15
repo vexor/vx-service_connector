@@ -17,8 +17,7 @@ describe Vx::ServiceConnector::Bitbucket do
     let(:commits) { bitbucket.commits(repo) }
 
     it "should return payload for last commit" do
-      mock_default_branch
-      mock_get_commit repo.full_name, 'master'
+      mock_get_commit repo.full_name
       c = commits.last
       expect(c).to be
       expect(c.message).to eq "Fix all the bugs"
@@ -27,9 +26,9 @@ describe Vx::ServiceConnector::Bitbucket do
       expect(c.branch).to eq 'master'
       expect(c.branch_label).to eq 'master'
       expect(c.sha).to eq '0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463'
-      expect(c.author).to eq 'tarasu'
+      expect(c.author).to eq 'login'
       expect(c.author_email).to eq 'zazazip@yandex.ru'
-      expect(c.web_url).to eq 'https://bitbucket.org/tarasu/api-test/commits/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463'
+      expect(c.web_url).to eq 'https://bitbucket.org/login/api-test/commits/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463'
     end
   end
 
@@ -41,34 +40,25 @@ describe Vx::ServiceConnector::Bitbucket do
 
     before do
       mock_user_repos
-      mock_teams
-      mock_team_repos
+      mock_user_privileges
     end
 
-    it { should have(4).item }
+    it { should have(2).item }
 
     context "values" do
       subject { bitbucket.repos.map(&:values) }
 
       it { should eq(
         [["{b890dc44-b05d-4e0b-a0a4-6b5946e31603}",
-          "tarasu/res", false,
-          "ssh://git@bitbucket.org/tarasu/res.git",
-          "https://bitbucket.org/tarasu/res",
+          "login/res", false,
+          "ssh://git@bitbucket.org/login/res.git",
+          "https://bitbucket.org/login/res",
           "This your first repo!"],
          ["{7f4500f2-d3a7-4757-9f92-709d5976720c}",
-          "tarasu/api-test", false,
-          "ssh://git@bitbucket.org/tarasu/api-test.git",
-          "https://bitbucket.org/tarasu/api-test",
-          "repo for test api"],
-          ["{817f084d-bd66-4eb0-97c3-f190637b2de7}", "bcarpenter/registration_templates", false,
-          "ssh://hg@bitbucket.org/bcarpenter/registration_templates",
-          "https://bitbucket.org/bcarpenter/registration_templates",
-          "This your first repo!"],
-          ["{7b38a811-939e-42d0-a986-9bc24abc3ba2}", "bcarpenter/spiderbee", false,
-          "ssh://git@bitbucket.org/bcarpenter/spiderbee.git",
-          "https://bitbucket.org/bcarpenter/spiderbee",
-          "A open source project"]]
+          "login/api-test", false,
+          "ssh://git@bitbucket.org/login/api-test.git",
+          "https://bitbucket.org/login/api-test",
+          "repo for test api"]]
       ) }
 
     end
@@ -104,6 +94,7 @@ describe Vx::ServiceConnector::Bitbucket do
 
   context "(hooks)" do
     let(:url)   { 'https://example.com' }
+    let(:token) { 'token' }
     let(:hooks) { bitbucket.hooks(repo) }
 
     context "all" do
@@ -113,7 +104,7 @@ describe Vx::ServiceConnector::Bitbucket do
     end
 
     context "create" do
-      subject { hooks.create url }
+      subject { hooks.create url, token }
       before { mock_add_hook }
       it { should be }
     end

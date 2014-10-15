@@ -11,7 +11,7 @@ module Vx
           end
         end
 
-        def create(url)
+        def create(url, token)
           session.post(
             hooks_url,
             :type => 'POST',

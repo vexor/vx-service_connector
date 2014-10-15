@@ -1,27 +1,19 @@
 module BitbucketWebMocks
 
-  def mock_get_commit(repo_name, sha)
-    mock_get "https://bitbucket.org/api/2.0/repositories/#{repo_name}/commit/#{sha}", 'commit'
+  def mock_get_commit(repo_name)
+    mock_get "https://bitbucket.org/api/1.0/repositories/#{repo.full_name}/changesets/?limit=1", 'commit'
   end
 
   def mock_repo
     mock_get 'https://bitbucket.org/api/2.0/repositories/full/name', 'user_repo'
   end
 
-  def mock_default_branch
-    mock_get 'https://bitbucket.org/api/1.0/repositories/full/name/main-branch', 'default_branch'
-  end
-
   def mock_user_repos
     mock_get "https://bitbucket.org/api/1.0/user/repositories?pagelen=100", "user_repos"
   end
 
-  def mock_team_repos
-    mock_get "https://bitbucket.org/api/2.0/repositories/team?pagelen=100", "team_repos"
-  end
-
-  def mock_teams
-    mock_get "https://bitbucket.org/api/1.0/user/privileges", "teams"
+  def mock_user_privileges
+    mock_get "https://bitbucket.org/api/1.0/user/privileges", "user_privileges"
   end
 
   def mock_deploy_keys

@@ -6,7 +6,7 @@ module Vx
       Files = Struct.new(:session, :repo) do
 
         def get(sha, path)
-          ###
+          :not_available
         end
 
       end

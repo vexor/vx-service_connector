@@ -4,25 +4,20 @@ module Vx
       Repos = Struct.new(:session) do
 
         def to_a
-          @repos ||= (user_repositories + organization_repositories)
+          @repos ||= user_repositories
         end
 
-        def organizations
-          privileges = session.get "https://bitbucket.org/api/1.0/user/privileges"
-          privileges.teams.to_attrs.select{ |_, access| access == 'admin' }.keys
-        end
-
-        def organization_repositories
-          organizations.map do |team|
-            res = session.get("https://bitbucket.org/api/2.0/repositories/#{team}?pagelen=100")
-            res.values.map { |repo| repo_to_model repo }
-          end.flatten
-          ###
-        end
+        private
 
         def user_repositories
+          login = self.session.login
+          teams = session.get("https://bitbucket.org/api/1.0/user/privileges").teams
           res = session.get("https://bitbucket.org/api/1.0/user/repositories?pagelen=100")
-          res.values.map { |repo| repo_to_model repo }
+          res.values.map do |repo|
+            if repo_access?(repo.owner.username, login, teams) && repo.scm == 'git'
+              repo_to_model repo
+            end
+          end.compact
         end
 
         def repo_to_model(repo)
@@ -34,6 +29,10 @@ module Vx
             repo.links.html.href,
             repo.description
           )
+        end
+
+        def repo_access?(repo_owner, login, teams)
+          repo_owner == login || teams.to_hash.select{|_, value| value == 'admin'}.has_key?(repo_owner.to_sym)
         end
 
       end
