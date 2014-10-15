@@ -102,14 +102,32 @@ describe Vx::ServiceConnector::Bitbucket do
     end
   end
 
-  # context "(hooks)" do
-  #   context "all" do
-  #   end
-  #   context "create" do
-  #   end
-  #   context "destroy" do
-  #   end
-  # end
+  context "(hooks)" do
+    let(:url)   { 'url' }
+    let(:hooks) { bitbucket.hooks(repo) }
+
+    context "all" do
+      subject { hooks.all }
+      before { mock_hooks }
+      it { should have(2).item }
+    end
+
+    # context "create" do
+    #   subject { hooks.create url }
+    #   before { mock_add_hook }
+    #   it { should be }
+    # end
+
+    # context "destroy" do
+    #   let(:mask) { "http://example.com" }
+    #   subject { hooks.destroy mask }
+    #   before do
+    #     mock_hooks
+    #     mock_remove_hook
+    #   end
+    #   it { should have(1).item }
+    # end
+  end
 
   # context "(files)" do
   # end

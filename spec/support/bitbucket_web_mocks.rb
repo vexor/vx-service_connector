@@ -25,7 +25,8 @@ module BitbucketWebMocks
   end
 
   def mock_deploy_keys
-    mock_get "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys?pagelen=100", "deploy_keys"
+    mock_get "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys?pagelen=100",
+             "deploy_keys"
   end
 
   def mock_delete_deploy_key
@@ -36,6 +37,20 @@ module BitbucketWebMocks
     mock_post "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys",
               "{\"label\":\"octocat@octomac\",\"key\":\"public key\"}",
               "add_deploy_key"
+  end
+
+  def mock_add_hook
+    mock_post "https://bitbucket.org/api/1.0/repositories/full/name/services",
+              "{\"type\":\"POST\",\"url\":\"https://example.com\"}", ''
+  end
+
+  def mock_hooks
+    mock_get 'https://bitbucket.org/api/1.0/repositories/full/name/services',
+             'hooks'
+  end
+
+  def mock_remove_hook
+    mock_delete  "https://api.github.com/repos/full/name/hooks/1", "{}"
   end
 
   def mock_get(url, fixture)

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 4091572,
+    "service": {
+      "fields": [ 
+        { 
+          "name": "URL",
+          "value": "https://example.org" 
+        } 
+      ],
+      "type": "POST"
+    }
+  },
+ {
+    "id": 4091573,
+    "service": {
+      "fields": [ 
+        { 
+          "name": "URL",
+          "value": "https://example.org" 
+        } 
+      ],
+      "type": "POST"
+    }
+  }
+]
