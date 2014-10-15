@@ -46,6 +46,20 @@ module BitbucketWebMocks
     mock_delete  "https://bitbucket.org/api/1.0/repositories/full/name/services/1", ""
   end
 
+  def mock_get_file
+    stub_request(:get, "https://bitbucket.org/api/1.0/repositories/full/name/src/sha/path").
+      with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'Authorization'=>'token'}).
+      to_return(:status => 200, :body => "content")
+  end
+
+  def mock_get_file_not_found
+    stub_request(:get, "https://bitbucket.org/api/1.0/repositories/full/name/src/sha/path").
+      with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'Authorization'=>'token'}).
+      to_return(:status => 404, :body => "")
+  end
+
+  private
+
   def mock_get(url, fixture)
     stub_request(:get, url).
       with(:headers => {'Accept'=>'application/json', 'Authorization' => "token"}).

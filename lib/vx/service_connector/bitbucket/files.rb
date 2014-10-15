@@ -6,7 +6,12 @@ module Vx
       Files = Struct.new(:session, :repo) do
 
         def get(sha, path)
-          :not_available
+          begin
+            session.get("https://bitbucket.org/api/1.0/repositories/#{repo.full_name}/src/#{sha}/#{path}")
+          rescue RequestError => e
+            $stderr.puts "ERROR: #{e.inspect}"
+            nil
+          end
         end
 
       end

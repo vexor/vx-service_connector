@@ -120,7 +120,23 @@ describe Vx::ServiceConnector::Bitbucket do
     end
   end
 
-  # context "(files)" do
-  # end
+  context "(files)" do
+    let(:sha)  { 'sha' }
+    let(:path) { 'path' }
+
+    context "get" do
+      subject { bitbucket.files(repo).get sha, path }
+
+      context "success" do
+        before { mock_get_file }
+        it { should eq 'content' }
+      end
+
+      context "not found" do
+        before { mock_get_file_not_found }
+        it { should be_nil }
+      end
+    end
+  end
 
 end
