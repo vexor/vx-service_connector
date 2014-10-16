@@ -3,31 +3,31 @@
     "description": "",
     "links": {
       "decline": {
-        "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/pullrequests/5/decline"
+        "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests/5/decline"
       },
       "commits": {
-        "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/pullrequests/5/commits"
+        "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests/5/commits"
       },
       "self": {
-        "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/pullrequests/5"
+        "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests/5"
       },
       "comments": {
-        "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/pullrequests/5/comments"
+        "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests/5/comments"
       },
       "merge": {
-        "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/pullrequests/5/merge"
+        "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests/5/merge"
       },
       "html": {
-        "href": "https://bitbucket.org/tarasu/api-test/pull-request/5"
+        "href": "https://bitbucket.org/login/api-test/pull-request/5"
       },
       "activity": {
-        "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/pullrequests/5/activity"
+        "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests/5/activity"
       },
       "diff": {
-        "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/pullrequests/5/diff"
+        "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests/5/diff"
       },
       "approve": {
-        "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/pullrequests/5/approve"
+        "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests/5/approve"
       }
     },
     "title": "dddddddd",
@@ -40,7 +40,7 @@
         "hash": "7a715c783d90",
         "links": {
           "self": {
-            "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/commit/7a715c783d90"
+            "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commit/7a715c783d90"
           }
         }
       },
@@ -48,13 +48,13 @@
         "name": "master"
       },
       "repository": {
-        "full_name": "tarasu/api-test",
+        "full_name": "login/api-test",
         "links": {
           "self": {
-            "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test"
+            "href": "https://bitbucket.org/api/2.0/repositories/login/api-test"
           },
           "html": {
-            "href": "https://bitbucket.org/tarasu/api-test"
+            "href": "https://bitbucket.org/login/api-test"
           },
           "avatar": {
             "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/76ef4a8a61d5/img/language-avatars/ruby_16.png"
@@ -70,7 +70,7 @@
         "hash": "b8aed32b8a30",
         "links": {
           "self": {
-            "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test/commit/b8aed32b8a30"
+            "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commit/b8aed32b8a30"
           }
         }
       },
@@ -78,13 +78,13 @@
         "name": "fix"
       },
       "repository": {
-        "full_name": "tarasu/api-test",
+        "full_name": "login/api-test",
         "links": {
           "self": {
-            "href": "https://bitbucket.org/api/2.0/repositories/tarasu/api-test"
+            "href": "https://bitbucket.org/api/2.0/repositories/login/api-test"
           },
           "html": {
-            "href": "https://bitbucket.org/tarasu/api-test"
+            "href": "https://bitbucket.org/login/api-test"
           },
           "avatar": {
             "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/76ef4a8a61d5/img/language-avatars/ruby_16.png"
@@ -95,14 +95,14 @@
     },
     "reason": "",
     "author": {
-      "username": "tarasu",
-      "display_name": "tarasu",
+      "username": "login",
+      "display_name": "login",
       "links": {
         "self": {
-          "href": "https://bitbucket.org/api/2.0/users/tarasu"
+          "href": "https://bitbucket.org/api/2.0/users/login"
         },
         "html": {
-          "href": "https://bitbucket.org/tarasu"
+          "href": "https://bitbucket.org/login"
         },
         "avatar": {
           "href": "https://secure.gravatar.com/avatar/760fd901769630ef0628e7064eb01fbd?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2F76ef4a8a61d5%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32"

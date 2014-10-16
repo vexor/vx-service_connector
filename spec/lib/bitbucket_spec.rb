@@ -17,7 +17,7 @@ describe Vx::ServiceConnector::Bitbucket do
     let(:commits) { bitbucket.commits(repo) }
 
     it "should return payload for last commit" do
-      mock_get_commit repo.full_name
+      mock_get_last_commit repo.full_name
       c = commits.last
       expect(c).to be
       expect(c.message).to eq "Fix all the bugs"
@@ -27,7 +27,7 @@ describe Vx::ServiceConnector::Bitbucket do
       expect(c.branch_label).to eq 'master'
       expect(c.sha).to eq '0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463'
       expect(c.author).to eq 'login'
-      expect(c.author_email).to eq 'zazazip@yandex.ru'
+      expect(c.author_email).to eq 'example@gmail.com'
       expect(c.web_url).to eq 'https://bitbucket.org/login/api-test/commits/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463'
     end
   end

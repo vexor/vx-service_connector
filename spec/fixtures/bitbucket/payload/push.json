@@ -4,8 +4,8 @@
     "fork": false,
     "name": "api-test",
     "scm": "git",
-    "owner": "tarasu",
-    "absolute_url": "/tarasu/api-test/",
+    "owner": "login",
+    "absolute_url": "/login/api-test/",
     "slug": "api-test",
     "is_private": false
   },
@@ -22,16 +22,16 @@
       "branches": [
         
       ],
-      "raw_author": "tarasu <zazazip@yandex.ru>",
+      "raw_author": "login <example@gmail.com>",
       "utctimestamp": "2014-10-16 10:04:36+00:00",
-      "author": "tarasu",
+      "author": "login",
       "timestamp": "2014-10-16 12:04:36",
       "raw_node": "eb649cde116f7ebfd88c14938272ee5e5a04c77b",
       "parents": [
         "7969f39aced6"
       ],
       "branch": null,
-      "message": "commit1\n",
+      "message": "test commit",
       "revision": null,
       "size": -1
     },
@@ -43,20 +43,20 @@
           "file": "README.md"
         }
       ],
-      "raw_author": "tarasu <zazazip@yandex.ru>",
+      "raw_author": "login <example@gmail.com>",
       "utctimestamp": "2014-10-16 10:05:30+00:00",
-      "author": "tarasu",
+      "author": "login",
       "timestamp": "2014-10-16 12:05:30",
       "raw_node": "fcced6e76504a5fba74eb05de7cefa819db272c7",
       "parents": [
         "eb649cde116f"
       ],
       "branch": "master",
-      "message": "commit3\n",
+      "message": "test commit",
       "revision": null,
       "size": -1
     }
   ],
   "canon_url": "https://bitbucket.org",
-  "user": "tarasu"
+  "user": "login"
 }

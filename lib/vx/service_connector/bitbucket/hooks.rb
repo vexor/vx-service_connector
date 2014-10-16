@@ -30,7 +30,7 @@ module Vx
         private
 
           def hooks_url
-            "https://bitbucket.org/api/1.0/repositories/#{repo.full_name}/services"
+            "#{BITBUCKET_API_1}/repositories/#{repo.full_name}/services"
           end
 
           def hook_url(id)

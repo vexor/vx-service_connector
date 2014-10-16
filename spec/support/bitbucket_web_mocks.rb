@@ -1,7 +1,11 @@
 module BitbucketWebMocks
 
-  def mock_get_commit(repo_name)
+  def mock_get_last_commit(repo_name)
     mock_get "https://bitbucket.org/api/1.0/repositories/#{repo.full_name}/changesets/?limit=1", 'commit'
+  end
+
+  def mock_get_commit(repo_name, sha)
+    mock_get "https://bitbucket.org/api/2.0/repositories/#{repo_name}/commit/#{sha}", 'commit'
   end
 
   def mock_repo

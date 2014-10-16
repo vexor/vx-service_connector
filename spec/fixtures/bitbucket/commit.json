@@ -36,7 +36,7 @@
     "name": "api-test"
   },
   "author": {
-    "raw": "login <zazazip@yandex.ru>",
+    "raw": "login <example@gmail.com>",
     "user": {
       "username": "login",
       "display_name": "login",
