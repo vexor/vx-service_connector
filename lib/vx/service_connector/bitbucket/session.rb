@@ -7,26 +7,34 @@ module Vx
 
         def get(url, options = {})
           wrap do
-            res = agent.call :get, url, nil, query: options
+            res = agent.call :get, request_url(url), nil, query: options
             response! res
           end
         end
 
         def post(url, options = {})
           wrap do
-            res = agent.call :post, url, options, nil
+            res = agent.call :post, request_url(url), options, nil
             response! res
           end
         end
 
         def delete(url, options = {})
           wrap do
-            res = agent.call :delete, url, nil, query: options
+            res = agent.call :delete, request_url(url), nil, query: options
             response! res
           end
         end
 
         private
+
+          def request_url(url)
+            if url.include? 'api/1.0'
+              "https://bitbucket.org/#{url}"
+            else
+              url
+            end
+          end
 
           def response!(res)
             if (200..204).include?(res.status)

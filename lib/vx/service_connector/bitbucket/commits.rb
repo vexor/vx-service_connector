@@ -4,7 +4,7 @@ module Vx
       Commits = Struct.new(:session, :repo) do
         def last(options = {})
           begin
-            commit = session.get "#{BITBUCKET_API_1}/repositories/#{repo.full_name}/changesets/?limit=1"
+            commit = session.get "api/1.0/repositories/#{repo.full_name}/changesets/?limit=1"
             author, email = commit.author.raw.split('<')
             branch = commit.branch || 'master'
             Model::Payload.from_hash(

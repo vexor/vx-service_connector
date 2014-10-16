@@ -7,7 +7,7 @@ module Vx
 
         def get(sha, path)
           begin
-            session.get("#{BITBUCKET_API_1}/repositories/#{repo.full_name}/src/#{sha}/#{path}")
+            session.get("api/1.0/repositories/#{repo.full_name}/src/#{sha}/#{path}")
           rescue RequestError => e
             $stderr.puts "ERROR: #{e.inspect}"
             nil

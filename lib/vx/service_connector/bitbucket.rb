@@ -4,8 +4,6 @@ module Vx
 
       include ServiceConnector::Base
 
-      BITBUCKET_API_1 = 'https://bitbucket.org/api/1.0'
-
       def repos
         Bitbucket::Repos.new(session).to_a
       end
