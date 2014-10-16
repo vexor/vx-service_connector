@@ -54,7 +54,7 @@ module Vx
 
         def web_url
           if pull_request?
-            pull_request['links']['html']['href']
+            pull_request['links'] ? pull_request['links']['html']['href'] : nil
           else
             "https://bitbucket.org#{params['repository']['absolute_url']}commits/#{head_commit['raw_node']}"
           end
@@ -85,7 +85,7 @@ module Vx
         end
 
         def close_pull_request?
-          pull_request? && (%w(DECLINED MERGED).include? pull_request['state'])
+          pull_request? && (pull_request['state'] && %w(DECLINED MERGED).include?(pull_request['state']))
         end
 
         def pull_request_head_repo_full_name
@@ -100,15 +100,9 @@ module Vx
           pull_request_head_repo_full_name != pull_request_base_repo_full_name
         end
 
-        def ping_request?
-          self['zen'].to_s.size > 0
-        end
-
         def ignore?
           if pull_request?
             close_pull_request? || !foreign_pull_request?
-          elsif ping_request?
-            true
           else
             sha == '0000000000000000000000000000000000000000'
           end
@@ -116,10 +110,6 @@ module Vx
 
         def commit_for_pull_request
           @commit_for_pull_request ||= session.get pull_request['source']['commit']['links']['self']['href']
-        end
-
-        def head_commit?
-          self['head_commit']
         end
 
         def head_commit

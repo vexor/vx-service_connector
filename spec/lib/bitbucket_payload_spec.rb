@@ -4,14 +4,14 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
 
   include BitbucketWebMocks
 
-  let(:content)    { read_json_fixture "bitbucket/payload/push" }
+  let(:content)    { read_json_fixture 'bitbucket/payload/push' }
   let(:bitbucket)  { Vx::ServiceConnector::Bitbucket.new 'login', 'token' }
   let(:repo)       { create :repo }
   let(:payload)    { bitbucket.payload repo, content }
   subject { payload }
 
-  context "push" do
-    let(:url) { "https://bitbucket.org/login/api-test/commits/fcced6e76504a5fba74eb05de7cefa819db272c7"  }
+  context 'push' do
+    let(:url) { 'https://bitbucket.org/login/api-test/commits/fcced6e76504a5fba74eb05de7cefa819db272c7'  }
 
     its(:ignore?)             { should be_false }
     its(:pull_request?)       { should be_false }
@@ -25,9 +25,9 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
     its(:web_url)             { should eq url }
   end
 
-  context "create pull_request" do
-    let(:content) { read_json_fixture("bitbucket/payload/created_pull_request") }
-    let(:url)     { "https://bitbucket.org/login/api-test/pull-request/5" }
+  context 'create pull_request' do
+    let(:content) { read_json_fixture 'bitbucket/payload/created_pull_request' }
+    let(:url)     { 'https://bitbucket.org/login/api-test/pull-request/5' }
     let(:sha)     { 'b8aed32b8a30' }
 
     before do
@@ -44,7 +44,37 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
     its(:author)              { should eq 'login' }
     its(:author_email)        { should eq 'example@gmail.com' }
     its(:web_url)             { should eq url }
+  end
 
+  context 'declined pull request' do
+    let(:content) { read_json_fixture('bitbucket/payload/declined_pull_request') }
+
+    before do
+      mock_get_commit 'login/api-test', 'b8aed32b8a30'
+    end
+
+    its(:ignore?) { should be_true }
+  end
+
+  context 'foreign pull request' do
+    let(:content) { read_json_fixture 'bitbucket/payload/foreign_pull_request' }
+
+    before do
+      mock_get_commit 'other_login/api-test', 'b8aed32b8a30'
+    end
+
+    its(:ignore?) { should be_false }
+  end
+
+  context 'pull request with same repo' do
+
+    let(:content) { read_json_fixture 'bitbucket/payload/created_pull_request' }
+
+    before do
+       mock_get_commit 'login/api-test', 'b8aed32b8a30'
+    end
+
+    its(:ignore?) { should be_true }
   end
 
 end
