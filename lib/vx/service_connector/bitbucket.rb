@@ -9,7 +9,7 @@ module Vx
       end
 
       def organizations
-        Bitbucket::Repos.new(session).organizations
+        []
       end
 
       def hooks(repo)
