@@ -12,7 +12,7 @@ module Vx
         def user_repositories
           login = self.session.login
           teams = session.get("api/1.0/user/privileges").teams
-          res = session.get("api/1.0/user/repositories?pagelen=100")
+          res = session.get("api/1.0/user/repositories")
           res.values.map do |repo|
             if repo_access?(repo.owner.username, login, teams) && repo.scm == 'git'
               repo_to_model repo

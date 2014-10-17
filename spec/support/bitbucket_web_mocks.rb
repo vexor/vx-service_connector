@@ -13,7 +13,7 @@ module BitbucketWebMocks
   end
 
   def mock_user_repos
-    mock_get "https://bitbucket.org/api/1.0/user/repositories?pagelen=100", "user_repos"
+    mock_get "https://bitbucket.org/api/1.0/user/repositories", "user_repos"
   end
 
   def mock_user_privileges
