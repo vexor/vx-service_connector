@@ -9,31 +9,46 @@ module Vx
 
         private
 
-        def user_repositories
-          login = self.session.login
-          teams = session.get("api/1.0/user/privileges").teams
-          res = session.get("api/1.0/user/repositories")
-          res.values.map do |repo|
-            if repo_access?(repo.owner.username, login, teams) && repo.scm == 'git'
+          def user_repositories
+            res = session.get("api/1.0/user/repositories")
+            res.select do |repo|
+              git?(repo) && repo_access?(repo['owner'])
+            end.map do |repo|
               repo_to_model repo
             end
-          end.compact
-        end
+          end
 
-        def repo_to_model(repo)
-          Model::Repo.new(
-            repo.uuid,
-            repo.full_name,
-            repo.is_private,
-            repo.links.clone.last.href,
-            repo.links.html.href,
-            repo.description
-          )
-        end
+          def repo_to_model(repo)
+            name = repo['owner'] + "/" + repo['slug']
+            Model::Repo.new(
+              '-1',
+              name,
+              repo['is_private'],
+              "git@#{session.endpoint.host}/#{name}.git",
+              "#{session.endpoint}/#{name}",
+              repo['description']
+            )
+          end
 
-        def repo_access?(repo_owner, login, teams)
-          repo_owner == login || teams.to_hash.select{|_, value| value == 'admin'}.has_key?(repo_owner.to_sym)
-        end
+          def team_admin
+            @team_admin ||= begin
+              values = session.get("api/1.0/user/privileges")['teams']
+              values.select{|k,v| v == 'admin' }.keys
+            end
+          end
+
+          def login
+            session.login
+          end
+
+          def git?(repo)
+            repo['scm'] == 'git'
+          end
+
+          def repo_access?(repo_owner)
+            repo_owner == login ||
+              team_admin.include?(repo_owner)
+          end
 
       end
     end

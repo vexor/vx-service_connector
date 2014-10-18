@@ -14,20 +14,35 @@ module Vx
         def create(url, token)
           session.post(
             hooks_url,
-            :type => 'POST',
-            'URL' => url
+            'type' => 'POST',
+            'URL'  => url
+          )
+          session.post(
+            hooks_url,
+            'type' => 'Pull Request POST',
+            'URL'  => url,
+            'create/edit/merge/decline' => 'on',
+            'comments'                  => 'off',
+            'approve/unapprove'         => 'off'
           )
         end
 
         def destroy(url_mask)
           all.select do |hook|
-            hook.service.fields.first.value =~ /#{Regexp.escape url_mask}/
+            url = extract_url(hook)
+            url && url =~ /#{Regexp.escape url_mask}/
           end.map do |hook|
-            session.delete hook_url(hook.id)
+            session.delete hook_url(hook['id'])
           end
         end
 
         private
+
+          def extract_url(hook)
+            fields = hook['service']['fields']
+            url = fields.select{|f| f['name'] == 'URL' }.map{|f| f['value'] }.first
+            url
+          end
 
           def hooks_url
             "api/1.0/repositories/#{repo.full_name}/services"

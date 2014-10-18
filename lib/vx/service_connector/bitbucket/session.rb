@@ -1,46 +1,66 @@
-require 'sawyer'
+require 'oauth'
+require 'json'
+require 'ostruct'
+require 'uri'
 
 module Vx
   module ServiceConnector
     class Bitbucket
-      Session = Struct.new(:login, :private_token) do
+      Session = Struct.new(:login, :options) do
 
-        def get(url, options = {})
+        def get(url)
           wrap do
-            res = agent.call :get, request_url(url), nil, query: options
+            res = agent.get request_url(url)
             response! res
           end
         end
 
         def post(url, options = {})
           wrap do
-            res = agent.call :post, request_url(url), options, nil
+            res = agent.post request_url(url), options
             response! res
           end
         end
 
-        def delete(url, options = {})
+        def delete(url)
           wrap do
-            res = agent.call :delete, request_url(url), nil, query: options
+            res = agent.delete request_url(url)
             response! res
           end
+        end
+
+        def endpoint
+          @endpoint ||= URI("https://bitbucket.org")
+        end
+
+        def self.test
+          {
+            consumer_key:    "7j4RYZEd8YTQdfTWkJ",
+            consumer_secret: "Y8fSdaDK4GxKzvJn3tKRzyyYXctYSbUV",
+            token:           "WhFvryHuZ82XLKW6aP",
+            token_secret:    "zLSQe2DwhA4mfzwnPA53pKqLSyZgX5XH"
+          }
         end
 
         private
 
+
           def request_url(url)
-            if url.include? 'api/1.0'
-              "https://bitbucket.org/#{url}"
-            else
-              url
-            end
+            "#{endpoint}/#{url}"
           end
 
           def response!(res)
-            if (200..204).include?(res.status)
-              res.data
+            if (200..204).include?(res.code.to_i)
+              puts '---'
+              puts res.body
+              puts '---'
+              if res.header['Content-Type'].include?("application/json")
+                ::JSON.parse(res.body)
+              else
+                res.body
+              end
             else
-              raise RequestError, res.data.inspect
+              raise RequestError, res.body
             end
           end
 
@@ -49,19 +69,40 @@ module Vx
               yield
             rescue Errno::ETIMEDOUT => e
               raise RequestError, e
-            rescue Faraday::TimeoutError => e
-              raise RequestError, e
+            end
+          end
+
+          def validate_options!
+            unless options.is_a?(Hash) && options.keys.sort == [:consumer_key, :consumer_secret, :token, :token_secret]
+              raise InvalidArguments, options
             end
           end
 
           def agent
-            @agent ||= Sawyer::Agent.new(login) do |http|
-              http.headers['content-type']  = 'application/json'
-              http.headers['accept']        = 'application/json'
-              http.headers['Authorization'] = private_token
-              http.ssl.verify               = false
-              http.options[:timeout]        = 5
-              http.options[:open_timeout]   = 5
+            @agent ||= begin
+              validate_options!
+              consumer = OAuth::Consumer.new(
+                options[:consumer_key], options[:consumer_secret],
+                site: endpoint.to_s
+              )
+              token = OAuth::AccessToken.new consumer, options[:token], options[:token_secret]
+=begin
+              Sawyer::Agent.new(endpoint) do |http|
+                http.headers['content-type']  = 'application/json'
+                http.headers['accept']        = 'application/json'
+                http.ssl.verify               = false
+                http.options[:timeout]        = 5
+                http.options[:open_timeout]   = 5
+                http.request :oauth,
+                  consumer_key:    "7j4RYZEd8YTQdfTWkJ",
+                  consumer_secret: "Y8fSdaDK4GxKzvJn3tKRzyyYXctYSbUV",
+                  token:           "WhFvryHuZ82XLKW6aP",
+                  token_secret:    "zLSQe2DwhA4mfzwnPA53pKqLSyZgX5XH"
+                  ignore_extra_keys: true
+                http.response :logger
+              end
+=end
+              token
             end
           end
 

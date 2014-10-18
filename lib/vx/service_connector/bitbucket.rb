@@ -1,6 +1,6 @@
 module Vx
   module ServiceConnector
-    Bitbucket = Struct.new(:login, :access_token) do
+    Bitbucket = Struct.new(:login, :options) do
 
       include ServiceConnector::Base
 
@@ -39,7 +39,7 @@ module Vx
       private
 
         def create_session
-          self.class::Session.new(login, access_token)
+          self.class::Session.new(login, options)
         end
 
     end

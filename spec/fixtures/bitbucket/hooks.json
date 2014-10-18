@@ -1,24 +1,36 @@
 [
   {
-    "id": 1,
+    "id": 4115444,
     "service": {
-      "fields": [ 
-        { 
+      "fields": [
+        {
+          "name": "approve/unapprove",
+          "value": "on"
+        },
+        {
+          "name": "comments",
+          "value": "on"
+        },
+        {
+          "name": "create/edit/merge/decline",
+          "value": "on"
+        },
+        {
           "name": "URL",
           "value": "http://example.com"
-        } 
+        }
       ],
-      "type": "POST"
+      "type": "Pull Request POST"
     }
   },
- {
-    "id": 2,
+  {
+    "id": 4115443,
     "service": {
-      "fields": [ 
-        { 
+      "fields": [
+        {
           "name": "URL",
-          "value": "https://example.org" 
-        } 
+          "value": "http://example.com"
+        }
       ],
       "type": "POST"
     }
