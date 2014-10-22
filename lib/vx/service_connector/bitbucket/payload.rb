@@ -62,7 +62,7 @@ module Vx
 
         def message
           if pull_request?
-            commit_for_pull_request.message
+            commit_for_pull_request["message"]
           else
             head_commit['message']
           end
@@ -70,7 +70,7 @@ module Vx
 
         def author
           if pull_request?
-            commit_for_pull_request.author.user.display_name
+            commit_for_pull_request["author"]["user"]["display_name"]
           else
             head_commit['author']
           end
@@ -78,7 +78,7 @@ module Vx
 
         def author_email
           if pull_request?
-            commit_for_pull_request.author.raw[/.*<([^>]*)/,1]
+            commit_for_pull_request["author"]["raw"][/.*<([^>]*)/,1]
           else
             head_commit['raw_author'][/.*<([^>]*)/,1]
           end
@@ -109,7 +109,9 @@ module Vx
         end
 
         def commit_for_pull_request
-          @commit_for_pull_request ||= session.get pull_request['source']['commit']['links']['self']['href']
+          @commit_for_pull_request ||= begin
+            session.get pull_request['source']['commit']['links']['self']['href']
+          end
         end
 
         def head_commit

@@ -1,7 +1,7 @@
 module BitbucketWebMocks
 
   def mock_get_last_commit(repo_name)
-    mock_get "https://bitbucket.org/api/1.0/repositories/#{repo.full_name}/changesets/?limit=1", 'commit'
+    mock_get "https://bitbucket.org/api/1.0/repositories/#{repo.full_name}/changesets/?limit=1", 'commits'
   end
 
   def mock_get_commit(repo_name, sha)
@@ -66,7 +66,6 @@ module BitbucketWebMocks
 
   def mock_get(url, fixture)
     stub_request(:get, url).
-      with(:headers => {'Accept'=>'application/json', 'Authorization' => "token"}).
       to_return(
         :status => 200,
         :body => read_fixture("bitbucket/#{fixture}.json"),
@@ -75,19 +74,13 @@ module BitbucketWebMocks
 
   def mock_post(url, body, fixture)
     stub_request(:post, url).
-      with(:body    => body,
-           :headers => {
-            'Accept'=>'application/json',
-            'Authorization'=>'token'}).
+      with(:body    => body).
       to_return(:status => 200, :body => read_fixture("github/#{fixture}.json"), :headers => {})
   end
 
   def mock_delete(url, body)
     stub_request(:delete, url).
-      with(:body => body,
-           :headers => {
-            'Accept'=>'application/json',
-            'Authorization'=>'token'}).
+      with(:body => body).
       to_return(:status => 204, :body => '')
   end
 

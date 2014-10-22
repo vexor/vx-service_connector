@@ -21,7 +21,7 @@ module Vx
           def repo_to_model(repo)
             name = repo['owner'] + "/" + repo['slug']
             Model::Repo.new(
-              '-1',
+              name,
               name,
               repo['is_private'],
               "git@#{session.endpoint.host}/#{name}.git",

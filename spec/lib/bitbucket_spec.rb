@@ -7,7 +7,9 @@ describe Vx::ServiceConnector::Bitbucket do
   let(:login)     { 'login' }
   let(:token)     { 'token' }
   let(:repo)      { create :repo }
-  let(:bitbucket)    { described_class.new login, token }
+  let(:bitbucket) {
+    Vx::ServiceConnector::Bitbucket.new login, Vx::ServiceConnector::Bitbucket::Session.test
+  }
 
   subject { bitbucket }
 

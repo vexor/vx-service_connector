@@ -1,40 +1,7 @@
 {
-  "pullrequest_created": {
+  "pullrequest_updated": {
     "description": "...",
-    "links": {
-      "decline": {
-        "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/pullrequests/1/decline"
-      },
-      "commits": {
-        "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/pullrequests/1/commits"
-      },
-      "self": {
-        "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/pullrequests/1"
-      },
-      "comments": {
-        "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/pullrequests/1/comments"
-      },
-      "merge": {
-        "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/pullrequests/1/merge"
-      },
-      "html": {
-        "href": "https://bitbucket.org/121111foobar/vx-promo/pull-request/1"
-      },
-      "activity": {
-        "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/pullrequests/1/activity"
-      },
-      "diff": {
-        "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/pullrequests/1/diff"
-      },
-      "approve": {
-        "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/pullrequests/1/approve"
-      }
-    },
     "title": "PL test",
-    "close_source_branch": false,
-    "reviewers": [
-
-    ],
     "destination": {
       "commit": {
         "hash": "e4958d88c905",
@@ -63,14 +30,13 @@
         "name": "vx-promo"
       }
     },
-    "state": "OPEN",
-    "id": 1,
+    "reason": "",
     "source": {
       "commit": {
-        "hash": "b14806535f5e",
+        "hash": "5bf6aff99e83",
         "links": {
           "self": {
-            "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/commit/b14806535f5e"
+            "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/commit/5bf6aff99e83"
           }
         }
       },
@@ -93,7 +59,7 @@
         "name": "vx-promo"
       }
     },
-    "reason": "",
+    "state": "OPEN",
     "author": {
       "username": "dmexe",
       "display_name": "Dmitry  Galinsky",
@@ -109,12 +75,6 @@
         }
       }
     },
-    "created_on": "2014-10-22T20:10:18.501731+00:00",
-    "participants": [
-
-    ],
-    "updated_on": "2014-10-22T20:10:18.535203+00:00",
-    "merge_commit": null,
-    "closed_by": null
+    "date": "2014-10-22T20:39:16.972603+00:00"
   }
 }

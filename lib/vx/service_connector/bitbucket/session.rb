@@ -35,10 +35,10 @@ module Vx
 
         def self.test
           {
-            consumer_key:    "7j4RYZEd8YTQdfTWkJ",
-            consumer_secret: "Y8fSdaDK4GxKzvJn3tKRzyyYXctYSbUV",
-            token:           "WhFvryHuZ82XLKW6aP",
-            token_secret:    "zLSQe2DwhA4mfzwnPA53pKqLSyZgX5XH"
+            consumer_key:    "key",
+            consumer_secret: "secret",
+            token:           "token",
+            token_secret:    "token secret"
           }
         end
 
@@ -46,14 +46,15 @@ module Vx
 
 
           def request_url(url)
-            "#{endpoint}/#{url}"
+            if url.include?(endpoint.to_s)
+              url
+            else
+              "#{endpoint}/#{url}"
+            end
           end
 
           def response!(res)
             if (200..204).include?(res.code.to_i)
-              puts '---'
-              puts res.body
-              puts '---'
               if res.header['Content-Type'].include?("application/json")
                 ::JSON.parse(res.body)
               else
