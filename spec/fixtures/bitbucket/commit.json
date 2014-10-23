@@ -1,0 +1,72 @@
+{
+  "hash": "0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463",
+  "links": {
+    "self": {
+      "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commit/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463"
+    },
+    "comments": {
+      "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commit/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463/comments"
+    },
+    "patch": {
+      "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/patch/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463"
+    },
+    "html": {
+      "href": "https://bitbucket.org/login/api-test/commits/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463"
+    },
+    "diff": {
+      "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/diff/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463"
+    },
+    "approve": {
+      "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commit/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463/approve"
+    }
+  },
+  "repository": {
+    "links": {
+      "self": {
+        "href": "https://bitbucket.org/api/2.0/repositories/login/api-test"
+      },
+      "html": {
+        "href": "https://bitbucket.org/login/api-test"
+      },
+      "avatar": {
+        "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/76ef4a8a61d5/img/language-avatars/ruby_16.png"
+      }
+    },
+    "full_name": "login/api-test",
+    "name": "api-test"
+  },
+  "author": {
+    "raw": "login <example@gmail.com>",
+    "user": {
+      "username": "login",
+      "display_name": "login",
+      "links": {
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/users/login"
+        },
+        "html": {
+          "href": "https://bitbucket.org/login"
+        },
+        "avatar": {
+          "href": "https://secure.gravatar.com/avatar/760fd901769630ef0628e7064eb01fbd?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2F76ef4a8a61d5%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32"
+        }
+      }
+    }
+  },
+  "participants": [],
+  "parents": [
+    {
+      "hash": "26a59dea8bb1bf207d8607b1c58a077872c9f28f",
+      "links": {
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commit/26a59dea8bb1bf207d8607b1c58a077872c9f28f"
+        },
+        "html": {
+          "href": "https://bitbucket.org/login/api-test/commits/26a59dea8bb1bf207d8607b1c58a077872c9f28f"
+        }
+      }
+    }
+  ],
+  "date": "2014-10-11T18:55:21+00:00",
+  "message": "Fix all the bugs"
+}

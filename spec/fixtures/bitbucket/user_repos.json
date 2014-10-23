@@ -1,0 +1,197 @@
+{
+  "pagelen": 100,
+  "values": [
+    {
+      "scm": "git",
+      "has_wiki": false,
+      "description": "This your first repo!",
+      "links": {
+        "watchers": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/res/watchers"
+        },
+        "commits": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/res/commits"
+        },
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/res"
+        },
+        "html": {
+          "href": "https://bitbucket.org/login/res"
+        },
+        "avatar": {
+          "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/76ef4a8a61d5/img/language-avatars/default_16.png"
+        },
+        "forks": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/res/forks"
+        },
+        "clone": [
+          {
+            "href": "https://bitbucket.org/login/res.git",
+            "name": "https"
+          },
+          {
+            "href": "ssh://git@bitbucket.org/login/res.git",
+            "name": "ssh"
+          }
+        ],
+        "pullrequests": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/res/pullrequests"
+        }
+      },
+      "fork_policy": "allow_forks",
+      "name": "application",
+      "language": "",
+      "created_on": "2013-12-12T22:32:13.189979+00:00",
+      "full_name": "login/res",
+      "has_issues": false,
+      "owner": {
+        "username": "login",
+        "display_name": "login",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/users/login"
+          },
+          "html": {
+            "href": "https://bitbucket.org/login"
+          },
+          "avatar": {
+            "href": "https://secure.gravatar.com/avatar/760fd901769630ef0628e7064eb01fbd?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2F76ef4a8a61d5%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32"
+          }
+        }
+      },
+      "updated_on": "2014-10-11T16:40:17.327072+00:00",
+      "size": 5531542,
+      "is_private": false,
+      "uuid": "{b890dc44-b05d-4e0b-a0a4-6b5946e31603}"
+    },
+    {
+      "scm": "git",
+      "has_wiki": false,
+      "description": "repo for test api",
+      "links": {
+        "watchers": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/watchers"
+        },
+        "commits": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commits"
+        },
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test"
+        },
+        "html": {
+          "href": "https://bitbucket.org/login/api-test"
+        },
+        "avatar": {
+          "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/76ef4a8a61d5/img/language-avatars/ruby_16.png"
+        },
+        "forks": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/forks"
+        },
+        "clone": [
+          {
+            "href": "https://bitbucket.org/login/api-test.git",
+            "name": "https"
+          },
+          {
+            "href": "ssh://git@bitbucket.org/login/api-test.git",
+            "name": "ssh"
+          }
+        ],
+        "pullrequests": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests"
+        }
+      },
+      "fork_policy": "allow_forks",
+      "name": "api-test",
+      "language": "ruby",
+      "created_on": "2014-10-11T16:24:18.946823+00:00",
+      "full_name": "login/api-test",
+      "has_issues": false,
+      "owner": {
+        "username": "team1",
+        "display_name": "login",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/users/login"
+          },
+          "html": {
+            "href": "https://bitbucket.org/login"
+          },
+          "avatar": {
+            "href": "https://secure.gravatar.com/avatar/760fd901769630ef0628e7064eb01fbd?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2F76ef4a8a61d5%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32"
+          }
+        }
+      },
+      "updated_on": "2014-10-11T18:55:40.665939+00:00",
+      "size": 88532,
+      "is_private": false,
+      "uuid": "{7f4500f2-d3a7-4757-9f92-709d5976720c}"
+    },
+    {
+      "scm": "other",
+      "has_wiki": false,
+      "description": "repo for test api",
+      "links": {
+        "watchers": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/watchers"
+        },
+        "commits": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commits"
+        },
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test"
+        },
+        "html": {
+          "href": "https://bitbucket.org/login/api-test"
+        },
+        "avatar": {
+          "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/76ef4a8a61d5/img/language-avatars/ruby_16.png"
+        },
+        "forks": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/forks"
+        },
+        "clone": [
+          {
+            "href": "https://bitbucket.org/login/api-test.git",
+            "name": "https"
+          },
+          {
+            "href": "ssh://git@bitbucket.org/login/api-test.git",
+            "name": "ssh"
+          }
+        ],
+        "pullrequests": {
+          "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/pullrequests"
+        }
+      },
+      "fork_policy": "allow_forks",
+      "name": "api-test",
+      "language": "ruby",
+      "created_on": "2014-10-11T16:24:18.946823+00:00",
+      "full_name": "login/api-test",
+      "has_issues": false,
+      "owner": {
+        "username": "login",
+        "display_name": "login",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/users/login"
+          },
+          "html": {
+            "href": "https://bitbucket.org/login"
+          },
+          "avatar": {
+            "href": "https://secure.gravatar.com/avatar/760fd901769630ef0628e7064eb01fbd?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2F76ef4a8a61d5%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32"
+          }
+        }
+      },
+      "updated_on": "2014-10-11T18:55:40.665939+00:00",
+      "size": 88532,
+      "is_private": false,
+      "uuid": "{7f4500f2-d3a7-4757-9f92-709d5976720c}"
+    }
+
+  ],
+  "page": 1,
+  "size": 2
+}

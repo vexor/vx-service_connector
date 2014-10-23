@@ -1,0 +1,38 @@
+{
+  "repository": {
+    "website": "",
+    "fork": false,
+    "name": "vx-promo",
+    "scm": "git",
+    "owner": "121111foobar",
+    "absolute_url": "/121111foobar/vx-promo/",
+    "slug": "vx-promo",
+    "is_private": false
+  },
+  "truncated": false,
+  "commits": [
+    {
+      "node": "e4958d88c905",
+      "files": [
+        {
+          "type": "modified",
+          "file": "robots.txt"
+        }
+      ],
+      "raw_author": "Dmitry Galinsky <dima.exe@gmail.com>",
+      "utctimestamp": "2014-10-22 20:01:17+00:00",
+      "author": "dmexe",
+      "timestamp": "2014-10-22 22:01:17",
+      "raw_node": "e4958d88c9055ca471618f004c6f6b2d79965267",
+      "parents": [
+        "d050c9011b03"
+      ],
+      "branch": "master",
+      "message": "test\n",
+      "revision": null,
+      "size": -1
+    }
+  ],
+  "canon_url": "https://bitbucket.org",
+  "user": "dmexe"
+}

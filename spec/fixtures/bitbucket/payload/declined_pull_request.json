@@ -1,0 +1,80 @@
+{
+  "pullrequest_declined": {
+    "description": "",
+    "title": "test pull request 2",
+    "destination": {
+      "commit": {
+        "hash": "7a715c783d90",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commit/7a715c783d90"
+          }
+        }
+      },
+      "branch": {
+        "name": "master"
+      },
+      "repository": {
+        "full_name": "login/api-test",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/repositories/login/api-test"
+          },
+          "html": {
+            "href": "https://bitbucket.org/login/api-test"
+          },
+          "avatar": {
+            "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/76ef4a8a61d5/img/language-avatars/ruby_16.png"
+          }
+        },
+        "name": "api-test"
+      }
+    },
+    "reason": "",
+    "source": {
+      "commit": {
+        "hash": "b8aed32b8a30",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/repositories/login/api-test/commit/b8aed32b8a30"
+          }
+        }
+      },
+      "branch": {
+        "name": "fix"
+      },
+      "repository": {
+        "full_name": "login/api-test",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/repositories/login/api-test"
+          },
+          "html": {
+            "href": "https://bitbucket.org/login/api-test"
+          },
+          "avatar": {
+            "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/76ef4a8a61d5/img/language-avatars/ruby_16.png"
+          }
+        },
+        "name": "api-test"
+      }
+    },
+    "state": "DECLINED",
+    "author": {
+      "username": "login",
+      "display_name": "login",
+      "links": {
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/users/login"
+        },
+        "html": {
+          "href": "https://bitbucket.org/login"
+        },
+        "avatar": {
+          "href": "https://secure.gravatar.com/avatar/760fd901769630ef0628e7064eb01fbd?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2F76ef4a8a61d5%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&amp;s=32"
+        }
+      }
+    },
+    "date": "2014-10-16T09:32:29.057692+00:00"
+  }
+}

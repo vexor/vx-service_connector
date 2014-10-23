@@ -1,0 +1,80 @@
+{
+  "pullrequest_updated": {
+    "description": "...",
+    "title": "PL test",
+    "destination": {
+      "commit": {
+        "hash": "e4958d88c905",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/commit/e4958d88c905"
+          }
+        }
+      },
+      "branch": {
+        "name": "master"
+      },
+      "repository": {
+        "full_name": "121111foobar/vx-promo",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo"
+          },
+          "html": {
+            "href": "https://bitbucket.org/121111foobar/vx-promo"
+          },
+          "avatar": {
+            "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/bc2c3d924a20/img/language-avatars/default_16.png"
+          }
+        },
+        "name": "vx-promo"
+      }
+    },
+    "reason": "",
+    "source": {
+      "commit": {
+        "hash": "5bf6aff99e83",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo/commit/5bf6aff99e83"
+          }
+        }
+      },
+      "branch": {
+        "name": "test"
+      },
+      "repository": {
+        "full_name": "121111foobar/vx-promo",
+        "links": {
+          "self": {
+            "href": "https://bitbucket.org/api/2.0/repositories/121111foobar/vx-promo"
+          },
+          "html": {
+            "href": "https://bitbucket.org/121111foobar/vx-promo"
+          },
+          "avatar": {
+            "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/bc2c3d924a20/img/language-avatars/default_16.png"
+          }
+        },
+        "name": "vx-promo"
+      }
+    },
+    "state": "OPEN",
+    "author": {
+      "username": "dmexe",
+      "display_name": "Dmitry  Galinsky",
+      "links": {
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/users/dmexe"
+        },
+        "html": {
+          "href": "https://bitbucket.org/dmexe"
+        },
+        "avatar": {
+          "href": "https://secure.gravatar.com/avatar/b155fd1e7432c77594588c79f49d2168?d=https%3A%2F%2Fd3oaxc4q5k2d6q.cloudfront.net%2Fm%2Fbc2c3d924a20%2Fimg%2Fdefault_avatar%2F32%2Fuser_blue.png&s=32"
+        }
+      }
+    },
+    "date": "2014-10-22T20:39:16.972603+00:00"
+  }
+}

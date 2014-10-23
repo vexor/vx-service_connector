@@ -1,0 +1,38 @@
+[
+  {
+    "id": 4115444,
+    "service": {
+      "fields": [
+        {
+          "name": "approve/unapprove",
+          "value": "on"
+        },
+        {
+          "name": "comments",
+          "value": "on"
+        },
+        {
+          "name": "create/edit/merge/decline",
+          "value": "on"
+        },
+        {
+          "name": "URL",
+          "value": "http://example.com"
+        }
+      ],
+      "type": "Pull Request POST"
+    }
+  },
+  {
+    "id": 4115443,
+    "service": {
+      "fields": [
+        {
+          "name": "URL",
+          "value": "http://example.com"
+        }
+      ],
+      "type": "POST"
+    }
+  }
+]
