@@ -1,7 +1,7 @@
 module BitbucketWebMocks
 
   def mock_get_last_commit(repo_name)
-    mock_get "https://bitbucket.org/api/1.0/repositories/#{repo.full_name}/changesets/?limit=1", 'commits'
+    mock_get "https://bitbucket.org/api/1.0/repositories/#{repo.full_name}/changesets/?limit=1", 'changesets'
   end
 
   def mock_get_commit(repo_name, sha)
@@ -13,7 +13,7 @@ module BitbucketWebMocks
   end
 
   def mock_user_repos
-    mock_get "https://bitbucket.org/api/1.0/user/repositories", "user_repos"
+    mock_get "https://bitbucket.org/api/1.0/user/repositories", "repos"
   end
 
   def mock_user_privileges
@@ -31,7 +31,7 @@ module BitbucketWebMocks
 
   def mock_add_deploy_key
     mock_post "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys",
-              "{\"label\":\"octocat@octomac\",\"key\":\"public key\"}",
+              {"key"=>"public key", "label"=>"octocat@octomac"},
               "add_deploy_key"
   end
 

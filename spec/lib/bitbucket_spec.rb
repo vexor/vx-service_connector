@@ -4,7 +4,7 @@ describe Vx::ServiceConnector::Bitbucket do
 
   include BitbucketWebMocks
 
-  let(:login)     { 'login' }
+  let(:login)     { 'dmexe' }
   let(:token)     { 'token' }
   let(:repo)      { create :repo }
   let(:bitbucket) {
@@ -22,15 +22,15 @@ describe Vx::ServiceConnector::Bitbucket do
       mock_get_last_commit repo.full_name
       c = commits.last
       expect(c).to be
-      expect(c.message).to eq "Fix all the bugs"
+      expect(c.message).to eq "test\n"
       expect(c.skip).to be_false
       expect(c.pull_request?).to be_false
-      expect(c.branch).to eq 'master'
-      expect(c.branch_label).to eq 'master'
-      expect(c.sha).to eq '0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463'
-      expect(c.author).to eq 'login'
-      expect(c.author_email).to eq 'example@gmail.com'
-      expect(c.web_url).to eq 'https://bitbucket.org/login/api-test/commits/0a1fb3a24b8ceb48a16fb09a5759cd6f8a930463'
+      expect(c.branch).to eq 'test'
+      expect(c.branch_label).to eq 'test'
+      expect(c.sha).to eq '5bf6aff99e8350c493ecce2016c50d977de88d6f'
+      expect(c.author).to eq 'Dmitry Galinsky'
+      expect(c.author_email).to eq 'dima.exe@gmail.com'
+      expect(c.web_url).to eq 'https://bitbucket.org/full/name/commits/5bf6aff99e8350c493ecce2016c50d977de88d6f'
     end
   end
 
@@ -45,22 +45,32 @@ describe Vx::ServiceConnector::Bitbucket do
       mock_user_privileges
     end
 
-    it { should have(2).item }
+    it { should have(3).item }
 
     context "values" do
       subject { bitbucket.repos.map(&:values) }
 
       it { should eq(
-        [["{b890dc44-b05d-4e0b-a0a4-6b5946e31603}",
-          "login/res", false,
-          "ssh://git@bitbucket.org/login/res.git",
-          "https://bitbucket.org/login/res",
-          "This your first repo!"],
-         ["{7f4500f2-d3a7-4757-9f92-709d5976720c}",
-          "login/api-test", false,
-          "ssh://git@bitbucket.org/login/api-test.git",
-          "https://bitbucket.org/login/api-test",
-          "repo for test api"]]
+
+        [
+          ["121111foobar/vx-promo",
+           "121111foobar/vx-promo",
+           false,
+           "git@bitbucket.org/121111foobar/vx-promo.git",
+           "https://bitbucket.org/121111foobar/vx-promo",
+           ""],
+         ["dmexe/demo",
+          "dmexe/demo",
+          true,
+          "git@bitbucket.org/dmexe/demo.git",
+          "https://bitbucket.org/dmexe/demo",
+          ""],
+         ["dmexe/vx-binutils",
+          "dmexe/vx-binutils",
+          false,
+          "git@bitbucket.org/dmexe/vx-binutils.git",
+          "https://bitbucket.org/dmexe/vx-binutils",
+          ""]]
       ) }
 
     end

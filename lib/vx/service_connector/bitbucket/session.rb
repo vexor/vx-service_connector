@@ -55,7 +55,7 @@ module Vx
 
           def response!(res)
             if (200..204).include?(res.code.to_i)
-              if res.header['Content-Type'].include?("application/json")
+              if res.header['Content-Type'].to_s.include?("application/json")
                 ::JSON.parse(res.body)
               else
                 res.body

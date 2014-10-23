@@ -33,7 +33,8 @@ module Vx
           def team_admin
             @team_admin ||= begin
               values = session.get("api/1.0/user/privileges")['teams']
-              values.select{|k,v| v == 'admin' }.keys
+              values = values.select{|k,v| v == 'admin' }.keys
+              values
             end
           end
 
@@ -46,7 +47,7 @@ module Vx
           end
 
           def repo_access?(repo_owner)
-            repo_owner == login ||
+            (repo_owner == login) ||
               team_admin.include?(repo_owner)
           end
 
