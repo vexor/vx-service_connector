@@ -24,7 +24,7 @@ module Vx
               name,
               name,
               repo['is_private'],
-              "git@#{session.endpoint.host}/#{name}.git",
+              "git@#{session.endpoint.host}:#{name}.git",
               "#{session.endpoint}/#{name}",
               repo['description']
             )
