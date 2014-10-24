@@ -26,7 +26,8 @@ module Vx
               repo['is_private'],
               "git@#{session.endpoint.host}:#{name}.git",
               "#{session.endpoint}/#{name}",
-              repo['description']
+              repo['description'],
+              repo_language(repo)
             )
           end
 
@@ -40,6 +41,10 @@ module Vx
 
           def login
             session.login
+          end
+
+          def repo_language(repo)
+            repo['language'] == '' ? nil : repo['language']
           end
 
           def git?(repo)

@@ -22,7 +22,8 @@ module Vx
               compute_is_private(repo),
               compute_ssh_url(repo),
               compute_web_url(repo),
-              repo.description
+              repo.description,
+              nil
             )
           end
 

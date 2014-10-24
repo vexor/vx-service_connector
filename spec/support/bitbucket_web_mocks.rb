@@ -26,18 +26,21 @@ module BitbucketWebMocks
   end
 
   def mock_delete_deploy_key
-    mock_delete "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys/1", ""
+    mock_delete "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys/929688", ""
   end
 
   def mock_add_deploy_key
     mock_post "https://bitbucket.org/api/1.0/repositories/full/name/deploy-keys",
-              {"key"=>"public key", "label"=>"octocat@octomac"},
+              {"key"=>"public key", "label"=>"foo"},
               "add_deploy_key"
   end
 
   def mock_add_hook
     mock_post "https://bitbucket.org/api/1.0/repositories/full/name/services",
-              "{\"type\":\"POST\",\"URL\":\"https://example.com\"}",
+              {"type" => "POST", "URL" => "https://example.com"},
+              "create_hook"
+    mock_post "https://bitbucket.org/api/1.0/repositories/full/name/services",
+              {"URL"=>"https://example.com", "approve/unapprove"=>"off", "comments"=>"off", "create/edit/merge/decline"=>"on", "type"=>"Pull Request POST"},
               "create_hook"
   end
 
@@ -47,12 +50,12 @@ module BitbucketWebMocks
   end
 
   def mock_remove_hook
-    mock_delete  "https://bitbucket.org/api/1.0/repositories/full/name/services/1", ""
+    mock_delete  "https://bitbucket.org/api/1.0/repositories/full/name/services/4115444", ""
+    mock_delete  "https://bitbucket.org/api/1.0/repositories/full/name/services/4115443", ""
   end
 
   def mock_get_file
     stub_request(:get, "https://bitbucket.org/api/1.0/repositories/full/name/src/sha/path").
-      with(:headers => {'Accept'=>'application/json', 'Content-Type'=>'application/json', 'Authorization'=>'token'}).
       to_return(:status => 200, :body => "content")
   end
 

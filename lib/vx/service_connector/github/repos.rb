@@ -37,7 +37,8 @@ module Vx
             repo.private,
             repo.rels[:ssh].href,
             repo.rels[:html].href,
-            repo.description
+            repo.description,
+            repo.language
           )
         end
 

@@ -10,7 +10,8 @@ module Vx
         :is_private,
         :ssh_url,
         :html_url,
-        :description
+        :description,
+        :language
       )
 
       Payload = Struct.new(
