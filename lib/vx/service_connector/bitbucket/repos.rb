@@ -10,11 +10,15 @@ module Vx
         private
 
           def user_repositories
-            res = session.get("api/1.0/user/repositories")
-            res.select do |repo|
-              git?(repo) && repo_access?(repo['owner'])
-            end.map do |repo|
-              repo_to_model repo
+            begin
+              res = session.get("api/1.0/user/repositories")
+              res.select do |repo|
+                git?(repo) && repo_access?(repo['owner'])
+              end.map do |repo|
+                repo_to_model repo
+              end
+            rescue Vx::ServiceConnector::RequestError
+              []
             end
           end
 
