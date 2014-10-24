@@ -79,4 +79,11 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
     its(:ignore?) { should be_true }
   end
 
+  context 'push with empty commits' do
+
+    let(:content) { read_json_fixture 'bitbucket/payload/bug_1_empty_commits' }
+
+    its(:ignore?) { should be_true }
+  end
+
 end

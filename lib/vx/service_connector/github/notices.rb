@@ -13,8 +13,7 @@ module Vx
                 description: description,
                 target_url:  build_url
               )
-            rescue Octokit::UnprocessableEntity => e
-              STDERR.puts "ERROR: #{e.inspect}"
+            rescue Octokit::UnprocessableEntity, Octokit::Unauthorized
             end
           end
         end

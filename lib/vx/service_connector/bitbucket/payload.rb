@@ -76,11 +76,15 @@ module Vx
           end
         end
 
+        def commits?
+          not params["commits"].empty?
+        end
+
         def author_email
           if pull_request?
             commit_for_pull_request["author"]["raw"][/.*<([^>]*)/,1]
           else
-            head_commit['raw_author'][/.*<([^>]*)/,1]
+            commits? && head_commit['raw_author'][/.*<([^>]*)/,1]
           end
         end
 
@@ -104,7 +108,7 @@ module Vx
           if pull_request?
             close_pull_request? || !foreign_pull_request?
           else
-            sha == '0000000000000000000000000000000000000000'
+            sha == '0000000000000000000000000000000000000000' || !commits?
           end
         end
 

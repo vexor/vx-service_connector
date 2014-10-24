@@ -8,16 +8,24 @@ module Vx
         end
 
         def organizations
-          session.organizations.map(&:login) || []
+          begin
+            session.organizations.map(&:login) || []
+          rescue Octokit::Unauthorized
+            []
+          end
         end
 
         def organization_repositories
           organizations.map do |org|
             Thread.new do
-              session
-                .organization_repositories(org)
-                .select { |repo| repo.permissions && repo.permissions.admin }
-                .map { |repo| repo_to_model repo }
+              begin
+                session
+                  .organization_repositories(org)
+                  .select { |repo| repo.permissions && repo.permissions.admin }
+                  .map { |repo| repo_to_model repo }
+              rescue Octokit::Unauthorized
+                []
+              end
             end.tap do |th|
               th.abort_on_exception = true
             end
@@ -25,9 +33,13 @@ module Vx
         end
 
         def user_repositories
-          session.repositories
-            .select { |repo| repo.permissions && repo.permissions.admin }
-            .map { |repo| repo_to_model repo }
+          begin
+            session.repositories
+              .select { |repo| repo.permissions && repo.permissions.admin }
+              .map { |repo| repo_to_model repo }
+          rescue Octokit::Unauthorized
+            []
+          end
         end
 
         def repo_to_model(repo)
