@@ -57,16 +57,18 @@ module Vx
 
       def test_payload_attributes(params = {})
         {
-          skip:                 false,
-          pull_request?:        false,
-          pull_request_number:  nil,
-          branch:               'master',
-          branch_label:         'master:label',
-          sha:                  "HEAD",
-          message:              'test commit',
-          author:               'User Name',
-          author_email:         'me@example.com',
-          web_url:              'http://example.com',
+          skip:                   false,
+          foreign_pull_request?:  false,
+          internal_pull_request?: false,
+          pull_request_number:    nil,
+          branch:                 'master',
+          branch_label:           'master:label',
+          sha:                    "HEAD",
+          message:                'test commit',
+          author:                 'User Name',
+          author_email:           'me@example.com',
+          web_url:                'http://example.com',
+          tag:                    nil
         }.merge(params)
       end
 

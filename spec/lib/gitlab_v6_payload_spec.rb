@@ -10,7 +10,7 @@ describe Vx::ServiceConnector::GitlabV6::Payload do
   let(:payload) { gitlab.payload(repo, content) }
   subject { payload }
 
-  context "pull_request" do
+  context "foreign pull request" do
     let(:content) { read_json_fixture("gitlab_v6/payload/merge_request") }
     let(:sha)     { 'a7c31647c6449c3d98c4027d97e00b3048ac3bbf' }
 
@@ -20,7 +20,10 @@ describe Vx::ServiceConnector::GitlabV6::Payload do
       mock_project 1
     end
 
-    its(:pull_request?)       { should be_true }
+    it { should be_pull_request }
+    it { should be_foreign_pull_request }
+    it { should_not be_internal_pull_request }
+
     its(:pull_request_number) { should eq 5 }
     its(:sha)                 { should eq sha }
     its(:branch)              { should eq 'some-branch-name' }
@@ -39,7 +42,9 @@ describe Vx::ServiceConnector::GitlabV6::Payload do
     end
 
     let(:content) { read_json_fixture("gitlab_v6/payload/push_tag") }
-    its(:ignore?) { should be_true }
+    it { should_not be_ignore }
+    it { should be_tag }
+    its(:tag) { should eq 'v1' }
   end
 
   context "closed pull request" do
@@ -49,7 +54,8 @@ describe Vx::ServiceConnector::GitlabV6::Payload do
       mock_project 1
     end
 
-    its(:ignore?) { should be_true }
+    it { should be_pull_request }
+    it { should be_ignore }
   end
 
   context "merged pull request" do
@@ -59,7 +65,8 @@ describe Vx::ServiceConnector::GitlabV6::Payload do
       mock_project 1
     end
 
-    its(:ignore?) { should be_true }
+    it { should be_pull_request }
+    it { should be_ignore }
   end
 
   context "when identity is not authorized on push request" do
