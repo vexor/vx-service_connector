@@ -15,8 +15,8 @@ module Vx
       )
 
       Payload = Struct.new(
-        :skip,
-        :pull_request?,
+        :internal_pull_request?,
+        :foreign_pull_request?,
         :pull_request_number,
         :branch,
         :branch_label,
@@ -24,12 +24,22 @@ module Vx
         :message,
         :author,
         :author_email,
-        :web_url
+        :web_url,
+        :skip,
+        :tag,
       ) do
         def to_hash ; to_h end
 
         def ignore?
           !!(skip || message.to_s =~ /#{PAYLOAD_IGNORE_RE}/)
+        end
+
+        def tag?
+          !!tag
+        end
+
+        def pull_request?
+          internal_pull_request? or foreign_pull_request?
         end
 
         class << self
