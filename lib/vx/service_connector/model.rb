@@ -30,6 +30,20 @@ module Vx
       ) do
         def to_hash ; to_h end
 
+        def perform?(options = {})
+          return false if ignore?
+
+          case
+          when options.empty? # default
+            if internal_pull_request?
+              false
+            else
+              true
+            end
+          when options[:branch
+          end
+        end
+
         def ignore?
           !!(skip || message.to_s =~ /#{PAYLOAD_IGNORE_RE}/)
         end
