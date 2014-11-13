@@ -12,16 +12,16 @@ describe "(models)" do
     it "should knowns [ci skip]" do
       params[:skip] = false
       payload = described_class.from_hash(params)
-      expect(payload).to_not be_ignore
+      expect(payload).to be_perform
 
       params[:skip] = true
       payload = described_class.from_hash(params)
-      expect(payload).to be_ignore
+      expect(payload).to_not be_perform
 
       params[:skip] = false
       params[:message] = 'message [ci skip]'
       payload = described_class.from_hash(params)
-      expect(payload).to be_ignore
+      expect(payload).to_not be_perform
     end
 
   end

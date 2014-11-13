@@ -15,8 +15,8 @@ module Vx
       )
 
       Payload = Struct.new(
-        :skip,
-        :pull_request?,
+        :internal_pull_request?,
+        :foreign_pull_request?,
         :pull_request_number,
         :branch,
         :branch_label,
@@ -24,12 +24,39 @@ module Vx
         :message,
         :author,
         :author_email,
-        :web_url
+        :web_url,
+        :skip,
+        :tag,
       ) do
-        def to_hash ; to_h end
+        def to_hash
+          to_h
+        end
+
+        def master?
+          branch_label == "master"
+        end
+
+        def perform?(strategy = nil)
+          return false if ignore?
+
+          case strategy
+          when "master_or_pr"
+            master? or pull_request?
+          else # build all
+            not (internal_pull_request? or tag?)
+          end
+        end
 
         def ignore?
           !!(skip || message.to_s =~ /#{PAYLOAD_IGNORE_RE}/)
+        end
+
+        def tag?
+          !!tag
+        end
+
+        def pull_request?
+          internal_pull_request? or foreign_pull_request?
         end
 
         class << self
@@ -47,16 +74,18 @@ module Vx
 
       def test_payload_attributes(params = {})
         {
-          skip:                 false,
-          pull_request?:        false,
-          pull_request_number:  nil,
-          branch:               'master',
-          branch_label:         'master:label',
-          sha:                  "HEAD",
-          message:              'test commit',
-          author:               'User Name',
-          author_email:         'me@example.com',
-          web_url:              'http://example.com',
+          skip:                   false,
+          foreign_pull_request?:  false,
+          internal_pull_request?: false,
+          pull_request_number:    nil,
+          branch:                 'master',
+          branch_label:           'master:label',
+          sha:                    "HEAD",
+          message:                'test commit',
+          author:                 'User Name',
+          author_email:           'me@example.com',
+          web_url:                'http://example.com',
+          tag:                    nil
         }.merge(params)
       end
 

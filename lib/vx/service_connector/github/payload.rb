@@ -6,17 +6,19 @@ module Vx
       Payload = Struct.new(:session, :params) do
 
         def build
-          ServiceConnector::Model::Payload.new(
-            !!ignore?,
-            !!pull_request,
-            pull_request_number,
-            branch,
-            branch_label,
-            sha,
-            message,
-            author,
-            author_email,
-            web_url
+          ServiceConnector::Model::Payload.from_hash(
+            internal_pull_request?: (pull_request? && !foreign_pull_request?),
+            foreign_pull_request?:  foreign_pull_request?,
+            pull_request_number:    pull_request_number,
+            branch:                 branch,
+            branch_label:           branch_label,
+            sha:                    sha,
+            message:                message,
+            author:                 author,
+            author_email:           author_email,
+            web_url:                web_url,
+            tag:                    tag_name,
+            skip:                   ignore?,
           )
         end
 
@@ -24,6 +26,10 @@ module Vx
 
         def pull_request?
           key? "pull_request"
+        end
+
+        def tag_name
+          tag? and self['ref'].split("/tags/").last
         end
 
         def tag?
@@ -118,11 +124,11 @@ module Vx
 
         def ignore?
           if pull_request?
-            closed_pull_request? || !foreign_pull_request?
+            closed_pull_request?
           elsif ping_request?
             true
           else
-            sha == '0000000000000000000000000000000000000000' || tag?
+            sha == '0000000000000000000000000000000000000000'
           end
         end
 

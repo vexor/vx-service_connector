@@ -36,7 +36,7 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
       mock_get_commit '121111foobar/vx-promo', sha
     end
 
-    its(:ignore?)             { should be_true }
+    its(:ignore?)             { should be_false }
     its(:pull_request?)       { should be_true }
     its(:pull_request_number) { should eq 1 }
     its(:branch)              { should eq 'test' }
@@ -65,7 +65,10 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
       mock_get_commit 'other_login/api-test', 'b8aed32b8a30'
     end
 
-    its(:ignore?) { should be_false }
+    it { should_not be_ignore }
+    it { should be_pull_request }
+    it { should be_foreign_pull_request }
+    it { should_not be_internal_pull_request }
   end
 
   context 'pull request with same repo' do
@@ -76,7 +79,7 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
        mock_get_commit '121111foobar/vx-promo', 'b14806535f5e'
     end
 
-    its(:ignore?) { should be_true }
+    its(:ignore?) { should be_false }
   end
 
   context 'push with empty commits' do
