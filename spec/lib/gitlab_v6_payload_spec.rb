@@ -61,4 +61,23 @@ describe Vx::ServiceConnector::GitlabV6::Payload do
 
     its(:ignore?) { should be_true }
   end
+
+  context "when identity is not authorized on push request" do
+    before do
+      mock_project_not_found 1
+      mock_get_commit_not_found 1, "decc3915e29d7ae1786bb981b2ea3702afae592a"
+    end
+    its(:ignore?) { should be_true }
+  end
+
+  context "when identity is not authorized on merge request" do
+    let(:content) { read_json_fixture("gitlab_v6/payload/merge_request") }
+    before do
+      mock_project_not_found 1
+      mock_branch_not_found 1, "some-branch-name"
+      mock_get_commit_not_found 1, "a7c31647c6449c3d98c4027d97e00b3048ac3bbf"
+    end
+    its(:ignore?) { should be_true }
+  end
+
 end

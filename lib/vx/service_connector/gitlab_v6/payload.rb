@@ -6,7 +6,7 @@ module Vx
 
         def build
           ServiceConnector::Model::Payload.new(
-            !!ignore?,
+            !valid?,
             !!pull_request?,
             pull_request_number,
             branch,
@@ -20,6 +20,14 @@ module Vx
         end
 
         private
+
+        def valid?
+          if ignore?
+            false
+          else
+            message && author && author_email || false
+          end
+        end
 
         def message
           commit_for_payload["title"]
@@ -120,7 +128,7 @@ module Vx
             session.get("/projects/#{repo.id}")
           rescue RequestError => e
             $stderr.puts "ERROR: #{e.inspect}"
-            nil
+            {}
           end
         end
 
@@ -149,7 +157,7 @@ module Vx
         def commit_for_payload
           @commit_for_payload ||=
             begin
-              if not ignore?
+              if !ignore? && sha
                 session.get(commit_uri(repo.id, sha))
               else
                 {}

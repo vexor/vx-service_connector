@@ -29,7 +29,7 @@ module Vx
         def to_hash ; to_h end
 
         def ignore?
-          skip || message.to_s =~ /#{PAYLOAD_IGNORE_RE}/
+          !!(skip || message.to_s =~ /#{PAYLOAD_IGNORE_RE}/)
         end
 
         class << self
