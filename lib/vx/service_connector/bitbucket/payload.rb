@@ -95,7 +95,7 @@ module Vx
           end
         end
 
-        def close_pull_request?
+        def closed_pull_request?
           %w(DECLINED MERGED).include?(pull_request_state)
         end
 

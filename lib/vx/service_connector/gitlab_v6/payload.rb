@@ -29,7 +29,7 @@ module Vx
             author_email:           author_email,
             web_url:                web_url,
             tag:                    tag_name,
-            skip:                   ignore?,
+            skip:                   !valid?,
           )
         end
 

@@ -17,7 +17,6 @@ module Vx
 
         def destroy(key_name)
           all.select do |key|
-            puts [key_name, key['label']].inspect
             key['label'] == key_name
           end.map do |key|
             session.delete "api/1.0/repositories/#{repo.full_name}/deploy-keys/#{key['pk']}"

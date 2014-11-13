@@ -28,19 +28,22 @@ module Vx
         :skip,
         :tag,
       ) do
-        def to_hash ; to_h end
+        def to_hash
+          to_h
+        end
 
-        def perform?(options = {})
+        def master?
+          branch_label == "master"
+        end
+
+        def perform?(strategy = nil)
           return false if ignore?
 
-          case
-          when options.empty? # default
-            if internal_pull_request?
-              false
-            else
-              true
-            end
-          when options[:branch
+          case strategy
+          when "master_or_pr"
+            master? or pull_request?
+          else # build all
+            not (internal_pull_request? or tag?)
           end
         end
 
