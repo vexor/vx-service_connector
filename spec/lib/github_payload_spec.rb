@@ -86,4 +86,13 @@ describe Vx::ServiceConnector::Github::Payload do
     it { should_not be_ignore }
   end
 
+  context "bug_1 pull_request head repo is null" do
+    let(:content) { read_json_fixture("github/payload/bug_1_pr_head_repo_is_null") }
+    before do
+      mock_get_commit 'capistrano/capistrano', 'd5f67383592ddce6bfb63d8160b8c3ce30823989'
+    end
+    it { should be_pull_request }
+    it { should be_foreign_pull_request }
+  end
+
 end

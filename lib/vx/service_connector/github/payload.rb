@@ -100,7 +100,7 @@ module Vx
 
         def pull_request_head_repo_id
           if pull_request?
-            pull_request['head']['repo']['id']
+            pull_request['head']['repo'] && pull_request['head']['repo']['id']
           end
         end
 
