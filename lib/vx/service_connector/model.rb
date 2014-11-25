@@ -40,6 +40,8 @@ module Vx
           return false if ignore?
 
           case strategy
+          when Hash
+            check_strategy(strategy)
           when "master_or_pr"
             master? or pull_request?
           else # build all
@@ -67,6 +69,22 @@ module Vx
             end
             payload
           end
+        end
+
+        private
+
+        def check_strategy(strategy)
+          check_branches(strategy) && check_pull_requests(strategy)
+        end
+
+        def check_branches(strategy)
+          return true if strategy[:branches].nil?
+          Regexp.new(strategy[:branches].to_s) =~ branch
+        end
+
+        def check_pull_requests(strategy)
+          return true if strategy[:pull_requests].nil?
+          strategy[:pull_requests] ? true : !pull_request?
         end
       end
 
