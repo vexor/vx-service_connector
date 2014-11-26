@@ -24,92 +24,72 @@ describe "(models)" do
       expect(payload).to_not be_perform
     end
 
-    context 'perform? strategy' do
-      let(:params_issue)       { params.merge branch: 'issue-141' }
-      let(:params_some_branch) { params.merge branch: 'some-branch' }
-      let(:params_internal_pr) { params.merge internal_pull_request?: true }
-      let(:params_foreign_pr)  { params.merge foreign_pull_request?: true }
+    context "perform?" do
 
-      let(:expectation) do 
-        ->(p) { described_class.from_hash(p).perform?(strategy) }
+      it "message contains [ci skip]" do
+        params.merge!(message: "me [ci skip]")
+
+        # always skip
+        instance(params).to_not be_perform(nil)
       end
 
-      context 'with branches and prs' do
-        let(:strategy) do 
-          { branches: 'staging|issue-\d+', 
-            pull_requests: false }
-        end
+      it "restriction is null" do
+        # pass, push to master
+        instance(params).to be_perform(nil)
 
-        it 'gets performed when branch matches' do
-          expect(expectation[params_issue]).to be_true
-        end
+        # pass, foreign pr
+        instance(
+          params.merge(foreign_pull_request?: true)
+        ).to be_perform(nil)
 
-        it 'doesn\'t get performed when branch doesn\'t match' do
-          expect(expectation[params_some_branch]).to be_false
-        end
-
-        it 'doesn\'t get performed if it\'s an internal pull' do
-          expect(expectation[params_internal_pr]).to be_false
-        end
-
-        it 'doesn\'t get performed if it\'s an extermal pull' do
-          expect(expectation[params_foreign_pr]).to be_false
-        end
-
-        it 'doesn\'t get performed if it\'s a pull and branch matches' do
-          e = expectation[params_issue.merge internal_pull_request?: true]
-          expect(e).to be_false
-        end
+        # deny, internal pr
+        instance(
+          params.merge(internal_pull_request?: true)
+        ).to_not be_perform(nil)
       end
 
-      context 'with branches' do
-        let(:strategy) do 
-          { branches: 'staging|issue-\d+|master' } # pr == true by default
-        end
+      it "restriction is hash" do
+        # pass, branch matched
+        instance(
+          params.merge(branch: "master")
+        ).to be_perform(branch: "(master)" )
 
-        it 'gets performed when branch matches' do
-          expect(expectation[params_issue]).to be_true
-        end
+        # deny, branch not matched
+        instance(
+          params.merge(branch: "master")
+        ).to_not be_perform(branch: "(develop)" )
 
-        it 'doesn\'t get performed when branch doesn\'t match' do
-          expect(expectation[params_some_branch]).to be_false
-        end
+        # pass, pr allowed
+        instance(
+          params.merge(foreign_pull_request?: true)
+        ).to be_perform(pull_request: true)
 
-        it 'gets performed if it\'s an internal pull' do
-          expect(expectation[params_internal_pr]).to be_true
-        end
+        # pass, pr allowed
+        instance(
+          params.merge(internal_pull_request?: true)
+        ).to be_perform(pull_request: true)
 
-        it 'gets performed if it\'s an extermal pull' do
-          expect(expectation[params_foreign_pr]).to be_true
-        end
+        # deny, pr not allowed
+        instance(
+          params.merge(foreign_pull_request?: true)
+        ).to_not be_perform(pull_request: false)
 
-        it 'gets performed if it\'s a pull and branch matches' do
-          e = expectation[params_issue.merge internal_pull_request?: true]
-          expect(e).to be_true
-        end
+        # deny, pr not allowed
+        instance(
+          params.merge(internal_pull_request?: true)
+        ).to_not be_perform(pull_request: false)
       end
 
-      context 'with prs' do
-        let(:strategy) do 
-          { pull_requests: false } # all branches by default
-        end
-
-        it 'gets performed with one branch' do
-          expect(expectation[params_issue]).to be_true
-        end
-
-        it 'gets performed with another branch' do
-          expect(expectation[params_some_branch]).to be_true
-        end
-
-        it 'doesn\'s get performed if it\'s an internal pull' do
-          expect(expectation[params_internal_pr]).to be_false
-        end
-
-        it 'doesn\'t get performed if it\'s an extermal pull' do
-          expect(expectation[params_foreign_pr]).to be_false
-        end
+      it "unknown restriction" do
+        # deny always
+        instance(params).to_not be_perform('string')
+        instance(params).to_not be_perform(['array'])
       end
+
+      def instance(payload)
+        expect(described_class.from_hash(payload))
+      end
+
     end
   end
 end

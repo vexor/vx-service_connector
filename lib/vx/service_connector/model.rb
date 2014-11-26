@@ -32,21 +32,36 @@ module Vx
           to_h
         end
 
-        def master?
-          branch_label == "master"
-        end
-
-        def perform?(strategy = nil)
-          return false if ignore?
-
-          case strategy
-          when Hash
-            check_strategy(strategy)
-          when "master_or_pr"
-            master? or pull_request?
-          else # build all
-            not (internal_pull_request? or tag?)
+        def perform?(restriction = nil)
+          if ignore?
+            # skip build
+            return false
           end
+
+          if restriction.nil?
+            # skip internal pr or tag
+            # allow all pushes and foreign pr
+            return !(internal_pull_request? or tag?)
+          end
+
+          if restriction.is_a?(Hash)
+            branch_re = restriction[:branch]
+            pr        = restriction[:pull_request]
+
+            if branch_re && Regexp.new(branch_re).match(branch)
+              return true
+            end
+
+            if pr && pull_request?
+              return true
+            end
+
+            return false
+          end
+
+          # unknown restriction
+          # denied
+          return false
         end
 
         def ignore?
@@ -71,21 +86,6 @@ module Vx
           end
         end
 
-        private
-
-        def check_strategy(strategy)
-          check_branches(strategy) && check_pull_requests(strategy)
-        end
-
-        def check_branches(strategy)
-          return true if strategy[:branches].nil?
-          Regexp.new(strategy[:branches].to_s) =~ branch
-        end
-
-        def check_pull_requests(strategy)
-          return true if strategy[:pull_requests].nil?
-          strategy[:pull_requests] ? true : !pull_request?
-        end
       end
 
       extend self
