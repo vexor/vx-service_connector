@@ -16,7 +16,7 @@ module Vx
             author_email:           author_email,
             web_url:                web_url,
             tag:                    tag_name,
-            skip:                   ignore?,
+            skip:                   !valid?,
           )
         end
 
@@ -39,7 +39,8 @@ module Vx
 
         def sha
           if pull_request?
-            pull_request['source']['commit']['hash']
+            pull_request['source'] &&
+              pull_request['source']['commit']['hash']
           else
             head_commit['raw_node']
           end
@@ -48,7 +49,8 @@ module Vx
         def branch
           @branch ||= begin
             if pull_request?
-              pull_request['source']['branch']['name']
+              pull_request['source'] &&
+                pull_request['source']['branch']['name']
             else
               head_commit['branch']
             end
@@ -69,7 +71,8 @@ module Vx
 
         def message
           if pull_request?
-            commit_for_pull_request["message"]
+            commit = commit_for_pull_request
+            commit && commit['message']
           else
             head_commit['message']
           end
@@ -77,7 +80,8 @@ module Vx
 
         def author
           if pull_request?
-            commit_for_pull_request["author"]["user"]["display_name"]
+            commit = commit_for_pull_request
+            commit && commit["author"]["user"]["display_name"]
           else
             head_commit['author']
           end
@@ -89,7 +93,8 @@ module Vx
 
         def author_email
           if pull_request?
-            commit_for_pull_request["author"]["raw"][/.*<([^>]*)/,1]
+            commit = commit_for_pull_request
+            commit && commit["author"]["raw"][/.*<([^>]*)/,1]
           else
             commits? && head_commit['raw_author'][/.*<([^>]*)/,1]
           end
@@ -104,16 +109,26 @@ module Vx
         end
 
         def pull_request_head_repo_full_name
-          pull_request['source']['repository']['full_name']
+          pull_request['source'] &&
+            pull_request['source']['repository']['full_name']
         end
 
         def pull_request_base_repo_full_name
-          pull_request['destination']['repository']['full_name']
+          pull_request['destination'] &&
+            pull_request['destination']['repository']['full_name']
         end
 
         def foreign_pull_request?
           if pull_request?
             pull_request_head_repo_full_name != pull_request_base_repo_full_name
+          end
+        end
+
+        def valid?
+          if ignore?
+            false
+          else
+            message && author && author_email || false
           end
         end
 
@@ -127,7 +142,8 @@ module Vx
 
         def commit_for_pull_request
           @commit_for_pull_request ||= begin
-            session.get pull_request['source']['commit']['links']['self']['href']
+            pull_request['source'] &&
+              (session.get pull_request['source']['commit']['links']['self']['href'])
           end
         end
 

@@ -5,18 +5,6 @@ module Vx
       Payload = Struct.new(:session, :repo, :params) do
 
         def build
-          ServiceConnector::Model::Payload.new(
-            !valid?,
-            !!pull_request?,
-            pull_request_number,
-            branch,
-            branch_label,
-            sha,
-            message,
-            author,
-            author_email,
-            web_url
-          )
           ServiceConnector::Model::Payload.from_hash(
             internal_pull_request?: (pull_request? && !foreign_pull_request?),
             foreign_pull_request?:  foreign_pull_request?,

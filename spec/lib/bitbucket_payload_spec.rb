@@ -96,4 +96,18 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
     its(:ignore?) { should be_true }
   end
 
+  context 'push with PR approve' do
+
+    let(:content) { read_json_fixture 'bitbucket/payload/bug_3_pr_approve' }
+
+    its(:ignore?) { should be_true }
+  end
+
+  context 'push with PR approve' do
+
+    let(:content) { read_json_fixture 'bitbucket/payload/bug_4_pr_comment_created' }
+
+    its(:ignore?) { should be_true }
+  end
+
 end

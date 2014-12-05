@@ -1,0 +1,36 @@
+{
+  "pullrequest_comment_created": {
+    "links": {
+      "self": {
+        "href": "https://bitbucket.org/api/2.0/repositories/boomstarter/boomstarter/pullrequests/349/comments/4135018"
+      },
+      "html": {
+        "href": "https://bitbucket.org/boomstarter/boomstarter/pull-request/349/_/diff#comment-4135018"
+      }
+    },
+    "content": {
+      "raw": "\u041f\u043e\u043c\u0435\u043d\u044f\u043b.",
+      "markup": "markdown",
+      "html": "<p>\u041f\u043e\u043c\u0435\u043d\u044f\u043b.</p>"
+    },
+    "created_on": "2014-12-03T11:49:47.310260+00:00",
+    "user": {
+      "username": "bibimij",
+      "display_name": "bibimij",
+      "uuid": "{7385eb2d-3482-4bda-a311-91418d7373ce}",
+      "links": {
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/users/bibimij"
+        },
+        "html": {
+          "href": "https://bitbucket.org/bibimij"
+        },
+        "avatar": {
+          "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Nov/10/bibimij-avatar-403312456-2_avatar.png"
+        }
+      }
+    },
+    "updated_on": "2014-12-03T11:49:47.313956+00:00",
+    "id": 4135018
+  }
+}

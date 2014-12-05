@@ -1,0 +1,21 @@
+{
+  "pullrequest_approve": {
+    "date": "2014-12-03T14:13:07.062645+00:00",
+    "user": {
+      "username": "pi_boomstarter",
+      "display_name": "Pavel Ivanov",
+      "uuid": "{3acc0b44-d08a-4e50-9e8b-3cf223ff4bbd}",
+      "links": {
+        "self": {
+          "href": "https://bitbucket.org/api/2.0/users/pi_boomstarter"
+        },
+        "html": {
+          "href": "https://bitbucket.org/pi_boomstarter"
+        },
+        "avatar": {
+          "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Oct/15/pi_boomstarter-avatar-2102014747-6_avatar.png"
+        }
+      }
+    }
+  }
+}
