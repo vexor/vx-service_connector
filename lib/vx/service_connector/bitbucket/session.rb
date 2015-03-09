@@ -61,7 +61,7 @@ module Vx
                 res.body
               end
             else
-              raise RequestError, res.body
+              raise RequestError, res.code.to_s
             end
           end
 
