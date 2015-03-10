@@ -58,6 +58,17 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
     its(:ignore?) { should be_true }
   end
 
+  context 'access denied when get commit' do
+    let(:content) { read_json_fixture 'bitbucket/payload/created_pull_request' }
+    let(:sha)     { 'b14806535f5e' }
+
+    before do
+      mock_get_commit '121111foobar/vx-promo', sha, 403
+    end
+
+    its(:ignore?) { should be_true }
+  end
+
   context 'foreign pull request' do
     let(:content) { read_json_fixture 'bitbucket/payload/foreign_pull_request' }
 

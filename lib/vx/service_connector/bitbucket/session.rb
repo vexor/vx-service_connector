@@ -60,6 +60,8 @@ module Vx
               else
                 res.body
               end
+            elsif [403].include?(res.code.to_i)
+              nil
             else
               raise RequestError, res.code.to_s
             end

@@ -4,8 +4,8 @@ module BitbucketWebMocks
     mock_get "https://bitbucket.org/api/1.0/repositories/#{repo.full_name}/changesets/?limit=1", 'changesets'
   end
 
-  def mock_get_commit(repo_name, sha)
-    mock_get "https://bitbucket.org/api/2.0/repositories/#{repo_name}/commit/#{sha}", 'commit'
+  def mock_get_commit(repo_name, sha, code = 200)
+    mock_get "https://bitbucket.org/api/2.0/repositories/#{repo_name}/commit/#{sha}", 'commit', code
   end
 
   def mock_repo
@@ -67,10 +67,10 @@ module BitbucketWebMocks
 
   private
 
-  def mock_get(url, fixture)
+  def mock_get(url, fixture, code = 200)
     stub_request(:get, url).
       to_return(
-        :status => 200,
+        :status => code,
         :body => read_fixture("bitbucket/#{fixture}.json"),
         :headers => {'Content-Type' => 'application/json'})
   end
