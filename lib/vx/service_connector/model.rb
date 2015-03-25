@@ -2,7 +2,7 @@ module Vx
   module ServiceConnector
     module Model
 
-      PAYLOAD_IGNORE_RE = Regexp.escape("[ci skip]")
+      PAYLOAD_IGNORE_RE = /\[(ci skip|skip ci)\]/i
 
       Repo = Struct.new(
         :id,
@@ -65,7 +65,7 @@ module Vx
         end
 
         def ignore?
-          !!(skip || message.to_s =~ /#{PAYLOAD_IGNORE_RE}/)
+          !!(skip || message.to_s =~ PAYLOAD_IGNORE_RE)
         end
 
         def tag?

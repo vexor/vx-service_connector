@@ -18,10 +18,12 @@ describe "(models)" do
       payload = described_class.from_hash(params)
       expect(payload).to_not be_perform
 
-      params[:skip] = false
-      params[:message] = 'message [ci skip]'
-      payload = described_class.from_hash(params)
-      expect(payload).to_not be_perform
+      ["ci skip", 'Ci Skip', 'skip ci'].each do |m|
+        params[:skip] = false
+        params[:message] = "message [#{m}]"
+        payload = described_class.from_hash(params)
+        expect(payload).to_not be_perform
+      end
     end
 
     context "perform?" do
