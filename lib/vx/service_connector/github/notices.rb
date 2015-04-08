@@ -26,13 +26,12 @@ module Vx
               'pending'
             when :passed
               'success'
-            when :failed
+            when :failed, :cancelled
               'failure'
             when :errored
               'error'
             end
           end
-
       end
     end
   end
