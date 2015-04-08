@@ -41,7 +41,7 @@ describe Vx::ServiceConnector::Github do
       let(:url)  { 'url' }
       let(:desc) { 'description' }
 
-      { started: "pending",  passed: "success", failed: "failure", errored: "error"}.each do |k,v|
+      { started: "pending",  passed: "success", failed: "failure", errored: "error", cancelled: "failure" }.each do |k,v|
         context "#{k}" do
           subject { notices.create sha, k, url, desc }
           before { mock_create_notice(v) }
