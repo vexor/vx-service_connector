@@ -4,26 +4,57 @@ module Vx
       Repos = Struct.new(:session) do
 
         def to_a
-          @repos ||= user_repositories
+          @repos ||= all_repos
         end
 
         private
 
-          def user_repositories
-            begin
-              res = session.get("api/1.0/user/repositories")
-              res.select do |repo|
-                git?(repo) && repo_access?(repo['owner'])
-              end.map do |repo|
-                repo_to_model repo
-              end
-            rescue Vx::ServiceConnector::RequestError
+          def path(p)
+            "api/2.0/#{p}?role=admin&pagelen=100"
+          end
+
+          def teams
+            res = session.get(path "teams")
+
+            if list = res["values"]
+              list.map { |team| team["username"] }
+            else
               []
             end
           end
 
+          def all_repos
+            all_teams = [login] + teams
+            all_teams.map do |name|
+              Thread.new do
+                by_username(name)
+              end.tap do |t|
+                t.abort_on_exception = true
+              end
+            end.flat_map(&:value)
+          end
+
+          def by_username(name)
+            res = session.get(path "#{name}/repositories")
+            if values = res["values"]
+              make_repos_list(values)
+            else
+              []
+            end
+          end
+
+          def make_repos_list(values)
+            values.reduce([]) do |repos, repo|
+              if git?(repo)
+                repos << repo_to_model(repo)
+              else
+                repos
+              end
+            end
+          end
+
           def repo_to_model(repo)
-            name = repo['owner'] + "/" + repo['slug']
+            name = repo["full_name"]
             Model::Repo.new(
               name,
               name,
@@ -33,14 +64,6 @@ module Vx
               repo['description'],
               repo_language(repo)
             )
-          end
-
-          def team_admin
-            @team_admin ||= begin
-              values = session.get("api/1.0/user/privileges")['teams']
-              values = values.select{|k,v| v == 'admin' }.keys
-              values
-            end
           end
 
           def login
@@ -53,11 +76,6 @@ module Vx
 
           def git?(repo)
             repo['scm'] == 'git'
-          end
-
-          def repo_access?(repo_owner)
-            (repo_owner == login) ||
-              team_admin.include?(repo_owner)
           end
 
       end
