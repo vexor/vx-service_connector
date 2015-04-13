@@ -55,6 +55,28 @@ describe Vx::ServiceConnector::Github::Payload do
     its(:ignore?)               { should be_false }
   end
 
+  context "Octokit exceptions" do
+    let(:content) { read_json_fixture("github/payload/pull_request") }
+    let(:url)     { "https://github.com/evrone/cybergifts/pull/177" }
+    let(:sha)     { '84158c732ff1af3db9775a37a74ddc39f5c4078f' }
+
+    context "not found" do
+      before do
+        mock_get_commit_not_found("evrone/cybergifts", sha)
+      end
+
+      it { should be_ignore }
+    end
+
+    context "uanuthorized" do
+      before do
+        mock_get_commit_unauthorized("evrone/cybergifts", sha)
+      end
+
+      it { should be_ignore }
+    end
+  end
+
   context "push tag" do
     let(:content) { read_json_fixture("github/payload/push_tag") }
     it { should_not be_pull_request }

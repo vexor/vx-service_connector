@@ -4,9 +4,14 @@ module GithubWebMocks
     mock_get "https://api.github.com/repos/#{repo_name}/commits/#{sha}", 'commit'
   end
 
-  def mock_get_commit_not_found
-    stub_request(:get, "https://api.github.com/repos/full/name/commits/sha").
-      to_return(:status => 404, :body => "")
+  def mock_get_commit_not_found(repo, sha)
+    stub_request(:get, "https://api.github.com/repos/#{repo}/commits/#{sha}")
+      .to_return(:status => 404, :body => "")
+  end
+
+  def mock_get_commit_unauthorized(repo, sha)
+    stub_request(:get, "https://api.github.com/repos/#{repo}/commits/#{sha}")
+      .to_return(:status => 401, :body => "")
   end
 
   def mock_create_notice(state)
