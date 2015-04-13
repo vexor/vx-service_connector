@@ -1,0 +1,126 @@
+{
+    "pagelen": 10,
+    "values": [{
+        "scm": "git",
+        "has_wiki": true,
+        "description": "",
+        "links": {
+            "watchers": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/design-bucket/watchers"
+            },
+            "commits": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/design-bucket/commits"
+            },
+            "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/design-bucket"
+            },
+            "html": {
+                "href": "https://bitbucket.org/teamsinspace/design-bucket"
+            },
+            "avatar": {
+                "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/fc0cb8a00976/img/language-avatars/default_16.png"
+            },
+            "forks": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/design-bucket/forks"
+            },
+            "clone": [{
+                "href": "https://bitbucket.org/teamsinspace/design-bucket.git",
+                "name": "https"
+            }, {
+                "href": "ssh://git@bitbucket.org/teamsinspace/design-bucket.git",
+                "name": "ssh"
+            }],
+            "pullrequests": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/design-bucket/pullrequests"
+            }
+        },
+        "fork_policy": "allow_forks",
+        "name": "design-bucket1",
+        "language": "",
+        "created_on": "2014-07-25T01:10:59.815371+00:00",
+        "full_name": "teamsinspace/design-bucket1",
+        "has_issues": false,
+        "owner": {
+            "username": "teamsinspace",
+            "display_name": "Teams In Space",
+            "uuid": "{61fc5cf6-d054-47d2-b4a9-061ccf858379}",
+            "links": {
+                "self": {
+                    "href": "https://api.bitbucket.org/2.0/teams/teamsinspace"
+                },
+                "html": {
+                    "href": "https://bitbucket.org/teamsinspace"
+                },
+                "avatar": {
+                    "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Sep/24/teamsinspace-avatar-3731530358-7_avatar.png"
+                }
+            }
+        },
+        "updated_on": "2014-10-29T21:28:23.189145+00:00",
+        "size": 1346635,
+        "is_private": false,
+        "uuid": "{23ff7c6f-6f21-4d0c-ae7e-35069e097686}"
+    }, {
+        "scm": "git",
+        "has_wiki": false,
+        "description": "",
+        "links": {
+            "watchers": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/teamsinspace.bitbucket.org/watchers"
+            },
+            "commits": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/teamsinspace.bitbucket.org/commits"
+            },
+            "self": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/teamsinspace.bitbucket.org"
+            },
+            "html": {
+                "href": "https://bitbucket.org/teamsinspace/teamsinspace.bitbucket.org"
+            },
+            "avatar": {
+                "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/fc0cb8a00976/img/language-avatars/default_16.png"
+            },
+            "forks": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/teamsinspace.bitbucket.org/forks"
+            },
+            "clone": [{
+                "href": "https://bitbucket.org/teamsinspace/teamsinspace.bitbucket.org.git",
+                "name": "https"
+            }, {
+                "href": "ssh://git@bitbucket.org/teamsinspace/teamsinspace.bitbucket.org.git",
+                "name": "ssh"
+            }],
+            "pullrequests": {
+                "href": "https://api.bitbucket.org/2.0/repositories/teamsinspace/teamsinspace.bitbucket.org/pullrequests"
+            }
+        },
+        "fork_policy": "allow_forks",
+        "name": "teamsinspace.bitbucket.org1",
+        "language": "",
+        "created_on": "2014-09-23T16:40:12.835612+00:00",
+        "full_name": "teamsinspace/teamsinspace.bitbucket.org1",
+        "has_issues": false,
+        "owner": {
+            "username": "teamsinspace",
+            "display_name": "Teams In Space",
+            "uuid": "{61fc5cf6-d054-47d2-b4a9-061ccf858379}",
+            "links": {
+                "self": {
+                    "href": "https://api.bitbucket.org/2.0/teams/teamsinspace"
+                },
+                "html": {
+                    "href": "https://bitbucket.org/teamsinspace"
+                },
+                "avatar": {
+                    "href": "https://bitbucket-assetroot.s3.amazonaws.com/c/photos/2014/Sep/24/teamsinspace-avatar-3731530358-7_avatar.png"
+                }
+            }
+        },
+        "updated_on": "2014-09-25T17:36:42.979044+00:00",
+        "size": 76152,
+        "is_private": false,
+        "uuid": "{a2925176-b539-4985-b4d6-44c59850b3bb}"
+    }],
+    "page": 1,
+    "size": 2
+}

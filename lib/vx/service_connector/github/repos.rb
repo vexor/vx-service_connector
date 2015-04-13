@@ -19,24 +19,30 @@ module Vx
           organizations.map do |org|
             Thread.new do
               begin
-                session
-                  .organization_repositories(org)
-                  .select { |repo| repo.permissions && repo.permissions.admin }
-                  .map { |repo| repo_to_model repo }
+                session.organization_repositories(org)
+                       .reduce([], &filter_repos)
               rescue Octokit::Unauthorized
                 []
               end
             end.tap do |th|
               th.abort_on_exception = true
             end
-          end.map(&:value).flatten
+          end.flat_map(&:value)
+        end
+
+        def filter_repos
+          ->(repos, repo) {
+            if repo.permissions && repo.permissions.admin
+              repos << repo_to_model(repo)
+            else
+              repos
+            end
+          }
         end
 
         def user_repositories
           begin
-            session.repositories
-              .select { |repo| repo.permissions && repo.permissions.admin }
-              .map { |repo| repo_to_model repo }
+            session.repositories.reduce([], &filter_repos)
           rescue Octokit::Unauthorized
             []
           end

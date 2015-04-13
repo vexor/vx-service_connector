@@ -34,45 +34,112 @@ describe Vx::ServiceConnector::Bitbucket do
     end
   end
 
-  # context "(notices)" do
-  # end
+  context "repos class" do
+    subject { repos }
 
-  context "(repos)" do
-    subject { bitbucket.repos }
+    let(:repos)   { described_class::Repos.new session }
+    let(:team)    { "team2" }
+    let(:session) {
+      described_class::Session.new login, described_class::Session.test
+    }
 
     before do
-      mock_user_repos
-      mock_user_privileges
+      mock_repos("dmexe", "repos_team1")
+      mock_repos("team2", "repos_team2")
+      mock_teams
     end
 
-    it { should have(3).item }
+    it "has correct teams" do
+      expect(subject.send :teams).to eq [team]
+    end
 
-    context "values" do
+    context "repos by_username" do
+      subject do
+        repos.send(:by_username, username).map(&:full_name)
+      end
+
+      context "login" do
+        let(:username) { login }
+
+        it do
+          should eq([
+            "teamsinspace/design-bucket1",
+            "teamsinspace/teamsinspace.bitbucket.org1"
+          ])
+        end
+      end
+
+      context "team" do
+        let(:username) { team }
+
+        it do
+          should eq([
+            "teamsinspace/design-bucket2",
+            "teamsinspace/teamsinspace.bitbucket.org2"
+          ])
+        end
+      end
+    end
+
+
+    context "all repos" do
+      subject do
+        repos.send(:all_repos).map(&:full_name)
+      end
+
+      it do
+        should eq([
+          "teamsinspace/design-bucket1",
+          "teamsinspace/teamsinspace.bitbucket.org1",
+          "teamsinspace/design-bucket2",
+          "teamsinspace/teamsinspace.bitbucket.org2"
+        ])
+      end
+    end
+
+    context "repos" do
       subject { bitbucket.repos.map(&:values) }
 
-      it { should eq(
-
-        [
-          ["121111foobar/vx-promo",
-           "121111foobar/vx-promo",
-           false,
-           "git@bitbucket.org:121111foobar/vx-promo.git",
-           "https://bitbucket.org/121111foobar/vx-promo",
-           "", nil],
-         ["dmexe/demo",
-          "dmexe/demo",
-          true,
-          "git@bitbucket.org:dmexe/demo.git",
-          "https://bitbucket.org/dmexe/demo",
-          "", nil],
-         ["dmexe/vx-binutils",
-          "dmexe/vx-binutils",
-          false,
-          "git@bitbucket.org:dmexe/vx-binutils.git",
-          "https://bitbucket.org/dmexe/vx-binutils",
-          "", nil]]
-      ) }
-
+      it do
+        should eq([
+          [
+            "teamsinspace/design-bucket1",
+            "teamsinspace/design-bucket1",
+            false,
+            "git@bitbucket.org:teamsinspace/design-bucket1.git",
+            "https://bitbucket.org/teamsinspace/design-bucket1",
+            "",
+            nil
+          ],
+          [
+            "teamsinspace/teamsinspace.bitbucket.org1",
+            "teamsinspace/teamsinspace.bitbucket.org1",
+            false,
+            "git@bitbucket.org:teamsinspace/teamsinspace.bitbucket.org1.git",
+            "https://bitbucket.org/teamsinspace/teamsinspace.bitbucket.org1",
+            "",
+            nil
+          ],
+          [
+            "teamsinspace/design-bucket2",
+            "teamsinspace/design-bucket2",
+            false,
+            "git@bitbucket.org:teamsinspace/design-bucket2.git",
+            "https://bitbucket.org/teamsinspace/design-bucket2",
+            "",
+            nil
+          ],
+          [
+            "teamsinspace/teamsinspace.bitbucket.org2",
+            "teamsinspace/teamsinspace.bitbucket.org2",
+            false,
+            "git@bitbucket.org:teamsinspace/teamsinspace.bitbucket.org2.git",
+            "https://bitbucket.org/teamsinspace/teamsinspace.bitbucket.org2",
+            "",
+            nil
+          ]
+        ])
+      end
     end
   end
 

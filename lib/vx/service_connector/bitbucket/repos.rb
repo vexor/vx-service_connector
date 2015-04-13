@@ -35,7 +35,7 @@ module Vx
           end
 
           def by_username(name)
-            res = session.get(path "#{name}/repositories")
+            res = session.get(path "repositories/#{name}")
             if values = res["values"]
               make_repos_list(values)
             else
