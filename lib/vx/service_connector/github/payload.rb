@@ -20,6 +20,9 @@ module Vx
             tag:                    tag_name,
             skip:                   ignore?,
           )
+        rescue ::Octokit::NotFound, ::Octokit::Unauthorized => e
+          Rails.logger.warn "#{e.class}: #{e.message}" if defined?(Rails)
+          OpenStruct.new ignore?: true
         end
 
         private
@@ -133,14 +136,10 @@ module Vx
         end
 
         def commit_for_pull_request
-          @commit_for_pull_request ||=
-            begin
-              data = session.commit pull_request["base"]["repo"]["full_name"], sha
-              data.commit
-            rescue ::Octokit::NotFound => e
-              $stderr.puts "ERROR: #{e.inspect}"
-              OpenStruct.new
-            end
+          @commit_for_pull_request ||= begin
+            data = session.commit pull_request["base"]["repo"]["full_name"], sha
+            data.commit
+          end
         end
 
         def head_commit?
