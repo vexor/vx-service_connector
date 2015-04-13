@@ -1,0 +1,36 @@
+{
+   "pagelen": 100,
+   "values": [{
+       "username": "team2",
+       "website": "",
+       "display_name": "the team",
+       "uuid": "{aa559944-83c9-4963-a9a8-69ac8d9cf5d2}",
+       "links": {
+           "self": {
+               "href": "https://api.bitbucket.org/2.0/teams/1team"
+           },
+           "repositories": {
+               "href": "https://api.bitbucket.org/2.0/repositories/1team"
+           },
+           "html": {
+               "href": "https://bitbucket.org/1team"
+           },
+           "followers": {
+               "href": "https://api.bitbucket.org/2.0/teams/1team/followers"
+           },
+           "avatar": {
+               "href": "https://d3oaxc4q5k2d6q.cloudfront.net/m/572a80470390/img/default_team_avatar/32/team_blue.png"
+           },
+           "members": {
+               "href": "https://api.bitbucket.org/2.0/teams/1team/members"
+           },
+           "following": {
+               "href": "https://api.bitbucket.org/2.0/teams/1team/following"
+           }
+       },
+       "created_on": "2013-04-22T18:09:29.103337+00:00",
+       "location": "",
+       "type": "team"
+    }
+  ]
+}

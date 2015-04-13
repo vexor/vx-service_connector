@@ -12,8 +12,12 @@ module BitbucketWebMocks
     mock_get 'https://bitbucket.org/api/2.0/repositories/full/name', 'user_repo'
   end
 
-  def mock_user_repos
-    mock_get "https://bitbucket.org/api/1.0/user/repositories", "repos"
+  def mock_repos(team_name, fixture_name)
+    mock_get "https://bitbucket.org/api/2.0/repositories/#{team_name}?role=admin&pagelen=100", fixture_name
+  end
+
+  def mock_teams
+    mock_get "https://bitbucket.org/api/2.0/teams?role=admin&pagelen=100", "teams"
   end
 
   def mock_user_privileges
