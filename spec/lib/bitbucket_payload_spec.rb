@@ -27,27 +27,6 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
     its(:web_url)             { should eq url }
   end
 
-  context 'create pull_request' do
-    let(:content) { read_json_fixture 'bitbucket/payload/created_pull_request' }
-    let(:url)     { 'https://bitbucket.org/121111foobar/vx-promo/pull-request/1' }
-    let(:sha)     { 'b14806535f5e' }
-
-    before do
-      mock_get_commit '121111foobar/vx-promo', sha
-    end
-
-    its(:ignore?)             { should be_false }
-    its(:pull_request?)       { should be_true }
-    its(:pull_request_number) { should eq 1 }
-    its(:branch)              { should eq 'test' }
-    its(:branch_label)        { should eq 'test' }
-    its(:sha)                 { should eq sha }
-    its(:message)             { should eq 'Fix all the bugs' }
-    its(:author)              { should eq 'login' }
-    its(:author_email)        { should eq 'example@gmail.com' }
-    its(:web_url)             { should eq url }
-  end
-
   context 'declined pull request' do
     let(:content) { read_json_fixture('bitbucket/payload/declined_pull_request') }
 
@@ -90,7 +69,7 @@ describe Vx::ServiceConnector::Bitbucket::Payload do
        mock_get_commit '121111foobar/vx-promo', 'b14806535f5e'
     end
 
-    its(:ignore?) { should be_false }
+    its(:ignore?) { should be_true }
   end
 
   context 'push with empty commits' do

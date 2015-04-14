@@ -41,7 +41,7 @@ module Vx
           if restriction.nil?
             # skip internal pr or tag
             # allow all pushes and foreign pr
-            return !(internal_pull_request? or tag?)
+            return !tag?
           end
 
           if restriction.is_a?(Hash)
@@ -65,7 +65,11 @@ module Vx
         end
 
         def ignore?
-          !!(skip || message.to_s =~ PAYLOAD_IGNORE_RE)
+          !!(
+              skip                   ||
+              internal_pull_request? ||
+              message.to_s =~ PAYLOAD_IGNORE_RE
+            )
         end
 
         def tag?

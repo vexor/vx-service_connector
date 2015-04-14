@@ -32,29 +32,6 @@ describe Vx::ServiceConnector::Github::Payload do
     its(:tag)                 { should be_nil }
   end
 
-  context "internal pull_request" do
-    let(:content) { read_json_fixture("github/payload/pull_request") }
-    let(:url)     { "https://github.com/evrone/cybergifts/pull/177" }
-    let(:sha)     { '84158c732ff1af3db9775a37a74ddc39f5c4078f' }
-
-    before do
-      mock_get_commit 'evrone/cybergifts', sha
-    end
-
-    its(:pull_request?)         { should be_true }
-    its(:foreign_pull_request?) { should be_false }
-    its(:internal_pull_request?){ should be_true }
-    its(:pull_request_number)   { should eq 177 }
-    its(:sha)                   { should eq sha }
-    its(:branch)                { should eq 'test' }
-    its(:branch_label)          { should eq 'dima-exe:test' }
-    its(:message)               { should eq 'Fix all the bugs' }
-    its(:author)                { should eq 'Monalisa Octocat' }
-    its(:author_email)          { should eq 'support@github.com' }
-    its(:web_url)               { should eq url }
-    its(:ignore?)               { should be_false }
-  end
-
   context "Octokit exceptions" do
     let(:content) { read_json_fixture("github/payload/pull_request") }
     let(:url)     { "https://github.com/evrone/cybergifts/pull/177" }
