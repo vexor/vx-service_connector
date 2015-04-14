@@ -69,7 +69,7 @@ describe "(models)" do
         # pass, pr allowed
         instance(
           params.merge(internal_pull_request?: true)
-        ).to be_perform(pull_request: true)
+        ).not_to be_perform(pull_request: true)
 
         # deny, pr not allowed
         instance(
