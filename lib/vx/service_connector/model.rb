@@ -41,7 +41,7 @@ module Vx
           if restriction.nil?
             # skip internal pr or tag
             # allow all pushes and foreign pr
-            return !tag?
+            return (!internal_pull_request? || !tag?)
           end
 
           if restriction.is_a?(Hash)
@@ -49,7 +49,10 @@ module Vx
             pr        = restriction[:pull_request]
 
             if branch_re && Regexp.new(branch_re).match(branch)
-              return true
+              # if branch name matches
+              # we're already building it,
+              # so we should ignore prs.
+              return !internal_pull_request?
             end
 
             if pr && pull_request?
@@ -65,11 +68,7 @@ module Vx
         end
 
         def ignore?
-          !!(
-              skip                   ||
-              internal_pull_request? ||
-              message.to_s =~ PAYLOAD_IGNORE_RE
-            )
+          !!(skip || message.to_s =~ PAYLOAD_IGNORE_RE)
         end
 
         def tag?

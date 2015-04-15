@@ -47,7 +47,7 @@ describe "(models)" do
         # deny, internal pr
         instance(
           params.merge(internal_pull_request?: true)
-        ).to_not be_perform(nil)
+        ).to be_perform(nil)
       end
 
       it "restriction is hash" do
@@ -69,7 +69,21 @@ describe "(models)" do
         # pass, pr allowed
         instance(
           params.merge(internal_pull_request?: true)
-        ).not_to be_perform(pull_request: true)
+        ).to be_perform(pull_request: true)
+
+        instance(
+          params.merge(
+            internal_pull_request?: true,
+            branch: '(develop)'
+          )
+        ).not_to be_perform(branch: '$\(dev')
+
+        instance(
+          params.merge(
+            internal_pull_request?: true,
+            branch: '(develop)'
+          )
+        ).to be_perform(branch: 'master', pull_request: true)
 
         # deny, pr not allowed
         instance(
