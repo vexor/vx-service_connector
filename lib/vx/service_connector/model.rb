@@ -48,6 +48,10 @@ module Vx
             branch_re = restriction[:branch]
             pr        = restriction[:pull_request]
 
+            if !branch_re && internal_pull_request?
+              return false
+            end
+
             if branch_re && Regexp.new(branch_re).match(branch)
               # if branch name matches
               # we're already building it,
