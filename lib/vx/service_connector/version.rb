@@ -1,5 +1,5 @@
 module Vx
   module ServiceConnector
-    VERSION = "0.4.8"
+    VERSION = "0.4.9"
   end
 end
