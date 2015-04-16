@@ -66,10 +66,10 @@ describe "(models)" do
           params.merge(foreign_pull_request?: true)
         ).to be_perform(pull_request: true)
 
-        # pass, pr allowed
+        # deny, we're building all branches
         instance(
           params.merge(internal_pull_request?: true)
-        ).to be_perform(pull_request: true)
+        ).not_to be_perform(pull_request: true)
 
         instance(
           params.merge(
