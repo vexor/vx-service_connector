@@ -41,7 +41,7 @@ module Vx
           if restriction.nil?
             # skip internal pr or tag
             # allow all pushes and foreign pr
-            return (!internal_pull_request? || !tag?)
+            return !(internal_pull_request? or tag?)
           end
 
           if restriction.is_a?(Hash)
