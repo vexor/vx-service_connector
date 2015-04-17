@@ -47,7 +47,7 @@ describe "(models)" do
         # deny, internal pr
         instance(
           params.merge(internal_pull_request?: true)
-        ).to be_perform(nil)
+        ).not_to be_perform(nil)
       end
 
       it "restriction is hash" do
