@@ -1,6 +1,6 @@
-# Vx::ServiceConnector
+# Service Connector [![Vexor status](http://ci.vexor.io/projects/b0c047de-f24a-4374-bc10-d317cec66f86/status.svg)](https://ci.vexor.io/ui/projects/b0c047de-f24a-4374-bc10-d317cec66f86/builds)
 
-TODO: Write a gem description
+GitHub, BitBucket and GitLab intergation library that powers Vexor.
 
 ## Installation
 
