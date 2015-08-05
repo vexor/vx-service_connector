@@ -9,7 +9,7 @@ module Vx
           begin
             re = session.get("api/1.0/repositories/#{repo.full_name}/src/#{sha}/#{path}")
             # TODO: check and remove source
-            re['source'] || re['data']
+            re && (re['source'] || re['data'])
           rescue RequestError => e
             $stderr.puts "ERROR: #{e.inspect}"
             nil
