@@ -94,6 +94,35 @@ describe "(models)" do
         instance(
           params.merge(internal_pull_request?: true)
         ).to_not be_perform(pull_request: false)
+
+        # allow, pr, pr_branch eq filter
+        instance(
+          params.merge(
+            foreign_pull_request?: true,
+            branch: 'develop'
+          )
+        ).to be_perform(pull_requests_filter: "develop", pull_request: true)
+
+        # deny, pr, pr_branch not eq filter
+        instance(
+          params.merge(
+            foreign_pull_request?: true,
+            branch: 'develop'
+          )
+        ).to_not be_perform(pull_requests_filter: "test", pull_request: true)
+
+        # deny, push, pr_branch eq filter
+        instance(
+          params.merge(branch: 'develop')
+        ).to_not be_perform(pull_requests_filter: "develop", pull_request: true)
+
+        # deny, pr, pr_branch eq filter, but pr not checked
+        instance(
+          params.merge(
+            foreign_pull_request?: true,
+            branch: 'develop'
+          )
+        ).to_not be_perform(pull_requests_filter: "test", pull_request: false)
       end
 
       it "unknown restriction" do
