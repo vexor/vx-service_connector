@@ -45,8 +45,9 @@ module Vx
           end
 
           if restriction.is_a?(Hash)
-            branch_re = restriction[:branch]
-            pr        = restriction[:pull_request]
+            branch_re    = restriction[:branch]
+            pr_branch_re = restriction[:pull_requests_filter]
+            pr           = restriction[:pull_request]
 
             if !branch_re && internal_pull_request?
               return false
@@ -60,7 +61,11 @@ module Vx
             end
 
             if pr && pull_request?
-              return true
+              if !pr_branch_re.nil?
+                return !Regexp.new(pr_branch_re).match(branch).nil?
+              else
+                return true
+              end
             end
 
             return false
