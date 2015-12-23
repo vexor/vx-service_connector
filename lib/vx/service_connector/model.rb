@@ -49,6 +49,12 @@ module Vx
             pr_branch_re = restriction[:pull_requests_filter]
             pr           = restriction[:pull_request]
 
+            if pr && branch_re.nil? && pr_branch_re.nil?
+              # skip internal pr or tag
+              # allow all pushes and foreign pr
+              return !(internal_pull_request? or tag?)
+            end
+
             if !branch_re && internal_pull_request?
               return false
             end

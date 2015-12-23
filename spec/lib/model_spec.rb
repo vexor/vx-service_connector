@@ -123,6 +123,9 @@ describe "(models)" do
             branch: 'develop'
           )
         ).to_not be_perform(pull_requests_filter: "test", pull_request: false)
+
+        #allow, pr, filters is nil
+        instance(params).to be_perform(branch: nil, pull_request: true, pull_requests_filter: nil)
       end
 
       it "unknown restriction" do
