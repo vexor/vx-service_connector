@@ -11,7 +11,8 @@ module Vx
                 build_sha,
                 status,
                 description: description,
-                target_url:  build_url
+                target_url:  build_url,
+                context: "ci/vexor"
               )
             rescue Octokit::UnprocessableEntity, Octokit::Unauthorized
             end

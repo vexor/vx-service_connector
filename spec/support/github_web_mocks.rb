@@ -16,7 +16,7 @@ module GithubWebMocks
 
   def mock_create_notice(state)
     mock_post "https://api.github.com/repos/full/name/statuses/sha",
-              "{\"description\":\"description\",\"target_url\":\"url\",\"state\":\"#{state}\"}",
+              "{\"description\":\"description\",\"target_url\":\"url\",\"context\":\"ci\/vexor\",\"state\":\"#{state}\"}",
               "create_status"
   end
 
