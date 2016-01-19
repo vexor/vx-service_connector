@@ -1,5 +1,6 @@
 {
   "state": "success",
   "target_url": "https://example.com/build/status",
-  "description": "The build succeeded!"
+  "description": "The build succeeded!",
+  "context": "ci/vexor"
 }
