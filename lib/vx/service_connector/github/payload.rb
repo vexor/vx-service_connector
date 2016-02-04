@@ -3,7 +3,18 @@ require 'ostruct'
 module Vx
   module ServiceConnector
     class Github
+      IGNORED_EVENT_TYPES = %w(
+                              closed
+                              assigned
+                              unassigned
+                              labeled
+                              unlabeled
+                              synchronized
+                            )
+
       Payload = Struct.new(:session, :params) do
+        # TODO: since we have "action" in payload, most of
+        #       this logic can be simplified
 
         def build
           ServiceConnector::Model::Payload.from_hash(
@@ -127,12 +138,16 @@ module Vx
 
         def ignore?
           if pull_request?
-            closed_pull_request?
+            ignore_pull_request?
           elsif ping_request?
             true
           else
             sha == '0000000000000000000000000000000000000000'
           end
+        end
+
+        def ignore_pull_request?
+          IGNORED_EVENT_TYPES.include?(params["action"])
         end
 
         def commit_for_pull_request

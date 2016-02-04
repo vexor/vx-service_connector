@@ -117,4 +117,45 @@ describe Vx::ServiceConnector::Github::Payload do
     it { should be_foreign_pull_request }
   end
 
+  context 'ignore pull request' do
+    let(:content) do
+      {
+        'action' => action,
+        'pull_request' => {
+          'base' => {
+            'repo' => {
+              'id' => 1,
+              'full_name' => 'test/test'
+            }
+          },
+
+          'head' => {
+            'sha' => '1'
+          }
+        }
+      }
+    end
+
+    let(:action) { nil }
+
+    before do
+      mock_get_commit 'test/test', '1'
+    end
+
+    Vx::ServiceConnector::Github::IGNORED_EVENT_TYPES.each do |e|
+      context "when event type is #{e}" do
+        let(:action) { e }
+        it { should be_ignore }
+      end
+    end
+
+    %w(opened reopened).each do |e|
+      context "when event type is #{e}" do
+        let(:action) { e }
+
+        it { should_not be_ignore }
+      end
+    end
+  end
+
 end
