@@ -16,7 +16,7 @@ module Vx
           def teams
             res = session.get(path "teams")
 
-            if list = res["values"]
+            If list = res["values"]
               list.map { |team| team["username"] }
             else
               []
