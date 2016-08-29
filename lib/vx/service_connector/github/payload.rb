@@ -125,9 +125,13 @@ module Vx
           self["zen"].to_s.size > 0
         end
 
+        def labeled_request?
+          self["action"] == "labeled"
+        end
+
         def ignore?
           if pull_request?
-            closed_pull_request?
+            closed_pull_request? || labeled_request?
           elsif ping_request?
             true
           else

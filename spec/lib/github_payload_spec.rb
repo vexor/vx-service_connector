@@ -115,6 +115,7 @@ describe Vx::ServiceConnector::Github::Payload do
     end
     it { should be_pull_request }
     it { should be_foreign_pull_request }
+    it { should be_ignore }
   end
 
 end
