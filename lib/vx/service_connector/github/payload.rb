@@ -126,7 +126,7 @@ module Vx
         end
 
         def labeled_request?
-          self["action"] == "labeled"
+          %w(labeled unlabeled).include? self["action"]
         end
 
         def ignore?
