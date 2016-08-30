@@ -129,9 +129,13 @@ module Vx
           %w(labeled unlabeled).include? self["action"]
         end
 
+        def assigned_request?
+          %w(assigned unassigned).include? self["action"]
+        end
+
         def ignore?
           if pull_request?
-            closed_pull_request? || labeled_request?
+            closed_pull_request? || labeled_request? || assigned_request?
           elsif ping_request?
             true
           else
