@@ -3,6 +3,11 @@ module Vx
     class Bitbucket
       Payload = Struct.new(:session, :params) do
 
+        def initialize(*)
+          super
+          self.params ||= {} # Prevents nil passed
+        end
+
         def build
           ServiceConnector::Model::Payload.from_hash(
             internal_pull_request?: (pull_request? && !foreign_pull_request?),
@@ -153,7 +158,7 @@ module Vx
 
         def pull_request
           @pull_request ||= begin
-            params.first.last.is_a?(Hash) && params.first.last
+            params.first && params.first.last.is_a?(Hash) && params.first.last
           end
         end
 
