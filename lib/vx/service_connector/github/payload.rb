@@ -3,7 +3,7 @@ require 'ostruct'
 module Vx
   module ServiceConnector
     class Github
-      Payload = Struct.new(:session, :params) do
+      Payload = Struct.new(:session, :params, :repo) do
 
         def build
           ServiceConnector::Model::Payload.from_hash(
@@ -19,6 +19,7 @@ module Vx
             web_url:                web_url,
             tag:                    tag_name,
             skip:                   ignore?,
+            files:                  files,
           )
         rescue ::Octokit::NotFound, ::Octokit::Unauthorized => e
           Rails.logger.warn "#{e.class}: #{e.message}" if defined?(Rails)
@@ -158,6 +159,10 @@ module Vx
           self["head_commit"] || {}
         end
 
+        def head_commit_id
+          head_commit["id"]
+        end
+
         def pull_request
           self["pull_request"]
         end
@@ -166,8 +171,20 @@ module Vx
           params.key? name
         end
 
+        def before_id
+          self["before"]
+        end
+
         def [](val)
           params[val]
+        end
+
+        def files
+          if pull_request? && key?("number")
+            session.pull_request_files(repo.full_name, pull_request_number) rescue []
+          elsif (before_id && head_commit_id)
+            session.compare(repo.full_name, before_id, head_commit_id).files rescue []
+          end.to_a.map{ |f| f.filename }
         end
 
       end

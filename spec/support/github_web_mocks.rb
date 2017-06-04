@@ -78,6 +78,14 @@ module GithubWebMocks
       to_return(:status => 404, :body => "")
   end
 
+  def mock_get_pull_files(repo_name, pull_num)
+    mock_get "https://api.github.com/repos/#{repo_name}/pulls/#{pull_num}/files", "payload/pull_request_files"
+  end
+
+  def mock_get_commit_files(repo_name, base_commit, head_commit)
+    mock_get "https://api.github.com/repos/#{repo_name}/compare/#{base_commit}...#{head_commit}", "payload/commit_files"
+  end
+
   def mock_post(url, body, fixture)
     stub_request(:post, url).
       with(:body    => body,

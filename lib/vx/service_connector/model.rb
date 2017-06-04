@@ -27,6 +27,7 @@ module Vx
         :web_url,
         :skip,
         :tag,
+        :files,
       ) do
         def to_hash
           to_h
@@ -121,7 +122,8 @@ module Vx
           author:                 'User Name',
           author_email:           'me@example.com',
           web_url:                'http://example.com',
-          tag:                    nil
+          tag:                    nil,
+          files:                  []
         }.merge(params)
       end
 

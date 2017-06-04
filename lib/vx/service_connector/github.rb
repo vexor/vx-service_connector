@@ -35,7 +35,7 @@ module Vx
       end
 
       def payload(repo, params)
-        Github::Payload.new(session, params).build
+        Github::Payload.new(session, params, repo).build
       end
 
       def commits(repo, options = {})
