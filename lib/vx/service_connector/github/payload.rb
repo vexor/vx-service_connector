@@ -179,11 +179,28 @@ module Vx
           params[val]
         end
 
+        def commits
+          if key?("commits")
+            self["commits"]
+          else
+            []
+          end
+        end
+
+        def commit_files
+          arr = ([self["commits"]] + [self["head_commit"]]).flatten.compact
+          arr.map do |commit|
+            commit["added"] + commit["modified"]
+          end
+        end
+
         def files
+          (commit_files + api_files).uniq.flatten
+        end
+
+        def api_files
           if pull_request? && key?("number")
             session.pull_request_files(repo.full_name, pull_request_number) rescue []
-          elsif (before_id && head_commit_id)
-            session.compare(repo.full_name, before_id, head_commit_id).files rescue []
           end.to_a.map{ |f| f.filename }
         end
 

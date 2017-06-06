@@ -24,13 +24,13 @@
             "username":"dima-exe"
          },
          "added":[
-            "test"
+            "file1.txt"
          ],
          "removed":[
 
          ],
          "modified":[
-
+             "file2.txt"
          ]
       }
    ],
@@ -51,7 +51,7 @@
          "username":"dima-exe"
       },
       "added":[
-         "test"
+          "file3.txt"
       ],
       "removed":[
 

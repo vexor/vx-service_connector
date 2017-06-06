@@ -34,7 +34,7 @@ describe Vx::ServiceConnector::Github::Payload do
     its(:author_email)        { should eq 'dima.exe@gmail.com' }
     its(:web_url)             { should eq url }
     its(:tag)                 { should be_nil }
-    its(:files)               { should eq ["file1.txt"]}
+    its(:files)               { should eq ["file1.txt", "file2.txt", "file3.txt"]}
   end
 
   context "internal pull_request" do

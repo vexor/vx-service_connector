@@ -27,7 +27,7 @@ module Vx
         :web_url,
         :skip,
         :tag,
-        :files,
+        :files
       ) do
         def to_hash
           to_h
