@@ -190,12 +190,12 @@ module Vx
         def commit_files
           arr = ([self["commits"]] + [self["head_commit"]]).flatten.compact
           arr.map do |commit|
-            commit["added"] + commit["modified"]
+            commit["added"].to_a + commit["modified"].to_a
           end
         end
 
         def files
-          (commit_files + api_files).uniq.flatten
+          (commit_files + api_files).uniq.flatten rescue []
         end
 
         def api_files
